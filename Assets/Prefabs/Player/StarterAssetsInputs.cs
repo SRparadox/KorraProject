@@ -6,8 +6,11 @@ using UnityEngine.InputSystem;
 
 namespace StarterAssets
 {
-	public class StarterAssetsInputs : MonoBehaviour
+	public class StarterAssetsInputsCopy : MonoBehaviour
 	{
+		//This is a copy. Remove the copy from the class name to use if needed.
+
+		
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
