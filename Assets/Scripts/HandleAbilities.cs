@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class HandleAbilities : MonoBehaviour
+public class HandleAbilities: MonoBehaviour
 {
 
     [Category("Abilities")]
@@ -25,8 +25,7 @@ public class HandleAbilities : MonoBehaviour
             {
                 currentCooldowns[i] -= Time.deltaTime;
                 AbilityCooldownTexts[i].text = currentCooldowns[i].ToString("F1");
-            }
-            else
+            } else
             {
                 currentCooldowns[i] = 0;
                 AbilityCooldownTexts[i].text = "R";
@@ -41,32 +40,33 @@ public class HandleAbilities : MonoBehaviour
             switch (abilityIndex)
             {
                 case 0:
-                    Debug.Log("Used Attack1");
-                    
-                    break;
+                Debug.Log("Used Attack1");
+
+                break;
                 case 1:
-                    Debug.Log("Used Attack2");
-                    
-                    break;
+                Debug.Log("Used Attack2");
+
+                break;
                 case 2:
-                    Debug.Log("Used Ability1");
-                    
-                    break;
+                Debug.Log("Used Ability1");
+
+                break;
                 case 3:
-                    Debug.Log("Used Ability2");
-                    
-                    break;
+                Debug.Log("Used Ability2");
+
+                break;
                 case 4:
-                    Debug.Log("Used Ultimate");
-                    
-                    break;
+                Debug.Log("Used Ultimate");
+
+                break;
             }
             currentCooldowns[abilityIndex] = AbilityCooldowns[abilityIndex];
         }
     }
 
 
-    void Update(){
+    void Update()
+    {
         updateCooldowns();
     }
 
