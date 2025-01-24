@@ -2,8 +2,17 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(VitalStream))]
+
 public class WaterClass: ElementalClass
 {
+    VitalStream vitalStream;
+
+    private void Start()
+    {
+        vitalStream = GetComponent<VitalStream>();
+    }
+
     // Aqua Surge
     public override void triggerAttack1()
     {
@@ -14,6 +23,12 @@ public class WaterClass: ElementalClass
     public override void triggerAttack2()
     {
         Debug.Log("Water Attack 2");
+
+        if (vitalStream != null)
+        {
+            Debug.Log("vital stream triggered");
+            vitalStream.Trigger();
+        }
     }
 
     public override void triggerAbility1()

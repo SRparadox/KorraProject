@@ -294,6 +294,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1266407853596131875, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
   m_PrefabInstance: {fileID: 8594220658941023006}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1342815183 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1934577064848693401, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+  m_PrefabInstance: {fileID: 8594220658941023006}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1342815190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,7 +308,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1342815182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 400b2e9c14486014ca0cb82f89fa39da, type: 3}
+  m_Script: {fileID: 11500000, guid: eab17bd213da6a548bc983feacfe9156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 7368918336036502496, guid: 0a4b24705418b1941bfcbd7a735ded7b, type: 3}
+  spawnPoint: {fileID: 1342815183}
+  projectileSpeed: 5
+--- !u!114 &1342815191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342815182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c30daf608cfa817489270dc835592df3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
@@ -472,6 +492,22 @@ PrefabInstance:
       propertyPath: abilities
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3486448372041650187, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.20000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 3486448372041650187, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836549847036869412, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.20000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836549847036869412, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
     - target: {fileID: 8339361628955760582, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       propertyPath: m_Name
       value: NestedParentArmature_Unpack
@@ -480,6 +516,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1266407853596131875, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1342815191}
     - targetCorrespondingSourceObject: {fileID: 1266407853596131875, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1342815190}
