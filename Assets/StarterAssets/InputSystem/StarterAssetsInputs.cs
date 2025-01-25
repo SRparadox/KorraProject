@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.PackageManager.ValidationSuite;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -43,6 +44,26 @@ namespace StarterAssets
         public void OnSprint(InputValue value)
         {
             SprintInput(value.isPressed);
+        }
+        public void OnAttack1(InputValue value)
+        {
+            abilities.useAbility(0);
+        }
+        public void OnAttack2(InputValue value)
+        {
+            abilities.useAbility(1);
+        }
+        public void OnAbility1()
+        {
+            abilities.useAbility(2);
+        }
+        public void OnAbility2()
+        {
+            abilities.useAbility(3);
+        }
+        public void OnUltimate()
+        {
+            abilities.useAbility(4);
         }
 #endif
         public void MoveInput(Vector2 newMoveDirection)
