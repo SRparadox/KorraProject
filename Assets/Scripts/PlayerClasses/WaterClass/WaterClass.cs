@@ -2,6 +2,7 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// Automatically attach these scripts
 [RequireComponent(typeof(VitalStream))]
 
 public class WaterClass: ElementalClass
@@ -45,6 +46,4 @@ public class WaterClass: ElementalClass
     {
         Debug.Log("Water Ultimate");
     }
-
-
 }
