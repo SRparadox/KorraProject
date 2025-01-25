@@ -7,7 +7,6 @@ Elements of a Character Base Class
 - Retrieve/handle input
 - Handle Cooldowns
 - Destructor
-
 */
 
 public abstract class ElementalClass: MonoBehaviour
@@ -29,9 +28,9 @@ public abstract class ElementalClass: MonoBehaviour
 
     }
 
-    public abstract void triggerAttack1();
-    public abstract void triggerAttack2();
-    public abstract void triggerAbility1();
-    public abstract void triggerAbility2();
-    public abstract void triggerUltimate();
+    public abstract void performAttack1();
+    public abstract void performAttack2();
+    public abstract void performAbility1();
+    public abstract void performAbility2();
+    public abstract void performUltimate();
 }

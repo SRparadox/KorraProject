@@ -15,13 +15,13 @@ public class WaterClass: ElementalClass
     }
 
     // Aqua Surge
-    public override void triggerAttack1()
+    public override void performAttack1()
     {
         Debug.Log("Water Attack 1");
     }
 
     // Vital Stream
-    public override void triggerAttack2()
+    public override void performAttack2()
     {
         Debug.Log("Water Attack 2");
 
@@ -32,17 +32,17 @@ public class WaterClass: ElementalClass
         }
     }
 
-    public override void triggerAbility1()
+    public override void performAbility1()
     {
         Debug.Log("Water Ability 1");
     }
 
-    public override void triggerAbility2()
+    public override void performAbility2()
     {
         Debug.Log("Water Ability 2");
     }
 
-    public override void triggerUltimate()
+    public override void performUltimate()
     {
         Debug.Log("Water Ultimate");
     }
