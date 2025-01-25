@@ -3,22 +3,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/* 
-Elements of a Character Base Class
-- Properties: health, speed, jump height, etc.
-- Retrieve/handle input
-- Handle Cooldowns
-- Destructor
-*/
-
-/*
-Potential issues:
-- Ability cooldown text array could differ in length to # of cooldowns --> potential tuntime error in UpdateCooldowns();
-- 
-
-
-*/
-
 public abstract class ElementalClass: MonoBehaviour
 {
     // Character class variables
@@ -96,11 +80,23 @@ public abstract class ElementalClass: MonoBehaviour
     // Helpers
     private bool IsAbilityReady(int abilityIndex)
     {
+        if (abilityIndex < 0 && abilityIndex >= AbilityCooldowns.Length)
+        {
+            Debug.LogWarning("Trying to access non-existent ability index.");
+            return false;
+        }
+
         return (currentCooldowns[abilityIndex] == 0);
     }
 
     private void ResetAbilityCooldown(int abilityIndex)
     {
+        if (abilityIndex < 0 && abilityIndex >= AbilityCooldowns.Length)
+        {
+            Debug.LogWarning("Trying to access non-existent ability index.");
+            return;
+        }
+
         currentCooldowns[abilityIndex] = AbilityCooldowns[abilityIndex];
     }
 
