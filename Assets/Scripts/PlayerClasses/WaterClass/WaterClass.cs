@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 // Automatically attach these scripts
 [RequireComponent(typeof(VitalStream))]
 
-public class WaterClass: ElementalClass
+public class WaterClass: CharacterClass
 {
     VitalStream vitalStream;
 
@@ -15,13 +15,13 @@ public class WaterClass: ElementalClass
     }
 
     // Aqua Surge
-    public override void performAttack1()
+    public override void PerformAttack1()
     {
         Debug.Log("Water Attack 1");
     }
 
     // Vital Stream
-    public override void performAttack2()
+    public override void PerformAttack2()
     {
         Debug.Log("Water Attack 2");
 
@@ -32,17 +32,17 @@ public class WaterClass: ElementalClass
         }
     }
 
-    public override void performAbility1()
+    public override void PerformAbility1()
     {
         Debug.Log("Water Ability 1");
     }
 
-    public override void performAbility2()
+    public override void PerformAbility2()
     {
         Debug.Log("Water Ability 2");
     }
 
-    public override void performUltimate()
+    public override void PerformUltimate()
     {
         Debug.Log("Water Ultimate");
     }

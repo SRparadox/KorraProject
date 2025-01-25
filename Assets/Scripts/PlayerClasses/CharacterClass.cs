@@ -3,24 +3,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public abstract class ElementalClass: MonoBehaviour
+public abstract class CharacterClass: MonoBehaviour
 {
     // Character class variables
     [Category("Character Properties")]
-    [SerializeField] protected float health = 100f;
-    [SerializeField] protected float speed = 20f;
-    [SerializeField] protected float jumpHeight = 5f;
+    [SerializeField] protected float health = 100.0f;
+    [SerializeField] protected float speed = 20.0f;
+    [SerializeField] protected float jumpHeight = 5.0f;
 
     [Category("Ability Cooldowns")]
-    [SerializeField] float[] AbilityCooldowns = new float[5]; // define character cooldowns
+    [SerializeField] float[] abilityCooldowns = new float[5]; // define character cooldowns
     private float[] currentCooldowns; // track cooldown statuses
 
     [Category("UI Elements")]
     [SerializeField] TextMeshProUGUI[] AbilityCooldownTexts = new TextMeshProUGUI[5];
 
-    void Start()
+    private void Awake()
     {
-        currentCooldowns = new float[AbilityCooldowns.Length];
+        currentCooldowns = new float[abilityCooldowns.Length];
     }
 
     void Update()
@@ -28,8 +28,14 @@ public abstract class ElementalClass: MonoBehaviour
         UpdateCooldowns();
     }
 
-    void UpdateCooldowns()
+    private void UpdateCooldowns()
     {
+        if (currentCooldowns == null || currentCooldowns.Length != abilityCooldowns.Length)
+        {
+            Debug.LogWarning("Warning: Current cooldowns wasn't initialized correctly or differs from length of cooldown array");
+            return;
+        }
+
         for (int i = 0; i < currentCooldowns.Length; i++)
         {
             if (currentCooldowns[i] > 0.0f)
@@ -80,7 +86,7 @@ public abstract class ElementalClass: MonoBehaviour
     // Helpers
     private bool IsAbilityReady(int abilityIndex)
     {
-        if (abilityIndex < 0 && abilityIndex >= AbilityCooldowns.Length)
+        if (abilityIndex < 0 || abilityIndex >= abilityCooldowns.Length)
         {
             Debug.LogWarning("Trying to access non-existent ability index.");
             return false;
@@ -91,13 +97,13 @@ public abstract class ElementalClass: MonoBehaviour
 
     private void ResetAbilityCooldown(int abilityIndex)
     {
-        if (abilityIndex < 0 && abilityIndex >= AbilityCooldowns.Length)
+        if (abilityIndex < 0 || abilityIndex >= abilityCooldowns.Length)
         {
             Debug.LogWarning("Trying to access non-existent ability index.");
             return;
         }
 
-        currentCooldowns[abilityIndex] = AbilityCooldowns[abilityIndex];
+        currentCooldowns[abilityIndex] = abilityCooldowns[abilityIndex];
     }
 
     public abstract void PerformAttack1();

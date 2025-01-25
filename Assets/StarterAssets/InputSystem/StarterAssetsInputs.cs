@@ -22,6 +22,13 @@ namespace StarterAssets
         public bool cursorLocked = true;
         public bool cursorInputForLook = true;
 
+        CharacterClass characterClass;
+
+        void Start()
+        {
+            characterClass = GetComponent<CharacterClass>();
+        }
+
 #if ENABLE_INPUT_SYSTEM
         public void OnMove(InputValue value)
         {
@@ -47,23 +54,23 @@ namespace StarterAssets
         }
         public void OnAttack1(InputValue value)
         {
-            abilities.useAbility(0);
+            characterClass.UseAbility(0);
         }
         public void OnAttack2(InputValue value)
         {
-            abilities.useAbility(1);
+            characterClass.UseAbility(1);
         }
         public void OnAbility1()
         {
-            abilities.useAbility(2);
+            characterClass.UseAbility(2);
         }
         public void OnAbility2()
         {
-            abilities.useAbility(3);
+            characterClass.UseAbility(3);
         }
         public void OnUltimate()
         {
-            abilities.useAbility(4);
+            characterClass.UseAbility(4);
         }
 #endif
         public void MoveInput(Vector2 newMoveDirection)
