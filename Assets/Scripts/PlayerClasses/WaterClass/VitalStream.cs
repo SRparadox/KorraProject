@@ -35,15 +35,4 @@ public class VitalStream: MonoBehaviour
             Destroy(projectile, 3f);
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("Damaged enemy!");
-
-            // Destroy vital stream projectile on collison
-            Destroy(other.gameObject);
-        }
-    }
 }
