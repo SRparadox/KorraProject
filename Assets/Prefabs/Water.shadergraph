@@ -3436,8 +3436,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -32.0,
-            "y": 529.0,
+            "x": -4.0,
+            "y": 544.0,
             "width": 151.0,
             "height": 34.0
         }
@@ -8276,7 +8276,7 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     },
-    "m_OutputChannel": 0
+    "m_OutputChannel": 1
 }
 
 {
