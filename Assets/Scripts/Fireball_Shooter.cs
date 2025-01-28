@@ -33,11 +33,16 @@ public class Fireball_Shooter : MonoBehaviour
         {
             GameObject fireball = Instantiate(fireball_Prefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
 
-            Rigidbody rb = fireball.GetComponent<Rigidbody>();
-            if( rb != null )
+            Camera mainCamera = Camera.main;
+            if ( mainCamera != null )
             {
-                rb.useGravity = false;
-                rb.linearVelocity = fireballSpawnPoint.transform.forward * fireballSpeed;
+                Vector3 cameraForward = mainCamera.transform.forward;
+                Rigidbody rb = fireball.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.useGravity = false;
+                    rb.linearVelocity = cameraForward * fireballSpeed;
+                }
             }
 
             Destroy( fireball, 3f );
