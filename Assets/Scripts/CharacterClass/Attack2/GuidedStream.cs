@@ -23,6 +23,7 @@ public class GuidedStream: MonoBehaviour
 
     [SerializeField] float splashActivationOffset;
     [SerializeField] float puddleScaleSpeed;
+    [SerializeField] float hitDetectionRadius;
 
     private Vector3 target;
 
@@ -88,6 +89,8 @@ public class GuidedStream: MonoBehaviour
                 {
                     if (!splashParticle.isPlaying)
                     {
+                        CheckForEnemyHit();
+
                         splashParticle.gameObject.SetActive(true);
                         splashParticle.transform.position = target;
                         splashParticle.Play();
@@ -153,4 +156,19 @@ public class GuidedStream: MonoBehaviour
         SplineNode node = new SplineNode(targetNodePosition, targetNodeDirection);
         spline.AddNode(node);
     }
+
+    private void CheckForEnemyHit()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(target, hitDetectionRadius);
+
+        foreach (Collider hit in hitColliders)
+        {
+            if (hit.CompareTag("Enemy"))
+            {
+                Debug.Log("Enemy hit!");
+                Destroy(hit.gameObject);
+            }
+        }
+    }
+
 }
