@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(GuidedStream))] // Attack 2
+[RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
 
 public class CharacterClass: MonoBehaviour
 {
@@ -20,14 +20,14 @@ public class CharacterClass: MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI[] AbilityCooldownTexts = new TextMeshProUGUI[5];
 
-    GuidedStream guidedStream;
+    GuidedStreamAttack guidedStream;
 
     private void Awake()
     {
         currentCooldowns = new float[abilityCooldowns.Length];
 
         // Retrieve ability references
-        guidedStream = GetComponent<GuidedStream>();
+        guidedStream = GetComponent<GuidedStreamAttack>();
     }
 
     void Update()

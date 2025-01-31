@@ -10357,7 +10357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9067ef389ef6b674493d5d98ef9bffda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  streamPrefab: {fileID: 0}
+  streamPrefab: {fileID: 5879177407378570033, guid: 58b09301291fac7488c51e5fc2479745, type: 3}
 --- !u!1 &1395464583
 GameObject:
   m_ObjectHideFlags: 0
