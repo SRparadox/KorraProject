@@ -4990,7 +4990,7 @@ GameObject:
   - component: {fileID: 1255187586515983441}
   - component: {fileID: 5879177407378570033}
   m_Layer: 0
-  m_Name: GuidedStreamPrefab
+  m_Name: WaterStreamPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
