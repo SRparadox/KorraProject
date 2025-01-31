@@ -5,27 +5,22 @@ using UnityEngine;
 
 public class GuidedStream: MonoBehaviour
 {
-    //[SerializeField] Spline spline;
-    //[SerializeField] ExampleContortAlong contortAlong;
+    [SerializeField] GuidedStreamControl streamPrefab;
 
     public void Trigger()
     {
-        Debug.Log("Triggered guided stream!");
-        //StopAllCoroutines();
-        //StartCoroutine(Coroutine_StreamBend());
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            SpawnGuidedStream(hit.point);
+        }
     }
-    //IEnumerator Coroutine_StreamBend()
-    //{
-    //    spline.gameObject.SetActive(false);
 
-    //    ConfigureSpline();
-
-    //    contortAlong.Init();
-    //}
-
-    //private void ConfigureSpline()
-    //{
-
-    //}
-
+    private void SpawnGuidedStream(Vector3 target)
+    {
+        GuidedStreamControl stream = Instantiate(streamPrefab, transform.position, Quaternion.identity);
+        stream.Spawn();
+    }
 }
