@@ -10407,8 +10407,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da6412c73d68f4541bb08c20eb25ae94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 20
-  dashDuration: 0.5
+  dashSpeed: 15
+  dashDuration: 1
+  upwardVelocity: 0.5
   vfxTrailPrefab: {fileID: 8009118580492116739, guid: 8eb23cb643cb5ab41b284e5520d26568, type: 3}
 --- !u!1 &1395464583
 GameObject:
