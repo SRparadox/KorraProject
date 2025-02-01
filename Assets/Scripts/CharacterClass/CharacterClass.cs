@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
+[RequireComponent(typeof(ElementalDash))] // Ability 1
 
 public class CharacterClass: MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class CharacterClass: MonoBehaviour
     [SerializeField] TextMeshProUGUI[] AbilityCooldownTexts = new TextMeshProUGUI[5];
 
     GuidedStreamAttack guidedStream;
+    ElementalDash elementalDash;
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class CharacterClass: MonoBehaviour
 
         // Retrieve ability references
         guidedStream = GetComponent<GuidedStreamAttack>();
+        elementalDash = GetComponent<ElementalDash>();
     }
 
     void Update()
@@ -44,13 +47,15 @@ public class CharacterClass: MonoBehaviour
     {
         if (guidedStream != null)
         {
-            //Debug.Log("guided stream triggered");
             guidedStream.Trigger();
         }
     }
     public void PerformAbility1()
     {
-
+        if (guidedStream != null)
+        {
+            elementalDash.Trigger();
+        }
     }
     public void PerformAbility2()
     {
