@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
@@ -10,9 +11,16 @@ public class CharacterClass: MonoBehaviour
 {
     // Character class variables
     [Header("Character Properties")]
-    [SerializeField] protected float health = 100.0f;
+    // [SerializeField] protected float health = 100.0f;
+
+    // Initialize Health Bar
+    [SerializeField] protected Slider HealthBar;
+
     [SerializeField] protected float speed = 20.0f;
+    
     [SerializeField] protected float jumpHeight = 5.0f;
+
+    [SerializeField] protected float healing = 25.0f;
 
     [Header("Ability Cooldowns")]
     [SerializeField] float[] abilityCooldowns = new float[5]; // define character cooldowns
@@ -36,6 +44,7 @@ public class CharacterClass: MonoBehaviour
     void Update()
     {
         UpdateCooldowns();
+        HealthBar.value -= 0.1f;
     }
 
     public void PerformAttack1()
@@ -52,14 +61,19 @@ public class CharacterClass: MonoBehaviour
     }
     public void PerformAbility1()
     {
+        // Ability - Healing when player presses button
+        // Healthbar goes up
         if (guidedStream != null)
         {
-            elementalDash.Trigger();
+            HealthBar.value += healing;
         }
     }
     public void PerformAbility2()
     {
-
+        if (guidedStream != null)
+        {
+            elementalDash.Trigger();
+        }
     }
     public void PerformUltimate()
     {
