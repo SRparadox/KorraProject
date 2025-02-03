@@ -10,10 +10,12 @@ public class ElementalDash: MonoBehaviour
     [SerializeField] private ParticleSystem vfxTrailPrefab;
 
     private CharacterController characterController;
+    private Animator animator;
 
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     public void Trigger()
@@ -38,7 +40,8 @@ public class ElementalDash: MonoBehaviour
             characterController.Move(dashDirection * dashSpeed * Time.deltaTime);
             yield return null;
         }
-
+        
+        animator.SetBool("IsDashing", false);
         Destroy(vfxTrail.gameObject, vfxTrail.main.duration);
         vfxTrail.Stop();
     }

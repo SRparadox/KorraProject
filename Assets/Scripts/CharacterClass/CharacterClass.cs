@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using TMPro;
 using UnityEngine;
@@ -24,9 +25,12 @@ public class CharacterClass: MonoBehaviour
     GuidedStreamAttack guidedStream;
     ElementalDash elementalDash;
 
+    Animator animator;
+
     private void Awake()
     {
         currentCooldowns = new float[abilityCooldowns.Length];
+        animator = GetComponent<Animator>();
 
         // Retrieve ability references
         guidedStream = GetComponent<GuidedStreamAttack>();
@@ -40,7 +44,7 @@ public class CharacterClass: MonoBehaviour
 
     public void PerformAttack1()
     {
-
+        animator.SetTrigger("Attack1");
     }
 
     public void PerformAttack2()
@@ -48,6 +52,7 @@ public class CharacterClass: MonoBehaviour
         if (guidedStream != null)
         {
             guidedStream.Trigger();
+            animator.SetTrigger("Attack2");
         }
     }
     public void PerformAbility1()
@@ -55,6 +60,7 @@ public class CharacterClass: MonoBehaviour
         if (guidedStream != null)
         {
             elementalDash.Trigger();
+            animator.SetBool("IsDashing", true);
         }
     }
     public void PerformAbility2()
@@ -93,6 +99,10 @@ public class CharacterClass: MonoBehaviour
         if (abilityIndex < 0 || abilityIndex >= currentCooldowns.Length)
         {
             Debug.LogWarning("Trying to access non-existent ability index.");
+            return;
+        }
+        if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle")){
+            Debug.Log("Can't use ability while in animation");
             return;
         }
 

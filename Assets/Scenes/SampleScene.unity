@@ -10831,6 +10831,13 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -4
       objectReference: {fileID: 0}
+    - target: {fileID: 5492372033273676515, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'Chest'\n\tTransform 'UpperChest'\n\tFrom
+        animation clip 'MoveBend'"
+      objectReference: {fileID: 0}
     - target: {fileID: 5836549847036869412, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.20000005
