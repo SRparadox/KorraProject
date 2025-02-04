@@ -13,28 +13,25 @@ public class Fireball_Shooter : MonoBehaviour
     void Awake()
     {
         attackAction = input.actions["Attack"];
-        if (attackAction == null )
+        if (attackAction == null)
         {
             Debug.LogError("Attack action not found!");
         }
     }
 
-    void Update()
+    public void Trigger()
     {
-        if( attackAction != null && attackAction.triggered)
-        {
-            ShootFireball();
-        }
+        ShootFireball();
     }
 
     void ShootFireball()
     {
-        if( fireball_Prefab != null && fireballSpawnPoint != null)
+        if (fireball_Prefab != null && fireballSpawnPoint != null)
         {
             GameObject fireball = Instantiate(fireball_Prefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
 
             Camera mainCamera = Camera.main;
-            if ( mainCamera != null )
+            if (mainCamera != null)
             {
                 Vector3 cameraForward = mainCamera.transform.forward;
                 Rigidbody rb = fireball.GetComponent<Rigidbody>();
@@ -45,7 +42,7 @@ public class Fireball_Shooter : MonoBehaviour
                 }
             }
 
-            Destroy( fireball, 3f );
-        } 
+            Destroy(fireball, 3f);
+        }
     }
 }
