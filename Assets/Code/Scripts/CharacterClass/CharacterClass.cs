@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(FireballShooter))] // Attack 1
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
 [RequireComponent(typeof(ElementalDash))] // Ability 1
 
@@ -22,6 +23,7 @@ public class CharacterClass: MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI[] AbilityCooldownTexts = new TextMeshProUGUI[5];
 
+    FireballShooter fireball;
     GuidedStreamAttack guidedStream;
     ElementalDash elementalDash;
 
@@ -33,6 +35,7 @@ public class CharacterClass: MonoBehaviour
         animator = GetComponent<Animator>();
 
         // Retrieve ability references
+        fireball = GetComponent<FireballShooter>();
         guidedStream = GetComponent<GuidedStreamAttack>();
         elementalDash = GetComponent<ElementalDash>();
     }
@@ -44,7 +47,11 @@ public class CharacterClass: MonoBehaviour
 
     public void PerformAttack1()
     {
-        animator.SetTrigger("Attack1");
+        if (fireball != null)
+        {
+            fireball.Trigger();
+            animator.SetTrigger("Attack1");
+        }
     }
 
     public void PerformAttack2()
@@ -101,7 +108,8 @@ public class CharacterClass: MonoBehaviour
             Debug.LogWarning("Trying to access non-existent ability index.");
             return;
         }
-        if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle")){
+        if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle"))
+        {
             Debug.Log("Can't use ability while in animation");
             return;
         }

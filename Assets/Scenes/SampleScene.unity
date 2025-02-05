@@ -10411,6 +10411,22 @@ MonoBehaviour:
   dashDuration: 1
   upwardVelocity: 0.5
   vfxTrailPrefab: {fileID: 8009118580492116739, guid: 8eb23cb643cb5ab41b284e5520d26568, type: 3}
+--- !u!114 &1342815203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342815182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea90c5c7a545c174e96061b66434dfb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireball_Prefab: {fileID: 0}
+  fireballSpawnPoint: {fileID: 0}
+  fireballSpeed: 10
+  input: {fileID: 0}
 --- !u!1 &1395464583
 GameObject:
   m_ObjectHideFlags: 0
@@ -10866,6 +10882,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1266407853596131875, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1342815202}
+    - targetCorrespondingSourceObject: {fileID: 1266407853596131875, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1342815203}
   m_SourcePrefab: {fileID: 100100000, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
