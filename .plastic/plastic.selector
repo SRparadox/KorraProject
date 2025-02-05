@@ -1,4 +1,0 @@
-repository "Korra Game/Korra Game@20066245460594@cloud"
-  path "/"
-    br "/main"
-    co "/main"
