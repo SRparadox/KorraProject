@@ -5343,6 +5343,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &757908255 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6789454673788440607, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+  m_PrefabInstance: {fileID: 8594220658941023006}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -10411,7 +10422,7 @@ MonoBehaviour:
   dashDuration: 1
   upwardVelocity: 0.5
   vfxTrailPrefab: {fileID: 8009118580492116739, guid: 8eb23cb643cb5ab41b284e5520d26568, type: 3}
---- !u!114 &1342815203
+--- !u!114 &1342815204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10420,13 +10431,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1342815182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea90c5c7a545c174e96061b66434dfb2, type: 3}
+  m_Script: {fileID: 11500000, guid: f0cdd965a13401d408bba54ea40053f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireball_Prefab: {fileID: 0}
-  fireballSpawnPoint: {fileID: 0}
+  fireball_Prefab: {fileID: 2232664650143588886, guid: 7bb64ef469ef02c43977dee4ebb0e388, type: 3}
+  fireballSpawnPoint: {fileID: 514996964}
   fireballSpeed: 10
-  input: {fileID: 0}
 --- !u!1 &1395464583
 GameObject:
   m_ObjectHideFlags: 0
@@ -10828,9 +10838,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1266407853596131887, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1751143072}
+    - target: {fileID: 1266407853596131887, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+    - target: {fileID: 1266407853596131887, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1266407853596131887, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: m_UIInputModule
+      value: 
+      objectReference: {fileID: 757908255}
     - target: {fileID: 3259884951051050591, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       propertyPath: abilities
       value: 
@@ -10866,7 +10888,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: NestedParentArmature_Unpack
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3259884951051050591, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+    - {fileID: 9122918336494901539, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1934577064848693401, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
@@ -10884,7 +10908,7 @@ PrefabInstance:
       addedObject: {fileID: 1342815202}
     - targetCorrespondingSourceObject: {fileID: 1266407853596131875, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1342815203}
+      addedObject: {fileID: 1342815204}
   m_SourcePrefab: {fileID: 100100000, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
