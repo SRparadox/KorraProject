@@ -6,18 +6,7 @@ public class Fireball_Shooter : MonoBehaviour
     public GameObject fireball_Prefab;
     public Transform fireballSpawnPoint;
     public float fireballSpeed = 10f;
-    public PlayerInput input;
-
-    private InputAction attackAction;
-
-    void Awake()
-    {
-        attackAction = input.actions["Attack"];
-        if (attackAction == null)
-        {
-            Debug.LogError("Attack action not found!");
-        }
-    }
+    
 
     public void Trigger()
     {

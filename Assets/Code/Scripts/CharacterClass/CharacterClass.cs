@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(FireballShooter))] // Attack 1
+[RequireComponent(typeof(Fireball_Shooter))] // Attack 1
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
 [RequireComponent(typeof(ElementalDash))] // Ability 1
 
@@ -23,7 +23,7 @@ public class CharacterClass: MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI[] AbilityCooldownTexts = new TextMeshProUGUI[5];
 
-    FireballShooter fireball;
+    Fireball_Shooter fireball;
     GuidedStreamAttack guidedStream;
     ElementalDash elementalDash;
 
@@ -35,7 +35,7 @@ public class CharacterClass: MonoBehaviour
         animator = GetComponent<Animator>();
 
         // Retrieve ability references
-        fireball = GetComponent<FireballShooter>();
+        fireball = GetComponent<Fireball_Shooter>();
         guidedStream = GetComponent<GuidedStreamAttack>();
         elementalDash = GetComponent<ElementalDash>();
     }
