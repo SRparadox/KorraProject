@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Fireball_Shooter))] // Attack 1
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
 [RequireComponent(typeof(ElementalDash))] // Ability 1
+[RequireComponent(typeof(WaterRing_Attack))] // Ability 2
+
 
 public class CharacterClass: MonoBehaviour
 {
@@ -26,6 +28,7 @@ public class CharacterClass: MonoBehaviour
     Fireball_Shooter fireball;
     GuidedStreamAttack guidedStream;
     ElementalDash elementalDash;
+    WaterRing_Attack waterRing;
 
     Animator animator;
 
@@ -52,6 +55,10 @@ public class CharacterClass: MonoBehaviour
             fireball.Trigger();
             animator.SetTrigger("Attack1");
         }
+        else
+        {
+            Debug.LogError("WaterRing_Attack script is missing on the player!");
+        }
     }
 
     public void PerformAttack2()
@@ -72,7 +79,14 @@ public class CharacterClass: MonoBehaviour
     }
     public void PerformAbility2()
     {
-
+        if(waterRing != null)
+        {
+            waterRing.Trigger();
+        }
+        else
+        {
+            Debug.LogError("WaterRing_Attack script is missing on the player!");
+        }
     }
     public void PerformUltimate()
     {
