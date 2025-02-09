@@ -4,10 +4,16 @@ using UnityEngine.InputSystem;
 public class Fireball_Shooter : MonoBehaviour
 {
     public GameObject fireball_Prefab;
+    public GameObject waterball_Prefab;
     public Transform fireballSpawnPoint;
     public float fireballSpeed = 10f;
     
+    private GameObject selectedPrefab; //stores which prefab the player will use
 
+    private void Start()
+    {
+        UpdateSelectedPrefab();
+    }
     public void Trigger()
     {
         ShootFireball();
@@ -15,9 +21,9 @@ public class Fireball_Shooter : MonoBehaviour
 
     void ShootFireball()
     {
-        if (fireball_Prefab != null && fireballSpawnPoint != null)
+        if (selectedPrefab != null && fireballSpawnPoint != null)
         {
-            GameObject fireball = Instantiate(fireball_Prefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
+            GameObject fireball = Instantiate(selectedPrefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
 
             Camera mainCamera = Camera.main;
             if (mainCamera != null)
@@ -32,6 +38,23 @@ public class Fireball_Shooter : MonoBehaviour
             }
 
             Destroy(fireball, 3f);
+        }
+    }
+
+    public void UpdateSelectedPrefab()
+    {
+        if (CompareTag("Fire"))
+        {
+            selectedPrefab = fireball_Prefab;
+        }
+        else if (CompareTag("Water"))
+        {
+            selectedPrefab = waterball_Prefab;
+        }
+        else
+        {
+            Debug.LogWarning("Player has no vaild element tag");
+            selectedPrefab = fireball_Prefab;
         }
     }
 }
