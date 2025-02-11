@@ -3,6 +3,7 @@ using UnityEngine;
 public class WaterRing_Attack : MonoBehaviour
 {
     public GameObject waterRingPrefab;
+    public GameObject fireRingPrefab;
 
     public void Trigger()
     {
@@ -11,9 +12,21 @@ public class WaterRing_Attack : MonoBehaviour
 
     private void SpawnWaterRing()
     {
-        if(waterRingPrefab != null)
+        GameObject selectPrefab = null;
+
+        if (gameObject.CompareTag("Fire"))
         {
-            GameObject waterRing = Instantiate(waterRingPrefab, transform.position, Quaternion.identity);
+            selectPrefab = fireRingPrefab;
+        }
+        else if (gameObject.CompareTag("Water"))
+        {
+            selectPrefab = waterRingPrefab;
+        }
+
+        if(selectPrefab != null)
+        {
+            Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
+            GameObject waterRing = Instantiate(selectPrefab, spawnPosition, Quaternion.identity);
             Debug.Log("Waterring spawned");
         }
         else

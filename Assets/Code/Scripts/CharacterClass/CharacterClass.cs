@@ -41,6 +41,7 @@ public class CharacterClass: MonoBehaviour
         fireball = GetComponent<Fireball_Shooter>();
         guidedStream = GetComponent<GuidedStreamAttack>();
         elementalDash = GetComponent<ElementalDash>();
+        waterRing = GetComponent<WaterRing_Attack>();
     }
 
     void Update()

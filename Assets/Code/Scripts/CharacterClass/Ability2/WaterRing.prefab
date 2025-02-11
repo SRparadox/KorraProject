@@ -29059,8 +29059,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d974bc38ecabdca4a98b9a096398976a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expansionTime: 5
+  expansionTime: 3
   maxScale: 5
+  rotationspeed: 300
+  slowerrotation: 100
+  holdDuration: 1
 --- !u!1 &1752957492982487542
 GameObject:
   m_ObjectHideFlags: 0
