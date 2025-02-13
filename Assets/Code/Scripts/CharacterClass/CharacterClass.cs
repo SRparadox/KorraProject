@@ -72,7 +72,7 @@ public class CharacterClass: MonoBehaviour
     }
     public void PerformAbility2()
     {
-
+        animator.SetTrigger("Ability2");
     }
     public void PerformUltimate()
     {
