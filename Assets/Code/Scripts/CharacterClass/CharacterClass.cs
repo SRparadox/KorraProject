@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
 [RequireComponent(typeof(ElementalDash))] // Ability 1
 [RequireComponent(typeof(WaterRing_Attack))] // Ability 2
+[RequireComponent(typeof(Ultimate_Attack))] // Ultimate
 
 
 public class CharacterClass: MonoBehaviour
@@ -29,6 +30,7 @@ public class CharacterClass: MonoBehaviour
     GuidedStreamAttack guidedStream;
     ElementalDash elementalDash;
     WaterRing_Attack waterRing;
+    Ultimate_Attack ultimate;
 
     Animator animator;
 
@@ -42,6 +44,7 @@ public class CharacterClass: MonoBehaviour
         guidedStream = GetComponent<GuidedStreamAttack>();
         elementalDash = GetComponent<ElementalDash>();
         waterRing = GetComponent<WaterRing_Attack>();
+        ultimate = GetComponent<Ultimate_Attack>();
     }
 
     void Update()
@@ -84,14 +87,13 @@ public class CharacterClass: MonoBehaviour
         {
             waterRing.Trigger();
         }
-        else
-        {
-            Debug.LogError("WaterRing_Attack script is missing on the player!");
-        }
     }
     public void PerformUltimate()
     {
-
+        if (ultimate != null)
+        {
+            ultimate.Trigger();
+        }
     }
 
     private void UpdateCooldowns()

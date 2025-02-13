@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireball_Prefab: {fileID: 2232664650143588886, guid: 7bb64ef469ef02c43977dee4ebb0e388, type: 3}
-  waterball_Prefab: {fileID: 4885209049403716159, guid: df6444262c2517f46955443cce296cdf, type: 3}
+  waterball_Prefab: {fileID: 7368918336036502496, guid: 0a4b24705418b1941bfcbd7a735ded7b, type: 3}
   fireballSpawnPoint: {fileID: 514996964}
   fireballSpeed: 10
 --- !u!114 &1342815211
@@ -773,6 +773,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterRingPrefab: {fileID: 1659077198427838856, guid: b15072ca7f5860f4faa3a5e637ac4241, type: 3}
+  fireRingPrefab: {fileID: 1609524124411887714, guid: 85dae3f884a5614469d4a28bd0d9cce7, type: 3}
+--- !u!114 &1342815218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342815182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d40ec9b38cd6e4092a96933b0601a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterUltPrefab: {fileID: 3489800656506599232, guid: 2637fd40344ce8c4d9cd427428a2ecfd, type: 3}
+  fireUltPrefab: {fileID: 5725092244643828049, guid: 76b6dfbe4e27eab4d89f12f049cf0ecf, type: 3}
 --- !u!1 &1395464583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,6 +1314,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1266407853596131875, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1342815211}
+    - targetCorrespondingSourceObject: {fileID: 1266407853596131875, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1342815218}
   m_SourcePrefab: {fileID: 100100000, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
