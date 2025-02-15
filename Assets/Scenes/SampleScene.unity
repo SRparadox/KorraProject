@@ -10862,6 +10862,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -4
       objectReference: {fileID: 0}
+    - target: {fileID: 5836549847036869412, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836549847036869412, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836549847036869412, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8339361628955760582, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       propertyPath: m_Name
       value: NestedParentArmature_Unpack
