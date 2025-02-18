@@ -5057,7 +5057,7 @@ MonoBehaviour:
   speedDelta: 1.4
   animSpeed: 15
   puddleParticle: {fileID: 4572041930450097623}
-  splashParticle: {fileID: 8607549093505059827}
+  splashParticle: {fileID: 5135481257431478286, guid: 7bc850f9b2677194da6a3f17b495e433, type: 3}
   splashActivationOffset: -2
   puddleScaleSpeed: 2
   hitDetectionRadius: 1.5
@@ -5152,8 +5152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MeshBender: {fileID: 0}
   generated: {fileID: 0}
-  mesh: {fileID: 7814459101124295239, guid: d3768a4fc97ed854bb35b0977e0618d8, type: 3}
-  material: {fileID: 2100000, guid: 845ae72f34775f444812bd1576bcc0ab, type: 2}
+  mesh: {fileID: 7814459101124295239, guid: 091b3b67020b9314091b839522a6602b, type: 3}
+  material: {fileID: 2100000, guid: e7a9282d46428084d936b4e47e616526, type: 2}
   rotation: {x: 0, y: 90, z: 0}
   scale: {x: 1, y: 0.2, z: 0.2}
   _TargetScale: 1
@@ -5263,10 +5263,5 @@ PrefabInstance:
 --- !u!4 &3347745717801729345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2181246675171133116, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
-  m_PrefabInstance: {fileID: 3472500390916520957}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8607549093505059827 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5135481257431478286, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
   m_PrefabInstance: {fileID: 3472500390916520957}
   m_PrefabAsset: {fileID: 0}

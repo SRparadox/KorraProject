@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 311404900484651976}
   - component: {fileID: -578614304801868341}
   - component: {fileID: 110525236109340352}
+  - component: {fileID: -3655872401231539650}
   m_Layer: 0
   m_Name: VitalStream
   m_TagString: Untagged
@@ -136,3 +137,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5000001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3655872401231539650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7368918336036502496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6406f47fecd698e4b8b3eb3835e46b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20

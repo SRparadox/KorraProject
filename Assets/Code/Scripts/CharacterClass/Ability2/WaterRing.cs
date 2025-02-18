@@ -55,6 +55,22 @@ public class WaterRing : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        string tag = collision.gameObject.tag;
+
+        if (tag == "Fire" || tag == "Water")
+        {
+            return;
+        }
+
+        if (tag == "Enemy")
+        {
+            Debug.Log("Enemy hit!");
+            Destroy(collision.gameObject);
+        }
+    }
+
     void DestroyRing()
     {
         Destroy(gameObject);

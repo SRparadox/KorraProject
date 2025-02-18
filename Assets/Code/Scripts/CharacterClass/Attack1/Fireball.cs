@@ -2,18 +2,23 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    public GameObject flameEffect_Prefab;
     public int damage = 20;
 
     private void OnCollisionEnter(Collision collision)
     {
+        string tag = collision.gameObject.tag;
 
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (tag == "Fire" || tag == "Water")
         {
+            return;
         }
 
-        
+        if (tag == "Enemy")
+        {
+            Debug.Log("Enemy hit!");
+            Destroy(collision.gameObject);
+        }
 
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
