@@ -17939,6 +17939,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Fire
       objectReference: {fileID: 0}
+    - target: {fileID: 1266407853596131880, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: MoveSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266407853596131880, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
+      propertyPath: SprintSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1266407853596131887, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       propertyPath: m_Camera
       value: 
