@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class GuidedStreamAttack: MonoBehaviour
 {
-    [SerializeField] GuidedStream streamPrefab;
+    [SerializeField] GuidedStream selectedPrefab;
     [SerializeField] Camera cam;
 
     public void Trigger()
@@ -26,7 +26,12 @@ public class GuidedStreamAttack: MonoBehaviour
 
     private void SpawnGuidedStream(Vector3 target)
     {
-        GuidedStream stream = Instantiate(streamPrefab, transform.position, Quaternion.identity);
+        GuidedStream stream = Instantiate(selectedPrefab, transform.position, Quaternion.identity);
         stream.SendTo(target);
+    }
+
+    public void SetPrefab(GuidedStream prefab)
+    {
+        selectedPrefab = prefab;
     }
 }

@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Fireball_Shooter))] // Attack 1
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
 [RequireComponent(typeof(ElementalDash))] // Ability 1
+[RequireComponent(typeof(WaterRing_Attack))] // Ability 2
+[RequireComponent(typeof(Ultimate_Attack))] // Ultimate
+
 
 public class CharacterClass: MonoBehaviour
 {
@@ -26,8 +29,28 @@ public class CharacterClass: MonoBehaviour
     Fireball_Shooter fireball;
     GuidedStreamAttack guidedStream;
     ElementalDash elementalDash;
+    WaterRing_Attack waterRing;
+    Ultimate_Attack ultimate;
 
     Animator animator;
+
+    [Header("Elemental Prefabs")]
+    public GameObject fireUlt;
+    public GameObject waterUlt;
+    public GameObject fireRingPrefab;
+    public GameObject waterRingPrefab;
+    public GameObject fireBall;
+    public GameObject waterBall;
+    public ParticleSystem firePs;
+    public ParticleSystem waterPs;
+    public GuidedStream firestream;
+    public GuidedStream waterstream;
+
+    private GameObject selectedAt1;
+    private GuidedStream selectedAt2;
+    private ParticleSystem selectedAb1;
+    private GameObject selectedAb2;
+    private GameObject selectedUlt;
 
     private void Awake()
     {
@@ -38,6 +61,38 @@ public class CharacterClass: MonoBehaviour
         fireball = GetComponent<Fireball_Shooter>();
         guidedStream = GetComponent<GuidedStreamAttack>();
         elementalDash = GetComponent<ElementalDash>();
+        waterRing = GetComponent<WaterRing_Attack>();
+        ultimate = GetComponent<Ultimate_Attack>();
+
+        switch(gameObject.tag)
+        {
+            case "Fire":
+                selectedAt1 = fireBall;
+                selectedAt2 = firestream;
+                selectedAb1 = firePs;
+                selectedAb2 = fireRingPrefab;
+                selectedUlt = fireUlt;
+                break;
+
+            case "Water":
+                selectedAt1 = waterBall;
+                selectedAt2 = waterstream;
+                selectedAb1 = waterPs;
+                selectedAb2 = waterRingPrefab;
+                selectedUlt = waterUlt;
+                break;
+        }
+
+        AssignPrefabs();
+    }
+
+    private void AssignPrefabs()
+    {
+        if (fireball != null) fireball.SetPrefab(selectedAt1);
+        if (guidedStream != null) guidedStream.SetPrefab(selectedAt2);
+        if (elementalDash != null) elementalDash.SetPrefab(selectedAb1);
+        if (waterRing != null) waterRing.SetPrefab(selectedAb2);
+        if (ultimate != null) ultimate.SetPrefab(selectedUlt);
     }
 
     void Update()
@@ -51,6 +106,10 @@ public class CharacterClass: MonoBehaviour
         {
             fireball.Trigger();
             animator.SetTrigger("Attack1");
+        }
+        else
+        {
+            Debug.LogError("WaterRing_Attack script is missing on the player!");
         }
     }
 
@@ -73,10 +132,17 @@ public class CharacterClass: MonoBehaviour
     public void PerformAbility2()
     {
         animator.SetTrigger("Ability2");
+        if(waterRing != null)
+        {
+            waterRing.Trigger();
+        }
     }
     public void PerformUltimate()
     {
-
+        if (ultimate != null)
+        {
+            ultimate.Trigger();
+        }
     }
 
     private void UpdateCooldowns()
@@ -161,4 +227,5 @@ public class CharacterClass: MonoBehaviour
 
         currentCooldowns[abilityIndex] = abilityCooldowns[abilityIndex];
     }
+
 }
