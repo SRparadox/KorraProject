@@ -149,6 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e26ca0a97756c478f6cf8f3c6e612b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireRingPrefab: {fileID: 1609524124411887714, guid: 85dae3f884a5614469d4a28bd0d9cce7, type: 3}
+  waterRingPrefab: {fileID: 1659077198427838856, guid: b15072ca7f5860f4faa3a5e637ac4241, type: 3}
   expansionTime: 5
   maxScale: 8
   Speed: 20

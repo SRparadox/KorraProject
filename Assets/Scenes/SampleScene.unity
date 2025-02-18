@@ -788,6 +788,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterUltPrefab: {fileID: 3489800656506599232, guid: 2637fd40344ce8c4d9cd427428a2ecfd, type: 3}
   fireUltPrefab: {fileID: 5725092244643828049, guid: 76b6dfbe4e27eab4d89f12f049cf0ecf, type: 3}
+  zoomOutDistance: 15
+  transitionSpeed: 2
 --- !u!1 &1395464583
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,7 +804,7 @@ GameObject:
   - component: {fileID: 1395464584}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

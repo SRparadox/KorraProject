@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Ultimate_Attack : MonoBehaviour
 {
-    public GameObject waterUltPrefab;
-    public GameObject fireUltPrefab;
     public float zoomOutDistance = 15f;
     public float transitionSpeed = 2f;
 
+    private GameObject selectedPrefab;
     private Vector3 originalCameraPosition;
     private bool isZoomingOut = false;
     private bool isReturning = false;
@@ -33,17 +32,7 @@ public class Ultimate_Attack : MonoBehaviour
 
     private void SpawnUltimate()
     {
-        GameObject selectedPrefab = null;
-
-        if (gameObject.CompareTag("Fire"))
-        {
-            selectedPrefab = fireUltPrefab;
-        }
-        else if (gameObject.CompareTag("Water"))
-        {
-            selectedPrefab = waterUltPrefab;
-        }
-
+      
         if(selectedPrefab != null)
         {
             Vector3 spawnPosition = transform.position + new Vector3(0, 6, 0);
@@ -59,6 +48,7 @@ public class Ultimate_Attack : MonoBehaviour
             Ultimate ultimateScript = ultimate.GetComponent<Ultimate>();
             if(ultimateScript != null)
             {
+                ultimateScript.Initialize(gameObject.tag);
                 ultimateScript.StartExpansion(transform.forward, this);
             }
             Debug.Log(selectedPrefab.name + "Spawned");
@@ -98,5 +88,10 @@ public class Ultimate_Attack : MonoBehaviour
             followCamera.enabled = true;
         }
     }
-   
+
+    public void SetPrefab(GameObject prefab)
+    {
+        selectedPrefab = prefab;
+    }
+
 }

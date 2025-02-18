@@ -3,17 +3,15 @@ using UnityEngine.InputSystem;
 
 public class Fireball_Shooter : MonoBehaviour
 {
-    public GameObject fireball_Prefab;
-    public GameObject waterball_Prefab;
     public Transform fireballSpawnPoint;
     public float fireballSpeed = 10f;
     
     private GameObject selectedPrefab; //stores which prefab the player will use
 
-    private void Start()
-    {
-        UpdateSelectedPrefab();
-    }
+    //private void Start()
+    //{
+       // UpdateSelectedPrefab();
+    //}
     public void Trigger()
     {
         ShootFireball();
@@ -41,20 +39,8 @@ public class Fireball_Shooter : MonoBehaviour
         }
     }
 
-    public void UpdateSelectedPrefab()
+    public void SetPrefab(GameObject prefab)
     {
-        if (CompareTag("Fire"))
-        {
-            selectedPrefab = fireball_Prefab;
-        }
-        else if (CompareTag("Water"))
-        {
-            selectedPrefab = waterball_Prefab;
-        }
-        else
-        {
-            Debug.LogWarning("Player has no vaild element tag");
-            selectedPrefab = fireball_Prefab;
-        }
+        selectedPrefab = prefab;
     }
 }

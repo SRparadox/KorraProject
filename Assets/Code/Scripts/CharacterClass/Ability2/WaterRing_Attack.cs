@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class WaterRing_Attack : MonoBehaviour
 {
-    public GameObject waterRingPrefab;
-    public GameObject fireRingPrefab;
+    //public GameObject waterRingPrefab;
+    //public GameObject fireRingPrefab;
+    private GameObject selectedPrefab;
+
+    public void SetPrefab(GameObject prefab)
+    {
+        selectedPrefab = prefab;
+    }
 
     public void Trigger()
     {
@@ -12,21 +18,11 @@ public class WaterRing_Attack : MonoBehaviour
 
     private void SpawnWaterRing()
     {
-        GameObject selectPrefab = null;
 
-        if (gameObject.CompareTag("Fire"))
-        {
-            selectPrefab = fireRingPrefab;
-        }
-        else if (gameObject.CompareTag("Water"))
-        {
-            selectPrefab = waterRingPrefab;
-        }
-
-        if(selectPrefab != null)
+        if(selectedPrefab != null)
         {
             Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
-            GameObject waterRing = Instantiate(selectPrefab, spawnPosition, Quaternion.identity);
+            GameObject waterRing = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
             ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
             if (ps != null)
             {

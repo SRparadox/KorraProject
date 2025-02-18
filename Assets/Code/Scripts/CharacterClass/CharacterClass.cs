@@ -34,6 +34,24 @@ public class CharacterClass: MonoBehaviour
 
     Animator animator;
 
+    [Header("Elemental Prefabs")]
+    public GameObject fireUlt;
+    public GameObject waterUlt;
+    public GameObject fireRingPrefab;
+    public GameObject waterRingPrefab;
+    public GameObject fireBall;
+    public GameObject waterBall;
+    public ParticleSystem firePs;
+    public ParticleSystem waterPs;
+    public GuidedStream firestream;
+    public GuidedStream waterstream;
+
+    private GameObject selectedAt1;
+    private GuidedStream selectedAt2;
+    private ParticleSystem selectedAb1;
+    private GameObject selectedAb2;
+    private GameObject selectedUlt;
+
     private void Awake()
     {
         currentCooldowns = new float[abilityCooldowns.Length];
@@ -45,6 +63,36 @@ public class CharacterClass: MonoBehaviour
         elementalDash = GetComponent<ElementalDash>();
         waterRing = GetComponent<WaterRing_Attack>();
         ultimate = GetComponent<Ultimate_Attack>();
+
+        switch(gameObject.tag)
+        {
+            case "Fire":
+                selectedAt1 = fireBall;
+                selectedAt2 = firestream;
+                selectedAb1 = firePs;
+                selectedAb2 = fireRingPrefab;
+                selectedUlt = fireUlt;
+                break;
+
+            case "Water":
+                selectedAt1 = waterBall;
+                selectedAt2 = waterstream;
+                selectedAb1 = waterPs;
+                selectedAb2 = waterRingPrefab;
+                selectedUlt = waterUlt;
+                break;
+        }
+
+        AssignPrefabs();
+    }
+
+    private void AssignPrefabs()
+    {
+        if (fireball != null) fireball.SetPrefab(selectedAt1);
+        if (guidedStream != null) guidedStream.SetPrefab(selectedAt2);
+        if (elementalDash != null) elementalDash.SetPrefab(selectedAb1);
+        if (waterRing != null) waterRing.SetPrefab(selectedAb2);
+        if (ultimate != null) ultimate.SetPrefab(selectedUlt);
     }
 
     void Update()
@@ -178,4 +226,5 @@ public class CharacterClass: MonoBehaviour
 
         currentCooldowns[abilityIndex] = abilityCooldowns[abilityIndex];
     }
+
 }
