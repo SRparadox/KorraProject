@@ -709,6 +709,16 @@ MonoBehaviour:
   - {fileID: 997852115}
   - {fileID: 2097328727}
   - {fileID: 542908059}
+  fireUlt: {fileID: 5725092244643828049, guid: 76b6dfbe4e27eab4d89f12f049cf0ecf, type: 3}
+  waterUlt: {fileID: 3489800656506599232, guid: 2637fd40344ce8c4d9cd427428a2ecfd, type: 3}
+  fireRingPrefab: {fileID: 1609524124411887714, guid: 85dae3f884a5614469d4a28bd0d9cce7, type: 3}
+  waterRingPrefab: {fileID: 1659077198427838856, guid: b15072ca7f5860f4faa3a5e637ac4241, type: 3}
+  fireBall: {fileID: 2232664650143588886, guid: 7bb64ef469ef02c43977dee4ebb0e388, type: 3}
+  waterBall: {fileID: 7368918336036502496, guid: 0a4b24705418b1941bfcbd7a735ded7b, type: 3}
+  firePs: {fileID: 198339005276279218, guid: d383195b63305294fa0b3354e7cfd563, type: 3}
+  waterPs: {fileID: 8009118580492116739, guid: 8eb23cb643cb5ab41b284e5520d26568, type: 3}
+  firestream: {fileID: 5879177407378570033, guid: 61c3807406a524745ae975171f529015, type: 3}
+  waterstream: {fileID: 5879177407378570033, guid: 58b09301291fac7488c51e5fc2479745, type: 3}
 --- !u!114 &1342815200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,7 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9067ef389ef6b674493d5d98ef9bffda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  streamPrefab: {fileID: 5879177407378570033, guid: 58b09301291fac7488c51e5fc2479745, type: 3}
+  selectedPrefab: {fileID: 0}
   cam: {fileID: 1751143072}
 --- !u!4 &1342815201 stripped
 Transform:
@@ -743,7 +753,6 @@ MonoBehaviour:
   dashSpeed: 15
   dashDuration: 1
   upwardVelocity: 0.5
-  vfxTrailPrefab: {fileID: 8009118580492116739, guid: 8eb23cb643cb5ab41b284e5520d26568, type: 3}
 --- !u!114 &1342815210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -756,8 +765,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cdd965a13401d408bba54ea40053f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireball_Prefab: {fileID: 2232664650143588886, guid: 7bb64ef469ef02c43977dee4ebb0e388, type: 3}
-  waterball_Prefab: {fileID: 7368918336036502496, guid: 0a4b24705418b1941bfcbd7a735ded7b, type: 3}
   fireballSpawnPoint: {fileID: 514996964}
   fireballSpeed: 10
 --- !u!114 &1342815211
@@ -772,8 +779,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a758d5b5911c1294fb3182c84200834d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterRingPrefab: {fileID: 1659077198427838856, guid: b15072ca7f5860f4faa3a5e637ac4241, type: 3}
-  fireRingPrefab: {fileID: 1609524124411887714, guid: 85dae3f884a5614469d4a28bd0d9cce7, type: 3}
 --- !u!114 &1342815218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,8 +791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d40ec9b38cd6e4092a96933b0601a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterUltPrefab: {fileID: 3489800656506599232, guid: 2637fd40344ce8c4d9cd427428a2ecfd, type: 3}
-  fireUltPrefab: {fileID: 5725092244643828049, guid: 76b6dfbe4e27eab4d89f12f049cf0ecf, type: 3}
   zoomOutDistance: 15
   transitionSpeed: 2
 --- !u!1 &1395464583
@@ -1249,7 +1252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1266407853596131875, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       propertyPath: m_TagString
-      value: Water
+      value: Fire
       objectReference: {fileID: 0}
     - target: {fileID: 1266407853596131887, guid: c9e1909bbd732fe43b468414956871f3, type: 3}
       propertyPath: m_Enabled
