@@ -61,7 +61,6 @@ public class Ultimate_Attack : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Camera Movement Update: isZoomingOut=" + isZoomingOut + " | isReturning=" + isReturning);
         HandleCameraMovement();
     }
 

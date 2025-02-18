@@ -20,6 +20,7 @@ namespace StarterAssets
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
+		public CharacterClass characterClass;
 
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
@@ -48,6 +49,26 @@ namespace StarterAssets
         public void OnAttack(InputValue value)
         {
             AttackInput(value.isPressed);
+        }
+		public void OnAttack1(InputValue value)
+        {
+            characterClass.UseAbility(0);
+        }
+        public void OnAttack2(InputValue value)
+        {
+            characterClass.UseAbility(1);
+        }
+        public void OnAbility1()
+        {
+            characterClass.UseAbility(2);
+        }
+        public void OnAbility2()
+        {
+            characterClass.UseAbility(3);
+        }
+        public void OnUltimate()
+        {
+            characterClass.UseAbility(4);
         }
 #endif
 

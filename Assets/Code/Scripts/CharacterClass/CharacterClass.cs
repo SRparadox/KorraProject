@@ -82,7 +82,7 @@ public class CharacterClass: MonoBehaviour
                 selectedUlt = waterUlt;
                 break;
         }
-
+        Debug.Log("Assigning Prefabs");
         AssignPrefabs();
     }
 

@@ -20,6 +20,7 @@ public class ElementalDash: MonoBehaviour
 
     public void Trigger()
     {
+        Debug.Log("Begin Dashing");
         StartCoroutine(Dash());
     }
 
@@ -48,6 +49,7 @@ public class ElementalDash: MonoBehaviour
 
     public void SetPrefab(ParticleSystem prefab)
     {
+        Debug.Log("Setting Dash Prefab");
         selectedPrefab = prefab;
     }
 }
