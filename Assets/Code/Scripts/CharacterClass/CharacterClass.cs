@@ -16,8 +16,6 @@ public class CharacterClass: MonoBehaviour
     // Character class variables
     [Header("Character Properties")]
     [SerializeField] protected float health = 100.0f;
-    [SerializeField] protected float speed = 20.0f;
-    [SerializeField] protected float jumpHeight = 5.0f;
 
     [Header("Ability Cooldowns")]
     [SerializeField] float[] abilityCooldowns = new float[5]; // define character cooldowns
@@ -64,23 +62,23 @@ public class CharacterClass: MonoBehaviour
         waterRing = GetComponent<WaterRing_Attack>();
         ultimate = GetComponent<Ultimate_Attack>();
 
-        switch(gameObject.tag)
+        switch (gameObject.tag)
         {
             case "Fire":
-                selectedAt1 = fireBall;
-                selectedAt2 = firestream;
-                selectedAb1 = firePs;
-                selectedAb2 = fireRingPrefab;
-                selectedUlt = fireUlt;
-                break;
+            selectedAt1 = fireBall;
+            selectedAt2 = firestream;
+            selectedAb1 = firePs;
+            selectedAb2 = fireRingPrefab;
+            selectedUlt = fireUlt;
+            break;
 
             case "Water":
-                selectedAt1 = waterBall;
-                selectedAt2 = waterstream;
-                selectedAb1 = waterPs;
-                selectedAb2 = waterRingPrefab;
-                selectedUlt = waterUlt;
-                break;
+            selectedAt1 = waterBall;
+            selectedAt2 = waterstream;
+            selectedAb1 = waterPs;
+            selectedAb2 = waterRingPrefab;
+            selectedUlt = waterUlt;
+            break;
         }
         Debug.Log("Assigning Prefabs");
         AssignPrefabs();
@@ -88,11 +86,16 @@ public class CharacterClass: MonoBehaviour
 
     private void AssignPrefabs()
     {
-        if (fireball != null) fireball.SetPrefab(selectedAt1);
-        if (guidedStream != null) guidedStream.SetPrefab(selectedAt2);
-        if (elementalDash != null) elementalDash.SetPrefab(selectedAb1);
-        if (waterRing != null) waterRing.SetPrefab(selectedAb2);
-        if (ultimate != null) ultimate.SetPrefab(selectedUlt);
+        if (fireball != null)
+            fireball.SetPrefab(selectedAt1);
+        if (guidedStream != null)
+            guidedStream.SetPrefab(selectedAt2);
+        if (elementalDash != null)
+            elementalDash.SetPrefab(selectedAb1);
+        if (waterRing != null)
+            waterRing.SetPrefab(selectedAb2);
+        if (ultimate != null)
+            ultimate.SetPrefab(selectedUlt);
     }
 
     void Update()
@@ -106,8 +109,7 @@ public class CharacterClass: MonoBehaviour
         {
             fireball.Trigger();
             animator.SetTrigger("Attack1");
-        }
-        else
+        } else
         {
             Debug.LogError("WaterRing_Attack script is missing on the player!");
         }
@@ -132,7 +134,7 @@ public class CharacterClass: MonoBehaviour
     public void PerformAbility2()
     {
         animator.SetTrigger("Ability2");
-        if(waterRing != null)
+        if (waterRing != null)
         {
             waterRing.Trigger();
         }
