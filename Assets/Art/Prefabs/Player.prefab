@@ -2754,7 +2754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedPrefab: {fileID: 0}
-  cam: {fileID: 0}
+  camera: {fileID: 0}
 --- !u!114 &7940512930135411166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2783,7 +2783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireballSpawnPoint: {fileID: 7177124578834598754}
-  fireballSpeed: 10
+  fireballSpeed: 1
 --- !u!114 &1253766486694166257
 MonoBehaviour:
   m_ObjectHideFlags: 0
