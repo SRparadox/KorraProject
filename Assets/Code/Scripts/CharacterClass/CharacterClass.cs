@@ -49,6 +49,8 @@ public class CharacterClass: MonoBehaviour
     private ParticleSystem selectedAb1;
     private GameObject selectedAb2;
     private GameObject selectedUlt;
+    private int AT1Uses = 0;
+    private int MAXUses = 4; // Allow 4 attacks before cooldown
 
     private void Awake()
     {
@@ -107,12 +109,9 @@ public class CharacterClass: MonoBehaviour
     {
         if (fireball != null)
         {
-            fireball.Trigger();
             animator.SetTrigger("Attack1");
-        } else
-        {
-            Debug.LogError("WaterRing_Attack script is missing on the player!");
-        }
+            fireball.Trigger();
+        } 
     }
 
     public void PerformAttack2()
@@ -186,7 +185,7 @@ public class CharacterClass: MonoBehaviour
         {
             switch (abilityIndex)
             {
-                case 0:
+                case 0:   
                 PerformAttack1();
                 break;
                 case 1:
