@@ -943,11 +943,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 25ce8533-d619-49c8-9e45-9d492c162cda
+  cloudProjectId: 97851fea-9da6-4fbf-9494-646c1750aca5
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Korra Game
-  organizationId: unity_hxrnovjxldtwkq
+  organizationId: a-size
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
