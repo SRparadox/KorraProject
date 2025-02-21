@@ -105,12 +105,18 @@ public class CharacterClass: MonoBehaviour
         UpdateCooldowns();
     }
 
+    public void triggerFireball(){
+        if (fireball != null)
+        {
+            fireball.Trigger();
+        }
+    }
+
     public void PerformAttack1()
     {
         if (fireball != null)
         {
             animator.SetTrigger("Attack1");
-            fireball.Trigger();
         } 
     }
 
