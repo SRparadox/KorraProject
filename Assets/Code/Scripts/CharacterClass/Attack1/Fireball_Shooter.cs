@@ -1,16 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Fireball_Shooter : MonoBehaviour
+public class Fireball_Shooter: MonoBehaviour
 {
     public Transform fireballSpawnPoint;
-    public float fireballSpeed = 10f;
-    
+    [SerializeField] public float fireballSpeed = 10f;
+
     private GameObject selectedPrefab; //stores which prefab the player will use
 
     //private void Start()
     //{
-       // UpdateSelectedPrefab();
+    // UpdateSelectedPrefab();
     //}
     public void Trigger()
     {

@@ -7,11 +7,11 @@ using UnityEngine;
 public class GuidedStreamAttack: MonoBehaviour
 {
     [SerializeField] GuidedStream selectedPrefab;
-    [SerializeField] Camera cam;
+    [SerializeField] Camera camera;
 
     public void Trigger()
     {
-        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+        Ray ray = new Ray(camera.transform.position, camera.transform.forward);
         RaycastHit[] hits = Physics.RaycastAll(ray);
 
         foreach (RaycastHit hit in hits)
