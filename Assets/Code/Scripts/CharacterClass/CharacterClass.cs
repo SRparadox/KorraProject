@@ -136,13 +136,16 @@ public class CharacterClass: MonoBehaviour
             animator.SetBool("IsDashing", true);
         }
     }
-    public void PerformAbility2()
-    {
-        animator.SetTrigger("Ability2");
+    public void triggerRing(){
         if (waterRing != null)
         {
             waterRing.Trigger();
         }
+    }
+
+    public void PerformAbility2()
+    {
+        animator.SetTrigger("Ability2");
     }
     public void PerformUltimate()
     {
