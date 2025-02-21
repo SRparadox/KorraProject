@@ -5057,7 +5057,7 @@ MonoBehaviour:
   speedDelta: 1.4
   animSpeed: 15
   puddleParticle: {fileID: 4572041930450097623}
-  splashParticle: {fileID: 8607549093505059827}
+  splashParticle: {fileID: 5135481257431478286, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
   splashActivationOffset: -2
   puddleScaleSpeed: 2
   hitDetectionRadius: 1.5
@@ -5235,10 +5235,5 @@ PrefabInstance:
 --- !u!4 &3347745717801729345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2181246675171133116, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
-  m_PrefabInstance: {fileID: 3472500390916520957}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &8607549093505059827 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5135481257431478286, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
   m_PrefabInstance: {fileID: 3472500390916520957}
   m_PrefabAsset: {fileID: 0}

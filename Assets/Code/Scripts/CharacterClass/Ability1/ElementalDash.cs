@@ -7,7 +7,7 @@ public class ElementalDash: MonoBehaviour
     [SerializeField] private float dashDuration = 0.2f;
     [SerializeField] private float upwardVelocity = 0.5f;
 
-    [SerializeField] private ParticleSystem vfxTrailPrefab;
+    private ParticleSystem selectedPrefab;
 
     private CharacterController characterController;
     private Animator animator;
@@ -20,12 +20,13 @@ public class ElementalDash: MonoBehaviour
 
     public void Trigger()
     {
+        Debug.Log("Begin Dashing");
         StartCoroutine(Dash());
     }
 
     private IEnumerator Dash()
     {
-        ParticleSystem vfxTrail = Instantiate(vfxTrailPrefab, transform.position + Vector3.down * 0.3f, Quaternion.identity);
+        ParticleSystem vfxTrail = Instantiate(selectedPrefab, transform.position + Vector3.down * 0.3f, Quaternion.identity);
         vfxTrail.transform.SetParent(transform);
 
         vfxTrail.Play();
@@ -44,5 +45,11 @@ public class ElementalDash: MonoBehaviour
         animator.SetBool("IsDashing", false);
         Destroy(vfxTrail.gameObject, vfxTrail.main.duration);
         vfxTrail.Stop();
+    }
+
+    public void SetPrefab(ParticleSystem prefab)
+    {
+        Debug.Log("Setting Dash Prefab");
+        selectedPrefab = prefab;
     }
 }

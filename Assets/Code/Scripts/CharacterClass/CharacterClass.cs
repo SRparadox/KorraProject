@@ -4,17 +4,16 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(FireballShooter))] // Attack 1
+[RequireComponent(typeof(Fireball_Shooter))] // Attack 1
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
 [RequireComponent(typeof(ElementalDash))] // Ability 1
-
-public class CharacterClass: MonoBehaviour
+[RequireComponent(typeof(WaterRing_Attack))] // Ability 2
+[RequireComponent(typeof(Ultimate_Attack))] // Ultimate
+public class CharacterClass : MonoBehaviour
 {
     // Character class variables
     [Header("Character Properties")]
     [SerializeField] protected float health = 100.0f;
-    [SerializeField] protected float speed = 20.0f;
-    [SerializeField] protected float jumpHeight = 5.0f;
 
     [Header("Ability Cooldowns")]
     [SerializeField] float[] abilityCooldowns = new float[5]; // define character cooldowns
@@ -23,21 +22,95 @@ public class CharacterClass: MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI[] AbilityCooldownTexts = new TextMeshProUGUI[5];
 
-    FireballShooter fireball;
+    Fireball_Shooter fireball;
     GuidedStreamAttack guidedStream;
     ElementalDash elementalDash;
+    WaterRing_Attack waterRing;
+    Ultimate_Attack ultimate;
 
     Animator animator;
 
+    [Header("Elemental Prefabs")]
+    public GameObject fireUlt;
+    public GameObject waterUlt;
+    public GameObject fireRingPrefab;
+    public GameObject waterRingPrefab;
+    public GameObject fireBall;
+    public GameObject waterBall;
+    public ParticleSystem firePs;
+    public ParticleSystem waterPs;
+    public GuidedStream firestream;
+    public GuidedStream waterstream;
+
+    private GameObject selectedAt1;
+    private GuidedStream selectedAt2;
+    private ParticleSystem selectedAb1;
+    private GameObject selectedAb2;
+    private GameObject selectedUlt;
+
     private void Awake()
     {
+        // Initialize cooldown array to match the number of defined ability cooldowns.
         currentCooldowns = new float[abilityCooldowns.Length];
+        
+        // Try to get the Animator component.
         animator = GetComponent<Animator>();
+        if(animator == null)
+        {
+            Debug.LogError("Animator component not found on this GameObject. Please add an Animator.");
+        }
 
-        // Retrieve ability references
-        fireball = GetComponent<FireballShooter>();
+        // Retrieve ability references from this GameObject.
+        fireball = GetComponent<Fireball_Shooter>();
         guidedStream = GetComponent<GuidedStreamAttack>();
         elementalDash = GetComponent<ElementalDash>();
+        waterRing = GetComponent<WaterRing_Attack>();
+        ultimate = GetComponent<Ultimate_Attack>();
+
+        // Check tag and assign corresponding prefabs.
+        switch (gameObject.tag)
+        {
+            case "Fire":
+                selectedAt1 = fireBall;
+                selectedAt2 = firestream;
+                selectedAb1 = firePs;
+                selectedAb2 = fireRingPrefab;
+                selectedUlt = fireUlt;
+                break;
+
+            case "Water":
+                selectedAt1 = waterBall;
+                selectedAt2 = waterstream;
+                selectedAb1 = waterPs;
+                selectedAb2 = waterRingPrefab;
+                selectedUlt = waterUlt;
+                break;
+
+            default:
+                Debug.LogWarning("CharacterClass: Tag is not set to 'Fire' or 'Water'. Defaulting to 'Fire' settings.");
+                selectedAt1 = fireBall;
+                selectedAt2 = firestream;
+                selectedAb1 = firePs;
+                selectedAb2 = fireRingPrefab;
+                selectedUlt = fireUlt;
+                break;
+        }
+        Debug.Log("Assigning Prefabs");
+        AssignPrefabs();
+    }
+
+    private void AssignPrefabs()
+    {
+        if (fireball != null)
+            fireball.SetPrefab(selectedAt1);
+        if (guidedStream != null)
+            guidedStream.SetPrefab(selectedAt2);
+        if (elementalDash != null)
+            elementalDash.SetPrefab(selectedAb1);
+        if (waterRing != null)
+            waterRing.SetPrefab(selectedAb2);
+        if (ultimate != null)
+            ultimate.SetPrefab(selectedUlt);
     }
 
     void Update()
@@ -50,7 +123,12 @@ public class CharacterClass: MonoBehaviour
         if (fireball != null)
         {
             fireball.Trigger();
-            animator.SetTrigger("Attack1");
+            if (animator != null)
+                animator.SetTrigger("Attack1");
+        }
+        else
+        {
+            Debug.LogError("Fireball_Shooter script is missing on the player!");
         }
     }
 
@@ -59,24 +137,37 @@ public class CharacterClass: MonoBehaviour
         if (guidedStream != null)
         {
             guidedStream.Trigger();
-            animator.SetTrigger("Attack2");
+            if (animator != null)
+                animator.SetTrigger("Attack2");
         }
     }
+
     public void PerformAbility1()
     {
-        if (guidedStream != null)
+        if (elementalDash != null)
         {
             elementalDash.Trigger();
-            animator.SetBool("IsDashing", true);
+            if (animator != null)
+                animator.SetBool("IsDashing", true);
         }
     }
+
     public void PerformAbility2()
     {
-
+        if (animator != null)
+            animator.SetTrigger("Ability2");
+        if (waterRing != null)
+        {
+            waterRing.Trigger();
+        }
     }
+
     public void PerformUltimate()
     {
-
+        if (ultimate != null)
+        {
+            ultimate.Trigger();
+        }
     }
 
     private void UpdateCooldowns()
@@ -92,11 +183,15 @@ public class CharacterClass: MonoBehaviour
             if (currentCooldowns[i] > 0.0f)
             {
                 currentCooldowns[i] -= Time.deltaTime;
-                AbilityCooldownTexts[i].text = currentCooldowns[i].ToString("F1");
-            } else
+                // Check if the UI text for this ability is assigned before setting its text.
+                if (AbilityCooldownTexts != null && i < AbilityCooldownTexts.Length && AbilityCooldownTexts[i] != null)
+                    AbilityCooldownTexts[i].text = currentCooldowns[i].ToString("F1");
+            }
+            else
             {
                 currentCooldowns[i] = 0;
-                AbilityCooldownTexts[i].text = "Ready";
+                if (AbilityCooldownTexts != null && i < AbilityCooldownTexts.Length && AbilityCooldownTexts[i] != null)
+                    AbilityCooldownTexts[i].text = "Ready";
             }
         }
     }
@@ -108,10 +203,14 @@ public class CharacterClass: MonoBehaviour
             Debug.LogWarning("Trying to access non-existent ability index.");
             return;
         }
-        if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle"))
+        // Ensure the animator has at least 2 layers before using index 1.
+        if (animator != null && animator.layerCount > 1)
         {
-            Debug.Log("Can't use ability while in animation");
-            return;
+            if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle"))
+            {
+                Debug.Log("Can't use ability while in animation");
+                return;
+            }
         }
 
         if (IsAbilityReady(abilityIndex))
@@ -119,22 +218,21 @@ public class CharacterClass: MonoBehaviour
             switch (abilityIndex)
             {
                 case 0:
-                PerformAttack1();
-                break;
+                    PerformAttack1();
+                    break;
                 case 1:
-                PerformAttack2();
-                break;
+                    PerformAttack2();
+                    break;
                 case 2:
-                PerformAbility1();
-                break;
+                    PerformAbility1();
+                    break;
                 case 3:
-                PerformAbility2();
-                break;
+                    PerformAbility2();
+                    break;
                 case 4:
-                PerformUltimate();
-                break;
+                    PerformUltimate();
+                    break;
             }
-
             ResetAbilityCooldown(abilityIndex);
         }
     }
