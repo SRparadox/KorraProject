@@ -151,6 +151,7 @@ public class CharacterClass: MonoBehaviour
     {
         if (ultimate != null)
         {
+            animator.SetTrigger("Ultimate");
             ultimate.Trigger();
         }
     }
