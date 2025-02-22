@@ -2976,6 +2976,10 @@ PrefabInstance:
       value: Water
       objectReference: {fileID: 0}
     - target: {fileID: 1507636620937791836, guid: 7097ba7ba649e1f41bba232312bdcbd8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1507636620937791836, guid: 7097ba7ba649e1f41bba232312bdcbd8, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -4305,7 +4309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4022fc3c8a98d1a4597ad12563687363, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -24.35
+      value: -20.39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4022fc3c8a98d1a4597ad12563687363, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5683,15 +5687,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4022fc3c8a98d1a4597ad12563687363, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.01
+      value: 2.69
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4022fc3c8a98d1a4597ad12563687363, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.45
+      value: -3.78
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4022fc3c8a98d1a4597ad12563687363, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 109.08
+      value: 108.16
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4022fc3c8a98d1a4597ad12563687363, type: 3}
       propertyPath: m_LocalRotation.w
