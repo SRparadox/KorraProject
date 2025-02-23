@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Fireball_Shooter: MonoBehaviour
+public class FireballShooter: MonoBehaviour
 {
     public Transform fireballSpawnPoint;
     [SerializeField] public float fireballSpeed = 10f;
@@ -35,7 +35,7 @@ public class Fireball_Shooter: MonoBehaviour
                 }
             }
 
-            Destroy(fireball, 3f);
+            Destroy(fireball, 6f);
         }
     }
 

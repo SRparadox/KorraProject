@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WaterRing_Attack : MonoBehaviour
+public class WaterRingAttack: MonoBehaviour
 {
     //public GameObject waterRingPrefab;
     //public GameObject fireRingPrefab;
@@ -19,7 +19,7 @@ public class WaterRing_Attack : MonoBehaviour
     private void SpawnWaterRing()
     {
 
-        if(selectedPrefab != null)
+        if (selectedPrefab != null)
         {
             Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
             GameObject waterRing = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
@@ -29,8 +29,7 @@ public class WaterRing_Attack : MonoBehaviour
                 ps.Play();
             }
             Debug.Log("Waterring spawned");
-        }
-        else
+        } else
         {
             Debug.LogError("Water ring prefab not assigned in the Inspector");
         }
