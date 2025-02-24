@@ -1,8 +1,5 @@
-using System;
-using System.ComponentModel;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Fireball_Shooter))] // Attack 1
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
@@ -52,10 +49,16 @@ public class CharacterClass: MonoBehaviour
     private GameObject selectedAb2;
     private GameObject selectedUlt;
 
+    private int maxAttack1Uses = 4;
+    private int currentAttack1Uses;
+    private bool isAttack1OnCooldown = false;
+
+
     private void Awake()
     {
         currentCooldowns = new float[abilityCooldowns.Length];
         animator = GetComponent<Animator>();
+        currentAttack1Uses = maxAttack1Uses;
 
         // Retrieve ability references
         fireball = GetComponent<Fireball_Shooter>();
@@ -102,14 +105,18 @@ public class CharacterClass: MonoBehaviour
 
     public void PerformAttack1()
     {
-        if (fireball != null)
+        if (fireball != null && currentAttack1Uses > 0)
         {
             fireball.Trigger();
             animator.SetTrigger("Attack1");
-        }
-        else
-        {
-            Debug.LogError("WaterRing_Attack script is missing on the player!");
+            currentAttack1Uses--;
+            Debug.Log(currentAttack1Uses);
+
+            if(currentAttack1Uses == 0)
+            {
+                ResetAbilityCooldown(0);
+                isAttack1OnCooldown = true;
+            }
         }
     }
 
@@ -162,6 +169,13 @@ public class CharacterClass: MonoBehaviour
             {
                 currentCooldowns[i] = 0;
                 AbilityCooldownTexts[i].text = "Ready";
+
+                if(i == 0 && isAttack1OnCooldown)
+                {
+                    currentAttack1Uses = maxAttack1Uses;
+                    isAttack1OnCooldown = false;
+                    Debug.Log("Attack 1 shots reset after cooldown.");
+                }
             }
         }
     }
@@ -173,13 +187,24 @@ public class CharacterClass: MonoBehaviour
             Debug.LogWarning("Trying to access non-existent ability index.");
             return;
         }
-        if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle"))
+        if(abilityIndex == 0)
+        {
+
+            if (currentAttack1Uses > 0)
+            {
+                PerformAttack1();
+            }
+            else if(IsAbilityReady(abilityIndex))
+            {
+                Debug.Log("Attack 1 on cooldown!");
+            }
+        }
+        else if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle"))
         {
             Debug.Log("Can't use ability while in animation");
             return;
         }
-
-        if (IsAbilityReady(abilityIndex))
+        else if (IsAbilityReady(abilityIndex))
         {
             switch (abilityIndex)
             {
