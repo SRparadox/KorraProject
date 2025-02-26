@@ -185,6 +185,9 @@ public class CharacterClass: MonoBehaviour
             Debug.LogWarning("Trying to access non-existent ability index.");
             return;
         }
+        if ((animator.GetCurrentAnimatorStateInfo(1).IsName("RightPunch") || animator.GetCurrentAnimatorStateInfo(1).IsName("LeftPunch")) && abilityIndex == 0) {
+            animator.SetBool("BufferPunch", true);
+        }
         if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle"))
         {
             Debug.Log("Can't use ability while in animation");

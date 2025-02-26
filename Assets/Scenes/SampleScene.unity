@@ -4684,6 +4684,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 871140690038432267, guid: 6d27176cf281fc84abdf37ab030a9543, type: 3}
+      propertyPath: fireballSpeed
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1648423746103420299, guid: 6d27176cf281fc84abdf37ab030a9543, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.375
@@ -4735,6 +4739,10 @@ PrefabInstance:
     - target: {fileID: 6308655479567604870, guid: 6d27176cf281fc84abdf37ab030a9543, type: 3}
       propertyPath: m_Center.y
       value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6308655479567604876, guid: 6d27176cf281fc84abdf37ab030a9543, type: 3}
+      propertyPath: m_TagString
+      value: Fire
       objectReference: {fileID: 0}
     - target: {fileID: 6685321068867126838, guid: 6d27176cf281fc84abdf37ab030a9543, type: 3}
       propertyPath: m_LocalPosition.y
