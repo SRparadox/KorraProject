@@ -1403,6 +1403,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d4a127e0400f88a47bbc93a0232e23f8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c2abcacb4c173e4c82e7cddb48922c5, type: 2}
     - target: {fileID: 919132149155446097, guid: d4a127e0400f88a47bbc93a0232e23f8, type: 3}
       propertyPath: m_Name
       value: SmallHouse
@@ -9092,6 +9096,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d4a127e0400f88a47bbc93a0232e23f8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c2abcacb4c173e4c82e7cddb48922c5, type: 2}
     - target: {fileID: 919132149155446097, guid: d4a127e0400f88a47bbc93a0232e23f8, type: 3}
       propertyPath: m_Name
       value: SmallHouse (1)
@@ -9340,6 +9348,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d4a127e0400f88a47bbc93a0232e23f8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c2abcacb4c173e4c82e7cddb48922c5, type: 2}
     - target: {fileID: 919132149155446097, guid: d4a127e0400f88a47bbc93a0232e23f8, type: 3}
       propertyPath: m_Name
       value: SmallHouse
@@ -10315,6 +10327,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3f3422b8adc527c4a89dbfb196f4fb75, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 55613e702badd314799bcc5b94d70001, type: 2}
     - target: {fileID: 919132149155446097, guid: 3f3422b8adc527c4a89dbfb196f4fb75, type: 3}
       propertyPath: m_Name
       value: WoodenBoat
@@ -11116,6 +11132,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d4a127e0400f88a47bbc93a0232e23f8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c2abcacb4c173e4c82e7cddb48922c5, type: 2}
     - target: {fileID: 919132149155446097, guid: d4a127e0400f88a47bbc93a0232e23f8, type: 3}
       propertyPath: m_Name
       value: SmallHouse (1)
