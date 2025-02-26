@@ -1,8 +1,5 @@
-using System;
-using System.ComponentModel;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(FireballShooter))] // Attack 1
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
@@ -50,10 +47,16 @@ public class CharacterClass: MonoBehaviour
     private GameObject selectedAb2;
     private GameObject selectedUlt;
 
+    private int maxAttack1Uses = 4;
+    private int currentAttack1Uses;
+    private bool isAttack1OnCooldown = false;
+
+
     private void Awake()
     {
         currentCooldowns = new float[abilityCooldowns.Length];
         animator = GetComponent<Animator>();
+        currentAttack1Uses = maxAttack1Uses;
 
         // Retrieve ability references
         fireball = GetComponent<FireballShooter>();
@@ -109,6 +112,7 @@ public class CharacterClass: MonoBehaviour
         {
             fireball.Trigger();
         }
+<<<<<<< HEAD
     }
 
     public void PerformAttack1()
@@ -117,6 +121,8 @@ public class CharacterClass: MonoBehaviour
         {
             animator.SetTrigger("Attack1");
         }
+=======
+>>>>>>> origin/Bryon_Branch
     }
 
     public void PerformAttack2()
@@ -174,6 +180,13 @@ public class CharacterClass: MonoBehaviour
             {
                 currentCooldowns[i] = 0;
                 AbilityCooldownTexts[i].text = "Ready";
+
+                if(i == 0 && isAttack1OnCooldown)
+                {
+                    currentAttack1Uses = maxAttack1Uses;
+                    isAttack1OnCooldown = false;
+                    Debug.Log("Attack 1 shots reset after cooldown.");
+                }
             }
         }
     }
@@ -193,7 +206,6 @@ public class CharacterClass: MonoBehaviour
             Debug.Log("Can't use ability while in animation");
             return;
         }
-
         if (IsAbilityReady(abilityIndex))
         {
             switch (abilityIndex)

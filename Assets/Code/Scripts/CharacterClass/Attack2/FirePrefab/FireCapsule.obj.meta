@@ -8,7 +8,11 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: WaterCapsule_pCylinder3Mat
+<<<<<<< HEAD
     second: {fileID: 2100000, guid: 035bcc5200d9adc458dbcfd7d1c51188, type: 2}
+=======
+    second: {fileID: 2100000, guid: 9a526ccb9696d6545b3991e93bfb18bd, type: 2}
+>>>>>>> origin/Bryon_Branch
   materials:
     materialImportMode: 2
     materialName: 0

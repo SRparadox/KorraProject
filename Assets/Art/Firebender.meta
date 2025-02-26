@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Art/Firebender.meta
 guid: 7b324da8609d1ab4bb43819a7f4948f8
+========
+guid: 741d181bb31e9bc458a95e6eb4837607
+>>>>>>>> origin/Bryon_Branch:Assets/Stylized Lava Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

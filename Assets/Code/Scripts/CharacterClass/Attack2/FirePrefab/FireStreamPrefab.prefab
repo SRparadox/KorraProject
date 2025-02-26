@@ -5153,7 +5153,11 @@ MonoBehaviour:
   MeshBender: {fileID: 0}
   generated: {fileID: 0}
   mesh: {fileID: 7814459101124295239, guid: 091b3b67020b9314091b839522a6602b, type: 3}
+<<<<<<< HEAD
   material: {fileID: 2100000, guid: e7a9282d46428084d936b4e47e616526, type: 2}
+=======
+  material: {fileID: 2100000, guid: 9a526ccb9696d6545b3991e93bfb18bd, type: 2}
+>>>>>>> origin/Bryon_Branch
   rotation: {x: 0, y: 90, z: 0}
   scale: {x: 1, y: 0.2, z: 0.2}
   _TargetScale: 1
