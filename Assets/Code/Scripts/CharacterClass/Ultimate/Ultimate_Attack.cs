@@ -1,4 +1,5 @@
 using Cinemachine;
+using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ public class Ultimate_Attack : MonoBehaviour
         {
             Debug.LogError("Main Camera not found! Ensure your camera is tagged as 'MainCamera'.");
         }
-        originalCameraPosition = cameraTransform.localPosition;
+        originalCameraPosition = cameraTransform.position;
     }
 
     public void Trigger()
@@ -42,6 +43,8 @@ public class Ultimate_Attack : MonoBehaviour
             {
                 followCamera.enabled = false;
             }
+
+            originalCameraPosition = cameraTransform.position;
             isZoomingOut = true;
             isReturning = false;
 
@@ -69,12 +72,25 @@ public class Ultimate_Attack : MonoBehaviour
     {
         if (isZoomingOut)
         {
-            Vector3 targetPosition = originalCameraPosition - new Vector3 (0,-3,zoomOutDistance);
+            Vector3 targetPosition = originalCameraPosition - cameraTransform.forward * zoomOutDistance + new Vector3(0, 3, 0);
             cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetPosition, Time.deltaTime * transitionSpeed);
+
+            if(Vector3.Distance(cameraTransform.position, targetPosition) < 0.1f)
+            {
+                isZoomingOut = false;
+            }
         }
         else if(isReturning)
         {
             cameraTransform.position = Vector3.Lerp(cameraTransform.position, originalCameraPosition, Time.deltaTime * transitionSpeed);
+            if (Vector3.Distance(cameraTransform.position, originalCameraPosition) < 0.1f)
+            {
+                isReturning = false;
+                if(followCamera != null)
+                {
+                    followCamera.enabled = true;
+                }
+            }
         }
     }
 

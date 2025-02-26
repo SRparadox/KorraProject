@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: WaterCapsule_pCylinder3Mat
-    second: {fileID: 2100000, guid: 41b2f17198c79274a9d0f0f7509aa563, type: 2}
+    second: {fileID: 2100000, guid: 9a526ccb9696d6545b3991e93bfb18bd, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -105,18 +105,10 @@ public class CharacterClass: MonoBehaviour
 
     public void PerformAttack1()
     {
-        if (fireball != null && currentAttack1Uses > 0)
+        if (fireball != null)
         {
             fireball.Trigger();
             animator.SetTrigger("Attack1");
-            currentAttack1Uses--;
-            Debug.Log(currentAttack1Uses);
-
-            if(currentAttack1Uses == 0)
-            {
-                ResetAbilityCooldown(0);
-                isAttack1OnCooldown = true;
-            }
         }
     }
 
@@ -187,24 +179,12 @@ public class CharacterClass: MonoBehaviour
             Debug.LogWarning("Trying to access non-existent ability index.");
             return;
         }
-        if(abilityIndex == 0)
-        {
-
-            if (currentAttack1Uses > 0)
-            {
-                PerformAttack1();
-            }
-            else if(IsAbilityReady(abilityIndex))
-            {
-                Debug.Log("Attack 1 on cooldown!");
-            }
-        }
-        else if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle"))
+        if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle"))
         {
             Debug.Log("Can't use ability while in animation");
             return;
         }
-        else if (IsAbilityReady(abilityIndex))
+        if (IsAbilityReady(abilityIndex))
         {
             switch (abilityIndex)
             {

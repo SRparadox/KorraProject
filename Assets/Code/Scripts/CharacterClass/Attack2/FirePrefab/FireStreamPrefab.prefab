@@ -5152,8 +5152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MeshBender: {fileID: 0}
   generated: {fileID: 0}
-  mesh: {fileID: 7814459101124295239, guid: d3768a4fc97ed854bb35b0977e0618d8, type: 3}
-  material: {fileID: 2100000, guid: 845ae72f34775f444812bd1576bcc0ab, type: 2}
+  mesh: {fileID: 7814459101124295239, guid: 091b3b67020b9314091b839522a6602b, type: 3}
+  material: {fileID: 2100000, guid: 9a526ccb9696d6545b3991e93bfb18bd, type: 2}
   rotation: {x: 0, y: 90, z: 0}
   scale: {x: 1, y: 0.2, z: 0.2}
   _TargetScale: 1
