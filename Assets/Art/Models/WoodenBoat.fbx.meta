@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: e8f82a04e4a0be24a93ec0c0e59033d8
+guid: 3f3422b8adc527c4a89dbfb196f4fb75
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material_atlas_00001_1
+    second: {fileID: 2100000, guid: 55613e702badd314799bcc5b94d70001, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,8 +38,8 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 9
-    meshCompression: 0
+    globalScale: 0.9
+    meshCompression: 3
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
@@ -88,7 +93,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.089999996
+    globalScale: 0.9
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

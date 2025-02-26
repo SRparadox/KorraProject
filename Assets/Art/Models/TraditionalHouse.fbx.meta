@@ -1,14 +1,19 @@
 fileFormatVersion: 2
-guid: b4c8579e426ac9049b565eaee7a57315
+guid: 536c3ad8044d94d45907ab131ddb9c5f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material_atlas_00001_1
+    second: {fileID: 2100000, guid: eae7090efb732b447838383a78cec794, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 0
-    materialLocation: 0
+    materialSearch: 1
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -34,7 +39,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1.2
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a95460e89a0c80b42ab653ad7095b1c1
+guid: 06e720b56449c3745b44914b084549ba
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,9 +8,9 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: initialShadingGroup
-    second: {fileID: 2100000, guid: e6acc614b663e8e4abb86b7795d35026, type: 2}
+    second: {fileID: 2100000, guid: 33fab6a5c3dc22041846c69a21fcfd60, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -38,8 +38,8 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
-    meshCompression: 0
+    globalScale: 1.5
+    meshCompression: 3
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
@@ -93,7 +93,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 1.5
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
