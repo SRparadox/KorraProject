@@ -881,7 +881,7 @@ Transform:
   m_GameObject: {fileID: 3885973296871084338}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.39999443, y: 1.3750001, z: -4}
+  m_LocalPosition: {x: 0.40000015, y: 1.375, z: -4.0000005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1360,7 +1360,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 7.5
   SprintSpeed: 7.5
-  RotationSmoothTime: 0.12
+  sensitivityX: 2.5
+  sensitivityY: 2.75
+  RotationSmoothTime: 0.07
   SpeedChangeRate: 10
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
   FootstepAudioClips:
