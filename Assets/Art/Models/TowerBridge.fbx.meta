@@ -3,7 +3,12 @@ guid: 0ff609de4bc56c748a267305d285bce8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TowerBridge_M
+    second: {fileID: 2100000, guid: 8ff4ebcd6422ba941a8392a2bb9e6c49, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

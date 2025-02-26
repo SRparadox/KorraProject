@@ -3,7 +3,12 @@ guid: 8edd628c4278fa2439de911564fb4ceb
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Asian_House
+    second: {fileID: 2100000, guid: 5cd13b1bd9b75404f897cccb6e15b462, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
