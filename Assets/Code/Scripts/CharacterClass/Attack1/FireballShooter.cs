@@ -1,20 +1,26 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FireballShooter: MonoBehaviour
+public class Fireball_Shooter : MonoBehaviour
 {
     public Transform fireballSpawnPoint;
-    [SerializeField] public float fireballSpeed = 10f;
-
+    public float fireballSpeed = 10f;
+    private Animator animator;
+    
     private GameObject selectedPrefab; //stores which prefab the player will use
 
-    //private void Start()
-    //{
-    // UpdateSelectedPrefab();
-    //}
+    private void Start()
+    {
+        //UpdateSelectedPrefab();
+        animator = GetComponent<Animator>();
+    }
     public void Trigger()
     {
         ShootFireball();
+    }
+
+    public void disableBuffer() {
+        if (animator != null) animator.SetBool("BufferPunch", false);
     }
 
     void ShootFireball()
@@ -22,7 +28,6 @@ public class FireballShooter: MonoBehaviour
         if (selectedPrefab != null && fireballSpawnPoint != null)
         {
             GameObject fireball = Instantiate(selectedPrefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
-
             Camera mainCamera = Camera.main;
             if (mainCamera != null)
             {
@@ -35,7 +40,7 @@ public class FireballShooter: MonoBehaviour
                 }
             }
 
-            Destroy(fireball, 6f);
+            Destroy(fireball, 3f);
         }
     }
 
