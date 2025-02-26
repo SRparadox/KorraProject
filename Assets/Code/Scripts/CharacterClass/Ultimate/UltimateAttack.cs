@@ -1,9 +1,6 @@
 using Cinemachine;
-<<<<<<< HEAD:Assets/Code/Scripts/CharacterClass/Ultimate/UltimateAttack.cs
-=======
 using TMPro;
 using UnityEditor.Experimental.GraphView;
->>>>>>> origin/Bryon_Branch:Assets/Code/Scripts/CharacterClass/Ultimate/Ultimate_Attack.cs
 using UnityEngine;
 
 public class UltimateAttack: MonoBehaviour
@@ -73,27 +70,20 @@ public class UltimateAttack: MonoBehaviour
     {
         if (isZoomingOut)
         {
-<<<<<<< HEAD:Assets/Code/Scripts/CharacterClass/Ultimate/UltimateAttack.cs
-            Vector3 targetPosition = originalCameraPosition - new Vector3(0, -3, zoomOutDistance);
-            cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetPosition, Time.deltaTime * transitionSpeed);
-        } else if (isReturning)
-=======
             Vector3 targetPosition = originalCameraPosition - cameraTransform.forward * zoomOutDistance + new Vector3(0, 3, 0);
             cameraTransform.position = Vector3.Lerp(cameraTransform.position, targetPosition, Time.deltaTime * transitionSpeed);
 
-            if(Vector3.Distance(cameraTransform.position, targetPosition) < 0.1f)
+            if (Vector3.Distance(cameraTransform.position, targetPosition) < 0.1f)
             {
                 isZoomingOut = false;
             }
-        }
-        else if(isReturning)
->>>>>>> origin/Bryon_Branch:Assets/Code/Scripts/CharacterClass/Ultimate/Ultimate_Attack.cs
+        } else if (isReturning)
         {
             cameraTransform.position = Vector3.Lerp(cameraTransform.position, originalCameraPosition, Time.deltaTime * transitionSpeed);
             if (Vector3.Distance(cameraTransform.position, originalCameraPosition) < 0.1f)
             {
                 isReturning = false;
-                if(followCamera != null)
+                if (followCamera != null)
                 {
                     followCamera.enabled = true;
                 }

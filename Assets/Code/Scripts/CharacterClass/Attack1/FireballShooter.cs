@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Fireball_Shooter : MonoBehaviour
+public class FireballShooter: MonoBehaviour
 {
     public Transform fireballSpawnPoint;
     public float fireballSpeed = 10f;
     private Animator animator;
-    
+
     private GameObject selectedPrefab; //stores which prefab the player will use
 
     private void Start()
@@ -19,8 +19,10 @@ public class Fireball_Shooter : MonoBehaviour
         ShootFireball();
     }
 
-    public void disableBuffer() {
-        if (animator != null) animator.SetBool("BufferPunch", false);
+    public void disableBuffer()
+    {
+        if (animator != null)
+            animator.SetBool("BufferPunch", false);
     }
 
     void ShootFireball()

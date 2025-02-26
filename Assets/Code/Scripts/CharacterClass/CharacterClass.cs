@@ -112,17 +112,15 @@ public class CharacterClass: MonoBehaviour
         {
             fireball.Trigger();
         }
-<<<<<<< HEAD
     }
 
     public void PerformAttack1()
     {
         if (fireball != null)
         {
+            fireball.Trigger();
             animator.SetTrigger("Attack1");
         }
-=======
->>>>>>> origin/Bryon_Branch
     }
 
     public void PerformAttack2()
@@ -181,7 +179,7 @@ public class CharacterClass: MonoBehaviour
                 currentCooldowns[i] = 0;
                 AbilityCooldownTexts[i].text = "Ready";
 
-                if(i == 0 && isAttack1OnCooldown)
+                if (i == 0 && isAttack1OnCooldown)
                 {
                     currentAttack1Uses = maxAttack1Uses;
                     isAttack1OnCooldown = false;
@@ -198,7 +196,8 @@ public class CharacterClass: MonoBehaviour
             Debug.LogWarning("Trying to access non-existent ability index.");
             return;
         }
-        if ((animator.GetCurrentAnimatorStateInfo(1).IsName("RightPunch") || animator.GetCurrentAnimatorStateInfo(1).IsName("LeftPunch")) && abilityIndex == 0) {
+        if ((animator.GetCurrentAnimatorStateInfo(1).IsName("RightPunch") || animator.GetCurrentAnimatorStateInfo(1).IsName("LeftPunch")) && abilityIndex == 0)
+        {
             animator.SetBool("BufferPunch", true);
         }
         if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle"))
