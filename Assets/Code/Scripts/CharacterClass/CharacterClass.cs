@@ -4,11 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Fireball_Shooter))] // Attack 1
+[RequireComponent(typeof(FireballShooter))] // Attack 1
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
 [RequireComponent(typeof(ElementalDash))] // Ability 1
-[RequireComponent(typeof(WaterRing_Attack))] // Ability 2
-[RequireComponent(typeof(Ultimate_Attack))] // Ultimate
+[RequireComponent(typeof(WaterRingAttack))] // Ability 2
+[RequireComponent(typeof(UltimateAttack))] // Ultimate
 
 
 public class CharacterClass: MonoBehaviour
@@ -24,11 +24,11 @@ public class CharacterClass: MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] TextMeshProUGUI[] AbilityCooldownTexts = new TextMeshProUGUI[5];
 
-    Fireball_Shooter fireball;
+    FireballShooter fireball;
     GuidedStreamAttack guidedStream;
     ElementalDash elementalDash;
-    WaterRing_Attack waterRing;
-    Ultimate_Attack ultimate;
+    WaterRingAttack waterRing;
+    UltimateAttack ultimate;
 
     Animator animator;
 
@@ -56,11 +56,11 @@ public class CharacterClass: MonoBehaviour
         animator = GetComponent<Animator>();
 
         // Retrieve ability references
-        fireball = GetComponent<Fireball_Shooter>();
+        fireball = GetComponent<FireballShooter>();
         guidedStream = GetComponent<GuidedStreamAttack>();
         elementalDash = GetComponent<ElementalDash>();
-        waterRing = GetComponent<WaterRing_Attack>();
-        ultimate = GetComponent<Ultimate_Attack>();
+        waterRing = GetComponent<WaterRingAttack>();
+        ultimate = GetComponent<UltimateAttack>();
 
         switch (gameObject.tag)
         {
@@ -103,7 +103,8 @@ public class CharacterClass: MonoBehaviour
         UpdateCooldowns();
     }
 
-    public void triggerFireball(){
+    public void triggerFireball()
+    {
         if (fireball != null)
         {
             fireball.Trigger();
@@ -115,7 +116,7 @@ public class CharacterClass: MonoBehaviour
         if (fireball != null)
         {
             animator.SetTrigger("Attack1");
-        } 
+        }
     }
 
     public void PerformAttack2()
@@ -134,7 +135,8 @@ public class CharacterClass: MonoBehaviour
             animator.SetBool("IsDashing", true);
         }
     }
-    public void triggerRing(){
+    public void triggerRing()
+    {
         if (waterRing != null)
         {
             waterRing.Trigger();
@@ -193,7 +195,7 @@ public class CharacterClass: MonoBehaviour
         {
             switch (abilityIndex)
             {
-                case 0:   
+                case 0:
                 PerformAttack1();
                 break;
                 case 1:

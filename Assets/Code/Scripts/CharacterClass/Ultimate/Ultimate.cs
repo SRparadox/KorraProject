@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Ultimate : MonoBehaviour
+public class Ultimate: MonoBehaviour
 {
     public GameObject fireRingPrefab;
     public GameObject waterRingPrefab;
@@ -14,7 +14,7 @@ public class Ultimate : MonoBehaviour
     private bool hasExpanded = false;
     private Rigidbody rb;
     private Vector3 launchDirection;
-    private Ultimate_Attack attackScript;
+    private UltimateAttack attackScript;
 
     public void Initialize(string tag)
     {
@@ -33,7 +33,7 @@ public class Ultimate : MonoBehaviour
 
         transform.localScale = Vector3.zero;
     }
-    public void StartExpansion(Vector3 direction, Ultimate_Attack attack)
+    public void StartExpansion(Vector3 direction, UltimateAttack attack)
     {
         launchDirection = direction;
         attackScript = attack;
@@ -51,7 +51,7 @@ public class Ultimate : MonoBehaviour
 
             ScaleAllChildren(transform, scaleFactor);
 
-            if(progress >= 1f)
+            if (progress >= 1f)
             {
                 hasExpanded = true;
                 LaunchForward();
@@ -74,7 +74,7 @@ public class Ultimate : MonoBehaviour
 
     void ScaleAllChildren(Transform parent, float scaleFactor)
     {
-        foreach(Transform child in parent)
+        foreach (Transform child in parent)
         {
             child.localScale = Vector3.one * scaleFactor;
             ScaleAllChildren(child, scaleFactor);
@@ -88,20 +88,18 @@ public class Ultimate : MonoBehaviour
             Vector3 impactPosition = collision.contacts[0].point;
             GameObject ringToSpawn = null;
 
-            if(playertag == "Fire" && fireRingPrefab != null)
+            if (playertag == "Fire" && fireRingPrefab != null)
             {
                 ringToSpawn = fireRingPrefab;
-            }
-            else if (playertag == "Water" && waterRingPrefab != null)
+            } else if (playertag == "Water" && waterRingPrefab != null)
             {
-                ringToSpawn =waterRingPrefab;
+                ringToSpawn = waterRingPrefab;
             }
 
             if (ringToSpawn != null)
             {
                 Instantiate(ringToSpawn, impactPosition, Quaternion.identity);
-            }
-            else
+            } else
             {
                 Debug.LogError("No valid ring prefab assigned for " + playertag);
             }
