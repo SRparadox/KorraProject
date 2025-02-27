@@ -44,13 +44,11 @@ namespace StarterAssets
 
         public void OnSprint(InputValue value)
         {
-            Debug.Log("Sprint pressed");
             SprintInput(value.isPressed);
         }
 
         public void OnAim(InputValue value)
         {
-            Debug.Log("Aim pressed");
             AimInput(value.isPressed);
         }
 
@@ -80,7 +78,6 @@ namespace StarterAssets
         }
 #endif
 
-
         public void MoveInput(Vector2 newMoveDirection)
         {
             move = newMoveDirection;
@@ -103,7 +100,6 @@ namespace StarterAssets
 
         public void AimInput(bool newAimState)
         {
-            Debug.Log("aim state changed");
             aim = newAimState;
         }
 
@@ -122,5 +118,4 @@ namespace StarterAssets
             Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
         }
     }
-
 }
