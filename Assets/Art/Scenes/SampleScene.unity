@@ -9507,6 +9507,14 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 7517572947383859237}
+    - target: {fileID: 4074374585356402851, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.78000593
+      objectReference: {fileID: 0}
+    - target: {fileID: 4074374585356402851, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.6599987
+      objectReference: {fileID: 0}
     - target: {fileID: 4705826424688216604, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: m_Name
       value: Player
@@ -9514,6 +9522,18 @@ PrefabInstance:
     - target: {fileID: 4705826424688216604, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: m_TagString
       value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213648135405583350, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.39998877
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213648135405583350, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213648135405583350, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.000002
       objectReference: {fileID: 0}
     - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: 'AbilityCooldownTexts.Array.data[0]'
@@ -14245,7 +14265,7 @@ Transform:
   m_GameObject: {fileID: 7517572947383859239}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.9955373, z: 0, w: 0.09436903}
-  m_LocalPosition: {x: 171.68073, y: 4.705, z: 1.2509141}
+  m_LocalPosition: {x: 171.24359, y: 4.705, z: 0.9883704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14292,7 +14312,7 @@ Camera:
     height: 1
   near clip plane: 0.2
   far clip plane: 500
-  field of view: 40
+  field of view: 30
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -14350,7 +14370,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 2
+    m_Time: 0.15
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
