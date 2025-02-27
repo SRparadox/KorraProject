@@ -9502,6 +9502,14 @@ PrefabInstance:
       propertyPath: sensitivityY
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: aimSensitivityX
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: aimSensitivityY
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

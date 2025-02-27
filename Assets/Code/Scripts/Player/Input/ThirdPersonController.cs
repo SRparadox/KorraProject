@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
+ * 
+ * Aiming code sourced from https://youtu.be/FbM4CkqtOuA?feature=shared
  */
 
 namespace StarterAssets
@@ -22,19 +24,22 @@ namespace StarterAssets
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
 
-        [Header("Camera Sensitivity")]
-        [Tooltip("X sensitivity multiplier")]
-        [SerializeField, Range(0f, 5f)] private float sensitivityX = 2.0f;
-
-        [Tooltip("Y sensitivity multiplier")]
-        [SerializeField, Range(0f, 5f)] private float sensitivityY = 2.0f;
-
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
 
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
+
+        [Header("Sensitivity")]
+        public float normalSensitivityX = 2.0f;
+        public float normalSensitivityY = 2.0f;
+
+        public float aimSensitivityX = 2.0f;
+        public float aimSensitivityY = 2.0f;
+
+        private float xSensitivity;
+        private float ySensitivity;
 
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
@@ -135,7 +140,6 @@ namespace StarterAssets
             }
         }
 
-
         private void Awake()
         {
             // get a reference to our main camera
@@ -149,6 +153,9 @@ namespace StarterAssets
 
         private void Start()
         {
+            xSensitivity = normalSensitivityX;
+            ySensitivity = normalSensitivityY;
+
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
             _hasAnimator = TryGetComponent(out _animator);
@@ -214,8 +221,8 @@ namespace StarterAssets
                 //Don't multiply mouse input by Time.deltaTime;
                 float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-                _cinemachineTargetYaw += _input.look.x * (sensitivityX * deltaTimeMultiplier);
-                _cinemachineTargetPitch -= _input.look.y * (sensitivityY * deltaTimeMultiplier);
+                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier * xSensitivity;
+                _cinemachineTargetPitch -= _input.look.y * deltaTimeMultiplier * ySensitivity;
             }
 
             // clamp our rotations so our values are limited 360 degrees
@@ -301,9 +308,13 @@ namespace StarterAssets
             if (staterAssetsInputs.aim)
             {
                 aimVirtualCamera.gameObject.SetActive(true);
+                xSensitivity = aimSensitivityX;
+                ySensitivity = aimSensitivityY;
             } else
             {
                 aimVirtualCamera.gameObject.SetActive(false);
+                xSensitivity = normalSensitivityX;
+                ySensitivity = normalSensitivityY;
             }
         }
 
