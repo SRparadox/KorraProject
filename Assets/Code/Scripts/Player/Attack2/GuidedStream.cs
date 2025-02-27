@@ -133,8 +133,6 @@ public class GuidedStream: MonoBehaviour
             Vector3 pos = transform.position + normal * radius;
             pos.y = streamSpawnHeight;
 
-            Debug.Log("y: " + pos.y);
-
             Vector3 direction = pos + Quaternion.Euler(Random.Range(-30, 30), Random.Range(60, 120) * sign, Random.Range(-30, 30)) * normal * radius / 2f;
 
             if (i == 0)
