@@ -1520,10 +1520,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 7.5
   SprintSpeed: 10
-  sensitivityX: 2.5
-  sensitivityY: 2.75
   RotationSmoothTime: 0.07
   SpeedChangeRate: 10
+  normalSensitivityX: 2
+  normalSensitivityY: 2
+  aimSensitivityX: 1
+  aimSensitivityY: 1
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
   FootstepAudioClips:
   - {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}
@@ -1704,7 +1706,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   abilityCooldowns:
-  - 1
+  - 0
   - 2
   - 2
   - 2

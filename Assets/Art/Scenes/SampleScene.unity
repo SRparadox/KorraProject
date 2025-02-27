@@ -9473,27 +9473,23 @@ PrefabInstance:
     - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: 'AbilityCooldownTexts.Array.data[0]'
       value: 
-      objectReference: {fileID: 3972637125356864314}
+      objectReference: {fileID: 2470516001548406293}
     - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: 'AbilityCooldownTexts.Array.data[1]'
       value: 
-      objectReference: {fileID: 8386790906170599463}
+      objectReference: {fileID: 5162191766182137736}
     - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: 'AbilityCooldownTexts.Array.data[2]'
       value: 
-      objectReference: {fileID: 3335624289802544448}
+      objectReference: {fileID: 6816834008092449226}
     - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: 'AbilityCooldownTexts.Array.data[3]'
       value: 
-      objectReference: {fileID: 8170760326830509133}
+      objectReference: {fileID: 6893414043714204044}
     - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: 'AbilityCooldownTexts.Array.data[4]'
       value: 
-      objectReference: {fileID: 8886461673699279942}
-    - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-      propertyPath: SprintSpeed
-      value: 10
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8327734968252762105}
     - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: sensitivityX
       value: 2.75
@@ -9501,14 +9497,6 @@ PrefabInstance:
     - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: sensitivityY
       value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-      propertyPath: aimSensitivityX
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-      propertyPath: aimSensitivityY
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14135,7 +14123,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 73.59998, y: 27.499992}
+  m_AnchoredPosition: {x: 82.5, y: 27.499992}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &7517572947383859234
@@ -14563,7 +14551,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: M2
+  m_text: R
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14740,7 +14728,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: R
+  m_text: T
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
