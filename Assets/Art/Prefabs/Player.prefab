@@ -1421,7 +1421,6 @@ GameObject:
   - component: {fileID: 7105402699739947193}
   - component: {fileID: 3285146808007534035}
   - component: {fileID: 8601454794748308458}
-  - component: {fileID: 3034473656581554063}
   - component: {fileID: 3238792511065377361}
   - component: {fileID: 30990453929750715}
   - component: {fileID: 7865049869909681944}
@@ -1520,7 +1519,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 7.5
-  SprintSpeed: 7.5
+  SprintSpeed: 10
   sensitivityX: 2.5
   sensitivityY: 2.75
   RotationSmoothTime: 0.07
@@ -1553,18 +1552,6 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
---- !u!114 &3034473656581554063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4705826424688216604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d00727769e7acf4cb09628971d70a7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   aimVirtualCamera: {fileID: 3917111920924183227}
 --- !u!114 &3238792511065377361
 MonoBehaviour:

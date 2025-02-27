@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cinemachine;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -82,6 +83,11 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        [Header("Aiming")]
+        [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
+
+        private StarterAssetsInputs staterAssetsInputs;
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -137,6 +143,8 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+
+            staterAssetsInputs = GetComponent<StarterAssetsInputs>();
         }
 
         private void Start()
@@ -166,6 +174,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            Aim();
         }
 
         private void LateUpdate()
@@ -284,6 +293,17 @@ namespace StarterAssets
             {
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+            }
+        }
+
+        private void Aim()
+        {
+            if (staterAssetsInputs.aim)
+            {
+                aimVirtualCamera.gameObject.SetActive(true);
+            } else
+            {
+                aimVirtualCamera.gameObject.SetActive(false);
             }
         }
 
