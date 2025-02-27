@@ -8415,6 +8415,26 @@ PrefabInstance:
       propertyPath: waterRingPrefab
       value: 
       objectReference: {fileID: 3484825922839809200, guid: b15072ca7f5860f4faa3a5e637ac4241, type: 3}
+    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: 'AbilityCooldownTexts.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3972637125356864314}
+    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: 'AbilityCooldownTexts.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8386790906170599463}
+    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: 'AbilityCooldownTexts.Array.data[2]'
+      value: 
+      objectReference: {fileID: 3335624289802544448}
+    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: 'AbilityCooldownTexts.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8170760326830509133}
+    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: 'AbilityCooldownTexts.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8886461673699279942}
     - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: sensitivityX
       value: 2.75
