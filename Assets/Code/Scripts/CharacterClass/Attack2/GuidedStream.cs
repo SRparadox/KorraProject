@@ -9,7 +9,6 @@ public class GuidedStream: MonoBehaviour
 {
     [SerializeField] float pointCount;
     [SerializeField] float radius;
-    [SerializeField] float heightDelta;
     [SerializeField] Vector3 scale;
 
     [SerializeField] Spline spline;
@@ -121,7 +120,7 @@ public class GuidedStream: MonoBehaviour
 
         int sign = Random.Range(0, 2) == 0 ? 1 : -1;
         float angle = 90 * sign;
-        float height = 0;
+        float streamSpawnHeight = transform.position.y;
 
         for (int i = 0; i < pointCount; i++)
         {
@@ -132,7 +131,10 @@ public class GuidedStream: MonoBehaviour
 
             Vector3 normal = Quaternion.Euler(0, angle, 0) * transform.forward;
             Vector3 pos = transform.position + normal * radius;
-            pos.y = height;
+            pos.y = streamSpawnHeight;
+
+            Debug.Log("y: " + pos.y);
+
             Vector3 direction = pos + Quaternion.Euler(Random.Range(-30, 30), Random.Range(60, 120) * sign, Random.Range(-30, 30)) * normal * radius / 2f;
 
             if (i == 0)
@@ -143,7 +145,6 @@ public class GuidedStream: MonoBehaviour
             spline.nodes[i].Position = transform.InverseTransformPoint(pos);
             spline.nodes[i].Direction = transform.InverseTransformPoint(direction);
 
-            height += heightDelta;
             angle += 90 * sign;
         }
 
