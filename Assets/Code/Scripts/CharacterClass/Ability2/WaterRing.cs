@@ -8,6 +8,8 @@ public class WaterRing : MonoBehaviour
     public float slowerrotation = 30f;
     public float holdDuration = 1f; //Time before disappearing
 
+    public float damage = 25;
+
     private float currentTime = 0f;
     private bool hasExpanded = false;
     private Vector3[] initialOffsets;
@@ -44,18 +46,12 @@ public class WaterRing : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        string tag = collision.gameObject.tag;
-
-        if (tag == "Fire" || tag == "Water")
+        if (collision.gameObject.GetComponent<CharacterClass>() != null)
         {
+            collision.gameObject.GetComponent<CharacterClass>().TakeDamage(damage);
             return;
         }
 
-        if (tag == "Enemy")
-        {
-            Debug.Log("Enemy hit!");
-            Destroy(collision.gameObject);
-        }
     }
 
     void DestroyRing()

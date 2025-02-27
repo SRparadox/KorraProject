@@ -8,6 +8,7 @@ public class GuidedStreamAttack: MonoBehaviour
 {
     [SerializeField] GuidedStream selectedPrefab;
     [SerializeField] Camera camera;
+    [SerializeField] float damage = 25;
 
     public void Trigger()
     {
@@ -28,6 +29,7 @@ public class GuidedStreamAttack: MonoBehaviour
     {
         GuidedStream stream = Instantiate(selectedPrefab, transform.position, Quaternion.identity);
         stream.SendTo(target);
+        stream.setDamage(damage);
     }
 
     public void SetPrefab(GuidedStream prefab)

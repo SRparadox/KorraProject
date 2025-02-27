@@ -8,6 +8,7 @@ public class Ultimate: MonoBehaviour
     public float maxScale = 8f;
     public float Speed = 20f;
     public float lifeTime = 5f;
+    public float damage = 75;
 
     private string playertag;
     private float currentTime = 0f;
@@ -83,6 +84,12 @@ public class Ultimate: MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.GetComponent<CharacterClass>() != null)
+        {
+            collision.gameObject.GetComponent<CharacterClass>().TakeDamage(damage);
+            return;
+        }
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             Vector3 impactPosition = collision.contacts[0].point;

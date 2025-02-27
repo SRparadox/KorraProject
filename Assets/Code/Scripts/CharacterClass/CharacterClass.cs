@@ -1,4 +1,7 @@
+using System;
+using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(FireballShooter))] // Attack 1
@@ -40,6 +43,9 @@ public class CharacterClass: MonoBehaviour
     public ParticleSystem waterPs;
     public GuidedStream firestream;
     public GuidedStream waterstream;
+    public Material waterMaterial;
+    public Material fireMaterial;
+    public GameObject playerBody;
 
     private GameObject selectedAt1;
     private GuidedStream selectedAt2;
@@ -50,6 +56,10 @@ public class CharacterClass: MonoBehaviour
     private int maxAttack1Uses = 4;
     private int currentAttack1Uses;
     private bool isAttack1OnCooldown = false;
+
+    public bool isPlayer = true;
+    public GameObject textSpawnLocation;
+    public GameObject dmgTextPrefab;
 
 
     private void Awake()
@@ -73,6 +83,7 @@ public class CharacterClass: MonoBehaviour
             selectedAb1 = firePs;
             selectedAb2 = fireRingPrefab;
             selectedUlt = fireUlt;
+            playerBody.GetComponent<Renderer>().material = fireMaterial;
             break;
 
             case "Water":
@@ -81,6 +92,7 @@ public class CharacterClass: MonoBehaviour
             selectedAb1 = waterPs;
             selectedAb2 = waterRingPrefab;
             selectedUlt = waterUlt;
+            playerBody.GetComponent<Renderer>().material = waterMaterial;
             break;
         }
         Debug.Log("Assigning Prefabs");
@@ -103,7 +115,7 @@ public class CharacterClass: MonoBehaviour
 
     void Update()
     {
-        UpdateCooldowns();
+        if (isPlayer) UpdateCooldowns();
     }
 
     public void triggerFireball()
@@ -118,7 +130,6 @@ public class CharacterClass: MonoBehaviour
     {
         if (fireball != null)
         {
-            fireball.Trigger();
             animator.SetTrigger("Attack1");
         }
     }
@@ -167,7 +178,7 @@ public class CharacterClass: MonoBehaviour
             Debug.LogWarning("Warning: Current cooldowns wasn't initialized correctly or differs from length of cooldown array");
             return;
         }
-
+        
         for (int i = 0; i < currentCooldowns.Length; i++)
         {
             if (currentCooldowns[i] > 0.0f)
@@ -251,6 +262,35 @@ public class CharacterClass: MonoBehaviour
         }
 
         currentCooldowns[abilityIndex] = abilityCooldowns[abilityIndex];
+    }
+
+    bool canTakeDamage = true;
+    IEnumerator ResetDamageCooldown()
+    {
+        Debug.Log("Damage cooldown started");
+        yield return new WaitForSeconds(0.25f);
+        canTakeDamage = true;
+    }
+
+    void spawnDamageText(float damage)
+    {
+        GameObject dmgText = Instantiate(dmgTextPrefab, textSpawnLocation.transform.position, Quaternion.identity);
+        dmgText.GetComponent<DamageText>().setDamageText(damage);
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (!canTakeDamage) return;
+        Debug.Log("Player has taken " + damage + " damage.");
+        health -= damage;
+        spawnDamageText(damage);
+        canTakeDamage = false;
+        StartCoroutine(ResetDamageCooldown());
+        if (health <= 0)
+        {
+            //Die();
+            //Add dead mechanic herre
+        }
     }
 
 }

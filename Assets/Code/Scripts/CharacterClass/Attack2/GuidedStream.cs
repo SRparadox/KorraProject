@@ -25,6 +25,7 @@ public class GuidedStream: MonoBehaviour
     [SerializeField] float hitDetectionRadius;
 
     private Vector3 target;
+    private float damageAmount;
 
     public void SendTo(Vector3 target)
     {
@@ -158,16 +159,25 @@ public class GuidedStream: MonoBehaviour
         spline.AddNode(node);
     }
 
+    public void setDamage(float damage){
+        damageAmount = damage;
+    }
+
+
     private void CheckForEnemyHit()
     {
         Collider[] hitColliders = Physics.OverlapSphere(target, hitDetectionRadius);
+        HashSet<GameObject> damagedObjects = new HashSet<GameObject>();
 
         foreach (Collider hit in hitColliders)
         {
-            if (hit.CompareTag("Enemy"))
+            GameObject hitObject = hit.gameObject;
+
+            if (hitObject.GetComponent<CharacterClass>() != null && !damagedObjects.Contains(hitObject))
             {
-                Debug.Log("Enemy hit!");
-                Destroy(hit.gameObject);
+                hitObject.GetComponent<CharacterClass>().TakeDamage(damageAmount);
+                damagedObjects.Add(hitObject);
+                return;
             }
         }
     }
