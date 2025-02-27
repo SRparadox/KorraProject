@@ -14,12 +14,7 @@ public class WaterRing : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        initialOffsets = new Vector3[transform.childCount];
-        for (int i = 0; i < transform.childCount; ++i)
-        {
-            Transform child = transform.GetChild(i);
-            initialOffsets[i] = child.localPosition.normalized;
-        }
+        transform.rotation = Quaternion.Euler(90f, 0f, 0f);
     }
 
     // Update is called once per frame
@@ -28,18 +23,12 @@ public class WaterRing : MonoBehaviour
         if (!hasExpanded)
         {
             currentTime += Time.deltaTime;
-
             float progress = Mathf.Clamp01(currentTime / expansionTime);
             float scaleFactor = Mathf.Lerp(0.1f, maxScale, progress);
-            transform.localScale = Vector3.one * scaleFactor;
+            transform.localScale = Vector3.one * scaleFactor; 
 
-            for(int i = 0; i < transform.childCount; i++)
-            {
-                Transform child = transform.GetChild(i);
-                child.localPosition = initialOffsets[i] * (maxScale * 0.3f);
-            }
             float currentRotationSpeed = Mathf.Lerp(rotationspeed, slowerrotation, progress);
-            transform.Rotate(Vector3.up, currentRotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.up, currentRotationSpeed * Time.deltaTime, Space.World);
 
             if (progress >= 1f)
             {
@@ -49,10 +38,8 @@ public class WaterRing : MonoBehaviour
         }
         else
         {
-            transform.Rotate(Vector3.up, slowerrotation * Time.deltaTime);
+            transform.Rotate(Vector3.up, slowerrotation * Time.deltaTime, Space.World);
         }
-
-
     }
 
     private void OnCollisionEnter(Collision collision)

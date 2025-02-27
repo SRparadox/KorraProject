@@ -8391,6 +8391,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4705826424688216604, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: m_TagString
+      value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: fireUlt
+      value: 
+      objectReference: {fileID: 6533730809385208864, guid: 76b6dfbe4e27eab4d89f12f049cf0ecf, type: 3}
+    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: waterUlt
+      value: 
+      objectReference: {fileID: 2398402702540021952, guid: fc2bfafd7cec320489659c81ee5d33d4, type: 3}
+    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: firestream
+      value: 
+      objectReference: {fileID: 5879177407378570033, guid: baf725e2316c0774990b22f6f4ed728c, type: 3}
+    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: fireRingPrefab
+      value: 
+      objectReference: {fileID: 3637822239372596547, guid: 85dae3f884a5614469d4a28bd0d9cce7, type: 3}
+    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: waterRingPrefab
+      value: 
+      objectReference: {fileID: 3484825922839809200, guid: b15072ca7f5860f4faa3a5e637ac4241, type: 3}
     - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: sensitivityX
       value: 2.75

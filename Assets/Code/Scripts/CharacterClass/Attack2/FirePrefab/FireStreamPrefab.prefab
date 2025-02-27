@@ -4839,7 +4839,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 41b2f17198c79274a9d0f0f7509aa563, type: 2}
+  - {fileID: 2100000, guid: e7a9282d46428084d936b4e47e616526, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4956,7 +4956,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8d2421297c3e1d448a832164334a2bf4, type: 2}
+  - {fileID: 2100000, guid: 093172e10184e2548b2332a6e43a97d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5057,7 +5057,7 @@ MonoBehaviour:
   speedDelta: 1.4
   animSpeed: 15
   puddleParticle: {fileID: 4572041930450097623}
-  splashParticle: {fileID: 5135481257431478286, guid: 7bc850f9b2677194da6a3f17b495e433, type: 3}
+  splashParticle: {fileID: 5135481257431478286, guid: cdd3045326ebd124f9058cd99fe3cf04, type: 3}
   splashActivationOffset: -2
   puddleScaleSpeed: 2
   hitDetectionRadius: 1.5
@@ -5152,12 +5152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MeshBender: {fileID: 0}
   generated: {fileID: 0}
-  mesh: {fileID: 7814459101124295239, guid: 091b3b67020b9314091b839522a6602b, type: 3}
-<<<<<<< HEAD
+  mesh: {fileID: 7814459101124295239, guid: bd7180afe4480b84b8a4435495c226b2, type: 3}
   material: {fileID: 2100000, guid: e7a9282d46428084d936b4e47e616526, type: 2}
-=======
-  material: {fileID: 2100000, guid: 9a526ccb9696d6545b3991e93bfb18bd, type: 2}
->>>>>>> origin/Bryon_Branch
   rotation: {x: 0, y: 90, z: 0}
   scale: {x: 1, y: 0.2, z: 0.2}
   _TargetScale: 1
@@ -5174,11 +5170,11 @@ PrefabInstance:
     - target: {fileID: 1555907843957030204, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: a03b35360b67eb041a8e7b28f6f3c8eb, type: 2}
+      objectReference: {fileID: 2100000, guid: 518448e73210c0b45b79add1e0974721, type: 2}
     - target: {fileID: 1680585077525033289, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 41b2f17198c79274a9d0f0f7509aa563, type: 2}
+      objectReference: {fileID: 2100000, guid: 9a526ccb9696d6545b3991e93bfb18bd, type: 2}
     - target: {fileID: 2181246675171133116, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.3
@@ -5238,29 +5234,26 @@ PrefabInstance:
     - target: {fileID: 4284444917721722197, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 093172e10184e2548b2332a6e43a97d2, type: 2}
+      objectReference: {fileID: 2100000, guid: e7a9282d46428084d936b4e47e616526, type: 2}
     - target: {fileID: 4284444917721722197, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: 093172e10184e2548b2332a6e43a97d2, type: 2}
+      objectReference: {fileID: 2100000, guid: e7a9282d46428084d936b4e47e616526, type: 2}
     - target: {fileID: 4939745165846323522, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8d2421297c3e1d448a832164334a2bf4, type: 2}
+      objectReference: {fileID: 2100000, guid: 093172e10184e2548b2332a6e43a97d2, type: 2}
     - target: {fileID: 7570161874237185380, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 8d2421297c3e1d448a832164334a2bf4, type: 2}
-    - target: {fileID: 7584097002741832030, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: a03b35360b67eb041a8e7b28f6f3c8eb, type: 2}
+      objectReference: {fileID: 2100000, guid: e7a9282d46428084d936b4e47e616526, type: 2}
     - target: {fileID: 8200457337575154965, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
       propertyPath: m_Name
       value: SplashLooped
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4461378325625931237, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
