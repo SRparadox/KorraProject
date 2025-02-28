@@ -42,6 +42,8 @@ namespace StarterAssets
         private float xSensitivity;
         private float ySensitivity;
 
+        private bool isAiming = false;
+
         [SerializeField] private LayerMask ignoreLayer;
 
         public AudioClip LandingAudioClip;
@@ -199,19 +201,23 @@ namespace StarterAssets
                 aimVirtualCamera.gameObject.SetActive(true);
                 xSensitivity = aimSensitivityX;
                 ySensitivity = aimSensitivityY;
+
+                Vector3 worldAimTarget = mouseWorldPosition;
+                worldAimTarget.y = transform.position.y;
+                Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+
+                // Face player forward
+                transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+
+                isAiming = true;
             } else
             {
                 aimVirtualCamera.gameObject.SetActive(false);
                 xSensitivity = normalSensitivityX;
                 ySensitivity = normalSensitivityY;
+
+                isAiming = false;
             }
-
-            Vector3 worldAimTarget = mouseWorldPosition;
-            worldAimTarget.y = transform.position.y;
-            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
-
-            // Always face player forward
-            transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
         }
 
         private void LateUpdate()
@@ -311,11 +317,15 @@ namespace StarterAssets
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                                   _mainCamera.transform.eulerAngles.y;
-                //float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                //    RotationSmoothTime);
 
-                //// rotate to face input direction relative to camera position
-                //transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                if (!isAiming)
+                {
+                    float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                        RotationSmoothTime);
+
+                    // rotate to face input direction relative to camera position
+                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                }
             }
 
 
