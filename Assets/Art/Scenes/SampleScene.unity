@@ -9863,11 +9863,23 @@ PrefabInstance:
       value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: debugTransform
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: aimSensitivityX
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: aimSensitivityY
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: ignoreLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: aimColliderMask.m_Bits
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8647750505064219965, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
