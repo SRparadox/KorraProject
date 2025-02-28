@@ -2,11 +2,12 @@
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  * 
- * Aiming code sourced from https://youtu.be/FbM4CkqtOuA?feature=shared
+ * Code modified with the help from https://youtu.be/FbM4CkqtOuA?feature=shared
  */
 
 namespace StarterAssets
@@ -40,6 +41,10 @@ namespace StarterAssets
 
         private float xSensitivity;
         private float ySensitivity;
+
+        private bool isAiming = false;
+
+        [SerializeField] private LayerMask ignoreLayer;
 
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
@@ -181,7 +186,38 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-            Aim();
+
+            Vector3 mouseWorldPosition = Vector3.zero;
+
+            Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, ~ignoreLayer))
+            {
+                mouseWorldPosition = raycastHit.point;
+            }
+
+            if (staterAssetsInputs.aim)
+            {
+                aimVirtualCamera.gameObject.SetActive(true);
+                xSensitivity = aimSensitivityX;
+                ySensitivity = aimSensitivityY;
+
+                Vector3 worldAimTarget = mouseWorldPosition;
+                worldAimTarget.y = transform.position.y;
+                Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+
+                // Face player forward
+                transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+
+                isAiming = true;
+            } else
+            {
+                aimVirtualCamera.gameObject.SetActive(false);
+                xSensitivity = normalSensitivityX;
+                ySensitivity = normalSensitivityY;
+
+                isAiming = false;
+            }
         }
 
         private void LateUpdate()
@@ -281,11 +317,15 @@ namespace StarterAssets
             {
                 _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                                   _mainCamera.transform.eulerAngles.y;
-                float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-                    RotationSmoothTime);
 
-                // rotate to face input direction relative to camera position
-                transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                if (!isAiming)
+                {
+                    float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+                        RotationSmoothTime);
+
+                    // rotate to face input direction relative to camera position
+                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                }
             }
 
 
@@ -300,21 +340,6 @@ namespace StarterAssets
             {
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-            }
-        }
-
-        private void Aim()
-        {
-            if (staterAssetsInputs.aim)
-            {
-                aimVirtualCamera.gameObject.SetActive(true);
-                xSensitivity = aimSensitivityX;
-                ySensitivity = aimSensitivityY;
-            } else
-            {
-                aimVirtualCamera.gameObject.SetActive(false);
-                xSensitivity = normalSensitivityX;
-                ySensitivity = normalSensitivityY;
             }
         }
 
