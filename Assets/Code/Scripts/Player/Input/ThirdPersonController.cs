@@ -44,8 +44,6 @@ namespace StarterAssets
 
         private bool isAiming = false;
 
-        [SerializeField] private LayerMask ignoreLayer;
-
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
         [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
@@ -191,7 +189,9 @@ namespace StarterAssets
 
             Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
             Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
-            if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, ~ignoreLayer))
+
+            int ignoreLayer = LayerMask.GetMask("Player");
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, ignoreLayer))
             {
                 mouseWorldPosition = raycastHit.point;
             }

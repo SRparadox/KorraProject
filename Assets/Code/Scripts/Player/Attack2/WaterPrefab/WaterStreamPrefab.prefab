@@ -5050,14 +5050,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointCount: 7
   radius: 2
-  heightDelta: 0.3
-  scale: {x: 1, y: 0.2, z: 0.2}
+  scale: {x: 1, y: 0.25, z: 0.25}
   spline: {fileID: 8910004010895002584}
   contortAlong: {fileID: 1420722390016221132}
   speedDelta: 1.4
   animSpeed: 15
   puddleParticle: {fileID: 4572041930450097623}
-  splashParticle: {fileID: 5135481257431478286, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
+  splashParticle: {fileID: 8607549093505059827}
   splashActivationOffset: -2
   puddleScaleSpeed: 2
   hitDetectionRadius: 1.5
@@ -5227,6 +5226,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SplashLooped
       objectReference: {fileID: 0}
+    - target: {fileID: 8200457337575154965, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5235,5 +5238,10 @@ PrefabInstance:
 --- !u!4 &3347745717801729345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2181246675171133116, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
+  m_PrefabInstance: {fileID: 3472500390916520957}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8607549093505059827 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5135481257431478286, guid: 516a5d10f772eca4fad3a6dc2dfdcb3b, type: 3}
   m_PrefabInstance: {fileID: 3472500390916520957}
   m_PrefabAsset: {fileID: 0}

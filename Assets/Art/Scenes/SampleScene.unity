@@ -9602,6 +9602,10 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 7517572947383859237}
+    - target: {fileID: 2828756203684264720, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: selectedPrefab
+      value: 
+      objectReference: {fileID: 5879177407378570033, guid: 58b09301291fac7488c51e5fc2479745, type: 3}
     - target: {fileID: 3054369247064380525, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: m_Layer
       value: 6
