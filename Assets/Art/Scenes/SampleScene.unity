@@ -9583,6 +9583,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: zoomOutDistance
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1261526212841310545, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3069512491
