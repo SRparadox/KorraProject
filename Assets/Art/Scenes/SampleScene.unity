@@ -7495,6 +7495,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dummy
       objectReference: {fileID: 0}
+    - target: {fileID: 7233193356939096023, guid: 1c841c2e341d3934c812de68a6e88229, type: 3}
+      propertyPath: waterUlt
+      value: 
+      objectReference: {fileID: 4180550122892678263, guid: dcdff0a87f462304692c5ff284fee5c8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9498,6 +9502,58 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: ballRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: throwSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: acceleration
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: chargeUpTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248666241047667773, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: speedCurve.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
     - target: {fileID: 1261526212841310545, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3069512491
@@ -9798,6 +9854,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: waterUlt
+      value: 
+      objectReference: {fileID: 5569776766358458418, guid: 4cf6620036a19a24a8616ba3fe7f2f48, type: 3}
     - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: 'AbilityCooldownTexts.Array.data[0]'
       value: 

@@ -1,4 +1,5 @@
 using Cinemachine;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -8,6 +9,13 @@ public class UltimateAttack: MonoBehaviour
     public float transitionSpeed = 2f;
 
     private GameObject selectedPrefab;
+    [SerializeField] private float ballRadius = 2f;
+    [SerializeField] private float chargeUpTime = 2f;
+
+    [SerializeField] AnimationCurve speedCurve;
+    [SerializeField] float throwSpeed = 5f;
+    [SerializeField] private float acceleration = 2f;
+
     private Vector3 originalCameraPosition;
     private bool isZoomingOut = false;
     private bool isReturning = false;
@@ -35,8 +43,9 @@ public class UltimateAttack: MonoBehaviour
 
         if (selectedPrefab != null)
         {
-            Vector3 spawnPosition = transform.position + new Vector3(0, 6, 0);
-            GameObject ultimate = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
+            Vector3 spawnPosition = transform.position + new Vector3(0, 4, 0);
+            GameObject ball = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
+            ball.transform.SetParent(transform);
 
             if (followCamera != null)
             {
@@ -47,17 +56,61 @@ public class UltimateAttack: MonoBehaviour
             isZoomingOut = true;
             isReturning = false;
 
-            Ultimate ultimateScript = ultimate.GetComponent<Ultimate>();
-            if (ultimateScript != null)
-            {
-                ultimateScript.Initialize(gameObject.tag);
-                ultimateScript.StartExpansion(transform.forward, this);
-            }
-            Debug.Log(selectedPrefab.name + "Spawned");
+            StartCoroutine(ChargeUp(ball));
         } else
         {
             Debug.LogError("Ultimate prefab not assigned in the Inspector");
         }
+    }
+
+    private IEnumerator ChargeUp(GameObject ball)
+    {
+        Vector3 initialScale = ball.transform.localScale;
+        Vector3 targetScale = new Vector3(ballRadius, ballRadius, ballRadius);
+
+        float elapsedTime = 0f;
+
+        ball.transform.localScale = Vector3.zero;
+
+        while (elapsedTime < chargeUpTime)
+        {
+            ball.transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, elapsedTime / chargeUpTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        ball.transform.localScale = targetScale;
+        ball.transform.SetParent(null);
+
+        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+
+        int ignoreLayer = LayerMask.GetMask("Player");
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, ~ignoreLayer))
+        {
+            StartCoroutine(Throw(ball, raycastHit.point));
+        }
+    }
+
+    private IEnumerator Throw(GameObject ball, Vector3 target)
+    {
+        Vector3 direction = (target - ball.transform.position).normalized;
+        float currentSpeed = throwSpeed;
+
+        while (ball != null)
+        {
+            ball.transform.position += direction * currentSpeed * Time.deltaTime;
+            currentSpeed += acceleration * Time.deltaTime;
+
+            if (Vector3.Distance(ball.transform.position, target) < 0.4f)
+            {
+                break;
+            }
+
+            yield return null;
+        }
+
+        Destroy(ball, 0.5f);
     }
 
     private void Update()
