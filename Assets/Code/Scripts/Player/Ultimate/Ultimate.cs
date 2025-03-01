@@ -16,6 +16,7 @@ public class Ultimate: MonoBehaviour
     private Rigidbody rb;
     private Vector3 launchDirection;
     private UltimateAttack attackScript;
+    private bool hasSpawnedRing = false;
 
     public void Initialize(string tag)
     {
@@ -50,8 +51,6 @@ public class Ultimate: MonoBehaviour
             float scaleFactor = Mathf.Lerp(0.1f, maxScale, progress);
             transform.localScale = Vector3.one * scaleFactor;
 
-            ScaleAllChildren(transform, scaleFactor);
-
             if (progress >= 1f)
             {
                 hasExpanded = true;
@@ -73,24 +72,17 @@ public class Ultimate: MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
-    void ScaleAllChildren(Transform parent, float scaleFactor)
-    {
-        foreach (Transform child in parent)
-        {
-            child.localScale = Vector3.one * scaleFactor;
-            ScaleAllChildren(child, scaleFactor);
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
+        if (hasSpawnedRing) return;
+        bool hitCharacter = false;
         if (collision.gameObject.GetComponent<CharacterClass>() != null)
         {
             collision.gameObject.GetComponent<CharacterClass>().TakeDamage(damage);
-            return;
+            hitCharacter = true;
         }
 
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Ground") || hitCharacter)
         {
             Vector3 impactPosition = collision.contacts[0].point;
             GameObject ringToSpawn = null;
@@ -106,6 +98,7 @@ public class Ultimate: MonoBehaviour
             if (ringToSpawn != null)
             {
                 Instantiate(ringToSpawn, impactPosition, Quaternion.identity);
+                hasSpawnedRing = true;
             } else
             {
                 Debug.LogError("No valid ring prefab assigned for " + playertag);

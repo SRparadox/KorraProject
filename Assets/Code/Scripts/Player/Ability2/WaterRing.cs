@@ -1,4 +1,6 @@
+using Mono.Cecil.Cil;
 using UnityEngine;
+using System.Collections;
 
 public class WaterRing : MonoBehaviour
 {
@@ -44,14 +46,43 @@ public class WaterRing : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.GetComponent<CharacterClass>() != null)
+        CharacterClass character = other.GetComponent<CharacterClass>();
+        if (character == null) return;
+
+        string myTeam = transform.root.tag;
+        string otherTeam = other.tag;
+
+        if (!other.CompareTag(myTeam))
         {
-            collision.gameObject.GetComponent<CharacterClass>().TakeDamage(damage);
-            return;
+            Debug.Log("Applying Damage and Knockback to: " + other.name);
+            character.TakeDamage(damage);
+
+            Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
+            knockbackDirection.y = 0.1f;
+            float knockbackDistance = 7f; 
+            float knockbackDuration = 0.2f; 
+
+            StartCoroutine(Knockback(other.transform, knockbackDirection, knockbackDistance, knockbackDuration));
+            Debug.Log("Knockback Applied");
+        }
+    }
+
+    private IEnumerator Knockback(Transform target, Vector3 direction, float distance, float duration)
+    {
+        Vector3 startPosition = target.position;
+        Vector3 endPosition = startPosition + direction * distance;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            target.position = Vector3.MoveTowards(target.position, endPosition, (distance / duration) * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
 
+        target.position = endPosition;
     }
 
     void DestroyRing()

@@ -23,11 +23,8 @@ public class WaterRingAttack: MonoBehaviour
         {
             Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
             GameObject waterRing = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
-            ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
-            if (ps != null)
-            {
-                ps.Play();
-            }
+
+            waterRing.tag = gameObject.tag;
             Debug.Log("Waterring spawned");
         } else
         {

@@ -36,6 +36,8 @@ public class UltimateAttack: MonoBehaviour
         if (selectedPrefab != null)
         {
             Vector3 spawnPosition = transform.position + new Vector3(0, 6, 0);
+
+            Vector3 direction = cameraTransform.forward;
             GameObject ultimate = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
 
             if (followCamera != null)
@@ -51,7 +53,7 @@ public class UltimateAttack: MonoBehaviour
             if (ultimateScript != null)
             {
                 ultimateScript.Initialize(gameObject.tag);
-                ultimateScript.StartExpansion(transform.forward, this);
+                ultimateScript.StartExpansion(direction, this);
             }
             Debug.Log(selectedPrefab.name + "Spawned");
         } else
