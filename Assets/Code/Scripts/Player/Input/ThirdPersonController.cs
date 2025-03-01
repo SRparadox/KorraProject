@@ -191,7 +191,7 @@ namespace StarterAssets
             Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
             int ignoreLayer = LayerMask.GetMask("Player");
-            if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, ignoreLayer))
+            if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, ~ignoreLayer))
             {
                 mouseWorldPosition = raycastHit.point;
             }
