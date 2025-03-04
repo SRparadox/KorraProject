@@ -216,6 +216,13 @@ namespace StarterAssets
                 xSensitivity = normalSensitivityX;
                 ySensitivity = normalSensitivityY;
 
+                Vector3 worldAimTarget = mouseWorldPosition;
+                worldAimTarget.y = transform.position.y;
+                Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+
+                // Face player forward
+                transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+
                 isAiming = false;
             }
         }
@@ -324,7 +331,7 @@ namespace StarterAssets
                         RotationSmoothTime);
 
                     // rotate to face input direction relative to camera position
-                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                    //transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
                 }
             }
 

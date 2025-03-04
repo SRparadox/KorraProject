@@ -288,9 +288,13 @@ public class CharacterClass: MonoBehaviour
         StartCoroutine(ResetDamageCooldown());
         if (health <= 0)
         {
-            //Die();
-            //Add dead mechanic herre
+            Respawn();
         }
+    }
+
+    public void Respawn(){
+        health = 100;
+        //Add respawn mechanic here
     }
 
 }
