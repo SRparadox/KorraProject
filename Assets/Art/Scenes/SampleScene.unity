@@ -9777,7 +9777,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4705826424688216604, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: m_TagString
-      value: Water
+      value: Fire
       objectReference: {fileID: 0}
     - target: {fileID: 4831288405876513415, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: m_Layer
