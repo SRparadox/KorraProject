@@ -33,6 +33,10 @@ public class SwitchScene : MonoBehaviour
     {
         SceneManager.LoadScene("MenuScene");
     }
+    public void SwitchToCharacterSelectionScene()
+    {
+        SceneManager.LoadScene("CharacterSelectionScene");
+    }
     public void ExitGame()
     {
         Application.Quit();
