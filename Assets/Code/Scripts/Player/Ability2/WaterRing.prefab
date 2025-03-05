@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a209955794024224a8a389eb9c5fdf20, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 43.457
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a209955794024224a8a389eb9c5fdf20, type: 3}
       propertyPath: m_LocalPosition.x
       value: 77.632996
       objectReference: {fileID: 0}
@@ -87,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d974bc38ecabdca4a98b9a096398976a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expansionTime: 2
-  maxScale: 600
+  expansionTime: 1
+  maxScale: 200
   rotationspeed: 500
   slowerrotation: 200
   holdDuration: 1

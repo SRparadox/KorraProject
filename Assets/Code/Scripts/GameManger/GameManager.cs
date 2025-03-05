@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.Android;
+using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +14,14 @@ public class GameManager : MonoBehaviour
     public float scoreTickRate = 2f; //How often score increases
     public Material waterMaterial, lavaMaterial;
     public Renderer waterRenderer;
-    public Material defaultSkybox, fireSkybox;
+    public Material defaultSkybox, fireSkybox, waterSkybox;
+    public Slider fireProgressBar;
+    public Slider waterProgressBar;
+    public Image[] fireWinIcons;
+    public Image[] waterWinIcons;
+    public Sprite[] fireWinSprites;
+    public Sprite[] waterWinSprites;
+    public TMP_Text timerText;
 
     private float roundTimer;
     private float scoreTimer = 0f;
@@ -34,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         roundTimer -= Time.deltaTime;
         scoreTimer += Time.deltaTime;
+        updateTimeUI();
 
         if(scoreTimer >= scoreTickRate)
         {
@@ -47,6 +57,13 @@ public class GameManager : MonoBehaviour
         }
 
         UpdateEnvironment();
+    }
+
+    void updateTimeUI()
+    {
+        int minutes = Mathf.FloorToInt(roundTimer / 60);
+        int seconds = Mathf.FloorToInt(roundTimer % 60);
+        timerText.text = $"{minutes: 00}:{seconds:00}";
     }
 
     void ChooseNewZone()
@@ -70,6 +87,22 @@ public class GameManager : MonoBehaviour
                 waterScore += scoreIncrement; 
                 break;
         }
+
+        UpdateProgessBars();
+    }
+
+    void UpdateProgessBars()
+    {
+        fireProgressBar.value = (float)fireScore / maxControlScore;
+        waterProgressBar.value = (float) waterScore / maxControlScore;
+    }
+
+    void UpdateWinIcons(Image[] teamIcons, int wins, Sprite[] teamSprites)
+    {
+        for(int i = 0; i < teamIcons.Length; i++)
+        {
+            teamIcons[i].sprite = (i < wins) ? teamSprites[1] : teamSprites[0];
+        }
     }
 
     void UpdateEnvironment()
@@ -87,7 +120,7 @@ public class GameManager : MonoBehaviour
                 break;
             case "Water":
                 waterRenderer.material = waterMaterial;
-                RenderSettings.skybox = defaultSkybox;
+                RenderSettings.skybox = waterSkybox;
                 break;
             case "Neutral":
                 waterRenderer.material = waterMaterial;
@@ -142,13 +175,13 @@ public class GameManager : MonoBehaviour
         if(roundWinner == "Fire")
         {
             fireWins++;
-            Debug.Log("Fire won the round");
+            UpdateWinIcons(fireWinIcons, fireWins, fireWinSprites);
             waterWins = 0;
         }
         else
         {
             waterWins++;
-            Debug.Log("Water won the round");
+            UpdateWinIcons(waterWinIcons, waterWins, waterWinSprites);
             fireWins = 0;
         }
 
