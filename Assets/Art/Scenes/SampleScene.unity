@@ -9551,6 +9551,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 30990453929750715, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1697093493}
     - target: {fileID: 46528980917580606, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -11700,6 +11704,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8edd628c4278fa2439de911564fb4ceb, type: 3}
   m_PrefabInstance: {fileID: 1676679977}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1697093493 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7105402699739947193, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+  m_PrefabInstance: {fileID: 1509351839}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1704600700
 PrefabInstance:

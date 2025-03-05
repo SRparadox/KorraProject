@@ -211,7 +211,7 @@ public class CharacterClass: MonoBehaviour
         {
             animator.SetBool("BufferPunch", true);
         }
-        if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle"))
+        if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle") || animator.GetLayerWeight(1) < 0.7f)
         {
             Debug.Log("Can't use ability while in animation");
             return;
