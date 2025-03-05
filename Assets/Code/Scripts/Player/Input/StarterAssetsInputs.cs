@@ -101,7 +101,6 @@ namespace StarterAssets
         public void MoveInput(Vector2 newMoveDirection)
         {
             move = newMoveDirection;
-            Debug.Log(move);
             if (move.y < 0){
                 animator.SetLayerWeight(2, math.abs(move.y));
                 animator.SetBool("backwards", true);
@@ -110,7 +109,6 @@ namespace StarterAssets
                 animator.SetBool("backwards", false);
                 animator.SetLayerWeight(2, math.abs(move.x));
             }
-            Debug.Log(animator.GetLayerWeight(2));
         }
 
         public void LookInput(Vector2 newLookDirection)
