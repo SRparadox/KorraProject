@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         roundTimer -= Time.deltaTime;
         scoreTimer += Time.deltaTime;
         updateTimeUI();
+        UpdateProgessBars();
 
         if(scoreTimer >= scoreTickRate)
         {
@@ -81,20 +82,22 @@ public class GameManager : MonoBehaviour
         switch (activeZone.controllingTeam)
         {
             case "Fire":
-                fireScore += scoreIncrement;
+                fireScore = Mathf.Min(fireScore + scoreIncrement, maxControlScore);
                 break;
             case "Water":
-                waterScore += scoreIncrement; 
+                waterScore = Mathf.Min(waterScore + scoreIncrement, maxControlScore); 
                 break;
+            case "Neutral":
+                return;
         }
 
-        UpdateProgessBars();
     }
 
     void UpdateProgessBars()
     {
-        fireProgressBar.value = (float)fireScore / maxControlScore;
-        waterProgressBar.value = (float) waterScore / maxControlScore;
+        float smoothSpeed = 5f * Time.deltaTime;
+        fireProgressBar.value = Mathf.Lerp(fireProgressBar.value, (float)fireScore / maxControlScore, smoothSpeed);
+        waterProgressBar.value = Mathf.Lerp(waterProgressBar.value, (float)waterScore / maxControlScore, smoothSpeed);
     }
 
     void UpdateWinIcons(Image[] teamIcons, int wins, Sprite[] teamSprites)
@@ -176,13 +179,11 @@ public class GameManager : MonoBehaviour
         {
             fireWins++;
             UpdateWinIcons(fireWinIcons, fireWins, fireWinSprites);
-            waterWins = 0;
         }
         else
         {
             waterWins++;
             UpdateWinIcons(waterWinIcons, waterWins, waterWinSprites);
-            fireWins = 0;
         }
 
         if(fireWins == 2)
@@ -205,9 +206,20 @@ public class GameManager : MonoBehaviour
     {
         fireScore = 0;
         waterScore = 0;
+        fireProgressBar.value = 0;
+        waterProgressBar.value = 0;
+        activeZone.controllingTeam = "Neutral";
         ChooseNewZone();
         SpawnPlayers();
         roundTimer = roundDuration;
+    }
+
+    void ResetWinIcons(Image[] teamIcons, Sprite[] teamSprites)
+    {
+        for (int i = 0; i < teamIcons.Length; i++)
+        {
+            teamIcons[i].sprite = teamSprites[0];
+        }
     }
 
     void ResetGame()
@@ -215,5 +227,8 @@ public class GameManager : MonoBehaviour
         fireWins = 0;
         waterWins = 0;
         ResetRound();
+        activeZone.controllingTeam = "Neutral";
+        ResetWinIcons(fireWinIcons, fireWinSprites);
+        ResetWinIcons(waterWinIcons, waterWinSprites);
     }
 }
