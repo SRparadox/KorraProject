@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class SwitchSettings : MonoBehaviour
 {
+    [SerializeField] private GameObject Menu;
+    [SerializeField] private GameObject Settings;
     [SerializeField] private GameObject Gameplay;
     [SerializeField] private GameObject Audio;
     [SerializeField] private GameObject Accessibility;
@@ -22,6 +24,16 @@ public class SwitchSettings : MonoBehaviour
         
     }
 
+    public void EnableMenu()
+    {
+        Menu.SetActive(true);
+        Settings.SetActive(false);
+    }
+    public void EnableSettings()
+    {
+        Settings.SetActive(true);
+        Menu.SetActive(false);
+    }
     public void EnableGameplay()
     {
         Gameplay.SetActive(true);

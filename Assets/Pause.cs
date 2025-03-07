@@ -4,6 +4,7 @@ public class Pause : MonoBehaviour
 {
     public bool ToggleMenu;
     [SerializeField] private GameObject PauseMenu;
+    [SerializeField] private GameObject SettingsMenu;
     [SerializeField] private GameObject HUD;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,11 +20,12 @@ public class Pause : MonoBehaviour
                 HUD.SetActive(ToggleMenu);
                 ToggleMenu = !ToggleMenu;
                 PauseMenu.SetActive(ToggleMenu);
+                SettingsMenu.SetActive(false);
                 Cursor.lockState = ToggleMenu ? CursorLockMode.None : CursorLockMode.Locked;
         }
 
         // in case the player leaves and reenters application while paused
-        if (PauseMenu.activeSelf && Cursor.lockState == CursorLockMode.Locked) {
+        if ((PauseMenu.activeSelf || SettingsMenu.activeSelf) && Cursor.lockState == CursorLockMode.Locked) {
             Cursor.lockState = CursorLockMode.None;
         }
     }
