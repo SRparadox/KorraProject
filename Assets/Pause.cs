@@ -3,6 +3,8 @@ using UnityEngine;
 public class Pause : MonoBehaviour
 {
     public bool ToggleMenu;
+    public bool ToggleHUD = true;
+
     [SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject SettingsMenu;
     [SerializeField] private GameObject HUD;
@@ -28,6 +30,9 @@ public class Pause : MonoBehaviour
         if ((PauseMenu.activeSelf || SettingsMenu.activeSelf) && Cursor.lockState == CursorLockMode.Locked) {
             Cursor.lockState = CursorLockMode.None;
         }
+        if ((!PauseMenu.activeSelf && !SettingsMenu.activeSelf) && ToggleHUD) {
+            HUD.SetActive(false);
+        }
     }
 
     public void PauseToggle()
@@ -36,5 +41,9 @@ public class Pause : MonoBehaviour
         ToggleMenu = !ToggleMenu;
         PauseMenu.SetActive(ToggleMenu);
         Cursor.lockState = ToggleMenu ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+    public void HUDToggle()
+    {
+        ToggleHUD = !ToggleHUD;
     }
 }
