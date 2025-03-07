@@ -32348,9 +32348,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1953055222}
   m_Direction: 0
   m_MinValue: 1
-  m_MaxValue: 3
+  m_MaxValue: 10
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -43408,6 +43408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ToggleMenu: 0
   PauseMenu: {fileID: 1618779426}
+  HUD: {fileID: 3412534893666343791}
 --- !u!114 &8003180979108266742
 MonoBehaviour:
   m_ObjectHideFlags: 0
