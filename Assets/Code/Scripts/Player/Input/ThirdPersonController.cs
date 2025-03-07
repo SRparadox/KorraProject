@@ -2,6 +2,7 @@
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -32,6 +33,9 @@ namespace StarterAssets
         public float SpeedChangeRate = 10.0f;
 
         [Header("Sensitivity")]
+
+        [SerializeField] protected Slider SensitivitySlider;
+
         public float normalSensitivityX = 2.0f;
         public float normalSensitivityY = 2.0f;
 
@@ -153,8 +157,8 @@ namespace StarterAssets
 
         private void Start()
         {
-            xSensitivity = normalSensitivityX;
-            ySensitivity = normalSensitivityY;
+            xSensitivity = normalSensitivityX * SensitivitySlider.value;
+            ySensitivity = normalSensitivityY * SensitivitySlider.value;
 
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
@@ -308,13 +312,13 @@ namespace StarterAssets
             if (staterAssetsInputs.aim)
             {
                 aimVirtualCamera.gameObject.SetActive(true);
-                xSensitivity = aimSensitivityX;
-                ySensitivity = aimSensitivityY;
+                xSensitivity = aimSensitivityX * SensitivitySlider.value;
+                ySensitivity = aimSensitivityY * SensitivitySlider.value;
             } else
             {
                 aimVirtualCamera.gameObject.SetActive(false);
-                xSensitivity = normalSensitivityX;
-                ySensitivity = normalSensitivityY;
+                xSensitivity = normalSensitivityX * SensitivitySlider.value;
+                ySensitivity = normalSensitivityY * SensitivitySlider.value;
             }
         }
 
