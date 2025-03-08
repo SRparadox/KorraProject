@@ -2,6 +2,8 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +24,8 @@ public class GameManager : MonoBehaviour
     public Sprite[] fireWinSprites;
     public Sprite[] waterWinSprites;
     public TMP_Text timerText;
+    public GameObject PowerUpSpawnParent;
+    public float powerUpSpawnInterval = 8f;
 
     private float roundTimer;
     private float scoreTimer = 0f;
@@ -37,6 +41,46 @@ public class GameManager : MonoBehaviour
         ChooseNewZone();
         SpawnPlayers();
         roundTimer = roundDuration;
+        for (int i = 0; i < 3; i++)
+        {
+            spawnAPowerup();
+        }
+        StartCoroutine(spawnPowerUpEveryXSeconds(powerUpSpawnInterval));
+    }
+
+    IEnumerator spawnPowerUpEveryXSeconds(float seconds)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(seconds);
+            spawnAPowerup();
+        }
+    }
+
+    void spawnAPowerup(){
+        Transform parentTransform = PowerUpSpawnParent.transform;
+        int childCount = parentTransform.childCount;
+        Transform[] children = new Transform[childCount];
+        for (int i = 0; i < childCount; i++)
+        {
+            children[i] = parentTransform.GetChild(i);
+        }
+        if (children.Length == 0) return;
+        int randomIndex = Random.Range(0, children.Length);
+        Transform randomChild = children[randomIndex];
+        PowerUpGiver powerUpGiver = randomChild.GetComponent<PowerUpGiver>();
+        if (powerUpGiver == null) {
+            Debug.LogError("PowerUpGiver component not found on the selected child.");
+        }
+        while (powerUpGiver.isActive){
+            randomIndex = Random.Range(0, children.Length);
+            randomChild = children[randomIndex];
+            powerUpGiver = randomChild.GetComponent<PowerUpGiver>();
+        }
+        if (powerUpGiver != null)
+        {
+            powerUpGiver.spawnPowerUp();
+        }
     }
 
     void Update()

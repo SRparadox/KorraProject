@@ -62,6 +62,7 @@ public class CharacterClass: MonoBehaviour
     public bool isPlayer = true;
     public GameObject textSpawnLocation;
     public GameObject dmgTextPrefab;
+    private DamageBoost damageBoostScript;
 
 
     private void Awake()
@@ -69,6 +70,7 @@ public class CharacterClass: MonoBehaviour
         currentCooldowns = new float[abilityCooldowns.Length];
         animator = GetComponent<Animator>();
         currentAttack1Uses = maxAttack1Uses;
+        damageBoostScript = GetComponent<DamageBoost>();
 
         // Retrieve ability references
         fireball = GetComponent<FireballShooter>();
@@ -118,6 +120,11 @@ public class CharacterClass: MonoBehaviour
     void Update()
     {
         if (isPlayer) UpdateCooldowns();
+    }
+
+    public float getDamageMultiplier()
+    {
+        return damageBoostScript.getDamageBoost();
     }
 
     public void triggerFireball()
@@ -316,6 +323,12 @@ public class CharacterClass: MonoBehaviour
     public void Respawn(){
         health = 100;
         //Add respawn mechanic here
+    }
+
+    public void Heal(float amount)
+    {
+        Debug.Log("Player has healed " + amount + " health.");
+        health = Mathf.Min(health + amount, 100);
     }
 
     public void OnSuccessfulHit()

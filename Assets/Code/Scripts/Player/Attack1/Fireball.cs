@@ -10,7 +10,8 @@ public class Fireball : MonoBehaviour
 
         if (collision.gameObject.GetComponent<CharacterClass>() != null && collision.gameObject.tag != gameObject.tag)
         {
-            collision.gameObject.GetComponent<CharacterClass>().TakeDamage(damage);
+            collision.gameObject.GetComponent<CharacterClass>().TakeDamage(damage * player.getDamageMultiplier());
+            Debug.Log("Damage Dealt: " + damage * player.getDamageMultiplier());
             Destroy(gameObject);
             if (player != null)
             {

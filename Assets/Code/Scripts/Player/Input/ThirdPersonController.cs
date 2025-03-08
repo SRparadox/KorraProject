@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System.Collections;
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
@@ -22,9 +23,11 @@ namespace StarterAssets
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
+        private float saveMoveSpeed;
 
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
+        private float saveSprintSpeed;
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -161,6 +164,9 @@ namespace StarterAssets
         {
             xSensitivity = normalSensitivityX;
             ySensitivity = normalSensitivityY;
+
+            saveMoveSpeed = MoveSpeed;
+            saveSprintSpeed = SprintSpeed;
 
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
@@ -348,6 +354,20 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
+        }
+
+        public float SpeedBoostMultiplier = 2f;
+        public float SpeedBoostDuration = 5f;
+        public void activateSpeedPowerup(){
+            MoveSpeed *= SpeedBoostMultiplier;
+            SprintSpeed *= SpeedBoostMultiplier;
+            StartCoroutine(DeactivateSpeedPowerup());
+        }
+
+        private IEnumerator DeactivateSpeedPowerup(){
+            yield return new WaitForSecondsRealtime(SpeedBoostDuration);
+            MoveSpeed = saveMoveSpeed;
+            SprintSpeed = saveSprintSpeed;
         }
 
         private void JumpAndGravity()

@@ -78,6 +78,7 @@ public class Ultimate: MonoBehaviour
         bool hitCharacter = false;
         if (collision.gameObject.GetComponent<CharacterClass>() != null)
         {
+            //Todo Setup Damage Boost on the ultimate
             collision.gameObject.GetComponent<CharacterClass>().TakeDamage(damage);
             hitCharacter = true;
         }

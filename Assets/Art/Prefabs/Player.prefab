@@ -1377,6 +1377,7 @@ GameObject:
   - component: {fileID: 1248666241047667773}
   - component: {fileID: 1261526212841310545}
   - component: {fileID: 4364807537878321513}
+  - component: {fileID: 6782562874022981665}
   m_Layer: 8
   m_Name: Player
   m_TagString: Fire
@@ -1470,11 +1471,11 @@ MonoBehaviour:
   SpeedChangeRate: 10
   normalSensitivityX: 2
   normalSensitivityY: 2
-  aimSensitivityX: 2
-  aimSensitivityY: 2
+  aimSensitivityX: 1
+  aimSensitivityY: 1
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
   FootstepAudioClips:
   - {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}
@@ -1504,6 +1505,8 @@ MonoBehaviour:
   CameraAngleOverride: 0
   LockCameraPosition: 0
   aimVirtualCamera: {fileID: 3917111920924183227}
+  SpeedBoostMultiplier: 2
+  SpeedBoostDuration: 5
 --- !u!114 &3238792511065377361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1539,6 +1542,7 @@ MonoBehaviour:
   sprint: 0
   aim: 0
   attack: 0
+  animator: {fileID: 0}
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -1679,6 +1683,7 @@ MonoBehaviour:
   waterMaterial: {fileID: 2100000, guid: c40190f69ff4e5044a6d13a0dc2eeff1, type: 2}
   fireMaterial: {fileID: 2100000, guid: 26fc6c563df463b45a2d080724ab5090, type: 2}
   playerBody: {fileID: 5893781970396546856}
+  maxUltimateCharge: 5
   isPlayer: 1
   textSpawnLocation: {fileID: 6587513422782624143}
   dmgTextPrefab: {fileID: 8142490801331932839, guid: 5440ced13e1261d4598ecd9fc9aa8155, type: 3}
@@ -1750,7 +1755,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16d40ec9b38cd6e4092a96933b0601a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomOutDistance: 2
+  zoomOutDistance: 3
   transitionSpeed: 2
 --- !u!114 &1261526212841310545
 MonoBehaviour:
@@ -1790,6 +1795,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+--- !u!114 &6782562874022981665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4705826424688216604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ea06a4a1c867f47a420a2c435291d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageMultiplier: 1.5
+  Duration: 8
 --- !u!1 &4831288405876513415
 GameObject:
   m_ObjectHideFlags: 0

@@ -1112,6 +1112,7 @@ GameObject:
   - component: {fileID: 1261526212841310545}
   - component: {fileID: 4364807537878321513}
   - component: {fileID: 7888050278623527779}
+  - component: {fileID: 8320567801424902066}
   m_Layer: 8
   m_Name: Dummy
   m_TagString: Fire
@@ -1213,6 +1214,7 @@ MonoBehaviour:
   waterMaterial: {fileID: 2100000, guid: c40190f69ff4e5044a6d13a0dc2eeff1, type: 2}
   fireMaterial: {fileID: 2100000, guid: 26fc6c563df463b45a2d080724ab5090, type: 2}
   playerBody: {fileID: 5893781970396546856}
+  maxUltimateCharge: 30
   isPlayer: 0
   textSpawnLocation: {fileID: 7191556666037465808}
   dmgTextPrefab: {fileID: 8142490801331932839, guid: 5440ced13e1261d4598ecd9fc9aa8155, type: 3}
@@ -1345,6 +1347,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.76, z: 0.3923027}
   m_Center: {x: -5.7654304e-10, y: 0.9300076, z: -0.032531537}
+--- !u!114 &8320567801424902066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4705826424688216604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ea06a4a1c867f47a420a2c435291d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DamageMultiplier: 1.5
+  Duration: 5
 --- !u!1 &4831288405876513415
 GameObject:
   m_ObjectHideFlags: 0

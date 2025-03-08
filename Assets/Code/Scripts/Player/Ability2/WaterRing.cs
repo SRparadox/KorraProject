@@ -58,7 +58,7 @@ public class WaterRing : MonoBehaviour
         if (!other.CompareTag(myTeam))
         {
             Debug.Log("Applying Damage and Knockback to: " + other.name);
-            character.TakeDamage(damage);
+            character.TakeDamage(damage * player.getDamageMultiplier());
             if(player != null)
             {
                 player.OnSuccessfulHit();
@@ -77,7 +77,7 @@ public class WaterRing : MonoBehaviour
     private IEnumerator Knockback(Transform target, Vector3 direction, float distance, float duration)
     {
         Vector3 startPosition = target.position;
-        Vector3 endPosition = startPosition + direction * distance;
+        Vector3 endPosition = startPosition + direction * distance * player.getDamageMultiplier();
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
