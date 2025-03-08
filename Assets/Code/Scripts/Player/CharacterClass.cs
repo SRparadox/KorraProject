@@ -192,6 +192,16 @@ public class CharacterClass: MonoBehaviour
         
         for (int i = 0; i < currentCooldowns.Length; i++)
         {
+            if(i == 4)
+            {
+                float ultimatePercentage = (float)ultimateCharge / maxUltimateCharge * 100f;
+                AbilityCooldownTexts[i].text = $"{ultimatePercentage:F0}%";
+                if(ultimatePercentage == 100)
+                {
+                    AbilityCooldownTexts[i].text = "Ready";
+                }
+                continue;
+            }
             if (currentCooldowns[i] > 0.0f)
             {
                 currentCooldowns[i] -= Time.deltaTime;
@@ -310,7 +320,7 @@ public class CharacterClass: MonoBehaviour
 
     public void OnSuccessfulHit()
     {
-        ultimateCharge++;
+        ultimateCharge = Mathf.Min(ultimateCharge + 1, maxUltimateCharge);
         if(ultimateCharge >= maxUltimateCharge)
         {
             Debug.Log("Ultimate is ready!");
