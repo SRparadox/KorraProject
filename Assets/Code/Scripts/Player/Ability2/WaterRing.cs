@@ -15,6 +15,7 @@ public class WaterRing : MonoBehaviour
     private float currentTime = 0f;
     private bool hasExpanded = false;
     private Vector3[] initialOffsets;
+    private CharacterClass player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -58,7 +59,11 @@ public class WaterRing : MonoBehaviour
         {
             Debug.Log("Applying Damage and Knockback to: " + other.name);
             character.TakeDamage(damage);
-
+            if(player != null)
+            {
+                player.OnSuccessfulHit();
+            }
+            
             Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
             knockbackDirection.y = 0.1f;
             float knockbackDistance = 7f; 
@@ -88,5 +93,10 @@ public class WaterRing : MonoBehaviour
     void DestroyRing()
     {
         Destroy(gameObject);
+    }
+
+    public void SetPlayer(CharacterClass character)
+    {
+        player = character;
     }
 }

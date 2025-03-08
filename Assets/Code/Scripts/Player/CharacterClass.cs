@@ -55,6 +55,8 @@ public class CharacterClass: MonoBehaviour
 
     private int maxAttack1Uses = 4;
     private int currentAttack1Uses;
+    private int ultimateCharge = 0;
+    public int maxUltimateCharge = 30;
     private bool isAttack1OnCooldown = false;
 
     public bool isPlayer = true;
@@ -164,10 +166,19 @@ public class CharacterClass: MonoBehaviour
     }
     public void PerformUltimate()
     {
-        if (ultimate != null)
+        if(ultimateCharge >= maxUltimateCharge)
         {
-            animator.SetTrigger("Ultimate");
-            ultimate.Trigger();
+            if (ultimate != null)
+            {
+                animator.SetTrigger("Ultimate");
+                ultimate.Trigger();
+                ultimateCharge = 0;
+                Debug.Log("Ultimate actived!");
+            }
+        }
+        else
+        {
+            Debug.Log("Ultimate not ready yet");
         }
     }
 
@@ -295,6 +306,15 @@ public class CharacterClass: MonoBehaviour
     public void Respawn(){
         health = 100;
         //Add respawn mechanic here
+    }
+
+    public void OnSuccessfulHit()
+    {
+        ultimateCharge++;
+        if(ultimateCharge >= maxUltimateCharge)
+        {
+            Debug.Log("Ultimate is ready!");
+        }
     }
 
 }

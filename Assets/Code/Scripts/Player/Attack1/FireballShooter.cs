@@ -29,12 +29,20 @@ public class FireballShooter: MonoBehaviour
     {
         if (selectedPrefab != null && fireballSpawnPoint != null)
         {
-            GameObject fireball = Instantiate(selectedPrefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
+            GameObject Fireball = Instantiate(selectedPrefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
+            Fireball fireball = Fireball.GetComponent<Fireball>();
             Camera mainCamera = Camera.main;
+
+            if(fireball != null)
+            {
+                fireball.SetPlayer(GetComponent<CharacterClass>());
+            }
+            fireball.tag = gameObject.tag;
+
             if (mainCamera != null)
             {
                 Vector3 cameraForward = mainCamera.transform.forward;
-                Rigidbody rb = fireball.GetComponent<Rigidbody>();
+                Rigidbody rb = Fireball.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
                     rb.useGravity = false;
@@ -42,7 +50,7 @@ public class FireballShooter: MonoBehaviour
                 }
             }
 
-            Destroy(fireball, 3f);
+            Destroy(Fireball, 3f);
         }
     }
 

@@ -26,6 +26,7 @@ public class GuidedStream: MonoBehaviour
 
     private Vector3 target;
     private float damageAmount;
+    private CharacterClass player;
 
     public void SendTo(Vector3 target)
     {
@@ -161,6 +162,11 @@ public class GuidedStream: MonoBehaviour
         damageAmount = damage;
     }
 
+    public void SetPlayer(CharacterClass character)
+    {
+        player = character;
+    }
+
 
     private void CheckForEnemyHit()
     {
@@ -171,10 +177,15 @@ public class GuidedStream: MonoBehaviour
         {
             GameObject hitObject = hit.gameObject;
 
-            if (hitObject.GetComponent<CharacterClass>() != null && !damagedObjects.Contains(hitObject))
+            if (hitObject.GetComponent<CharacterClass>() != null && !damagedObjects.Contains(hitObject) && hitObject.tag != gameObject.tag)
             {
                 hitObject.GetComponent<CharacterClass>().TakeDamage(damageAmount);
                 damagedObjects.Add(hitObject);
+
+                if (player != null)
+                {
+                    player.OnSuccessfulHit();
+                }
                 return;
             }
         }

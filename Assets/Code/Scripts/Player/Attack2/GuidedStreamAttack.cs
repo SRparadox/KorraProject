@@ -28,8 +28,10 @@ public class GuidedStreamAttack: MonoBehaviour
     private void SpawnGuidedStream(Vector3 target)
     {
         GuidedStream stream = Instantiate(selectedPrefab, transform.position, Quaternion.identity);
+        stream.tag = gameObject.tag;
         stream.SendTo(target);
         stream.setDamage(damage);
+        stream.SetPlayer(GetComponent<CharacterClass>());
     }
 
     public void SetPrefab(GuidedStream prefab)
