@@ -101,7 +101,11 @@ namespace StarterAssets
         public void MoveInput(Vector2 newMoveDirection)
         {
             move = newMoveDirection;
-            if (move.y < 0){
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("RoundKick"))
+            {
+                return;
+            }
+            else if (move.y < 0){
                 animator.SetLayerWeight(2, math.abs(move.y));
                 animator.SetBool("backwards", true);
             }
@@ -150,6 +154,10 @@ namespace StarterAssets
         {
             strafingValue = math.lerp(strafingValue, move.x, Time.deltaTime * 1);
             animator.SetFloat("Strafe", strafingValue);
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("RoundKick"))
+            {
+                animator.SetLayerWeight(2, 0);
+            }
             
         }
 
