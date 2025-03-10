@@ -358,9 +358,11 @@ namespace StarterAssets
 
         public float SpeedBoostMultiplier = 2f;
         public float SpeedBoostDuration = 5f;
+        public ParticleSystem speedBoostParticles;
         public void activateSpeedPowerup(){
             MoveSpeed *= SpeedBoostMultiplier;
             SprintSpeed *= SpeedBoostMultiplier;
+            if (speedBoostParticles != null) speedBoostParticles.Play();
             StartCoroutine(DeactivateSpeedPowerup());
         }
 

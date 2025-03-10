@@ -63,6 +63,7 @@ public class CharacterClass: MonoBehaviour
     public GameObject textSpawnLocation;
     public GameObject dmgTextPrefab;
     private DamageBoost damageBoostScript;
+    public ParticleSystem healParticles;
 
 
     private void Awake()
@@ -305,12 +306,17 @@ public class CharacterClass: MonoBehaviour
         GameObject dmgText = Instantiate(dmgTextPrefab, textSpawnLocation.transform.position, Quaternion.identity);
         dmgText.GetComponent<DamageText>().setDamageText(damage);
     }
+    public ParticleSystem takeDamageParticles;
 
     public void TakeDamage(float damage)
     {
         if (!canTakeDamage) return;
         Debug.Log("Player has taken " + damage + " damage.");
         health -= damage;
+        if (takeDamageParticles != null)
+        {
+            takeDamageParticles.Play();
+        }
         spawnDamageText(damage);
         canTakeDamage = false;
         StartCoroutine(ResetDamageCooldown());
@@ -328,6 +334,10 @@ public class CharacterClass: MonoBehaviour
     public void Heal(float amount)
     {
         Debug.Log("Player has healed " + amount + " health.");
+        if (healParticles != null)
+        {
+            healParticles.Play();
+        }
         health = Mathf.Min(health + amount, 100);
     }
 

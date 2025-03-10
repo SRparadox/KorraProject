@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DamageBoost : MonoBehaviour
 {
+    public ParticleSystem particleSystem;
     public float DamageMultiplier = 1.5f;
     public float Duration = 5.0f;
     private bool isActive = false;
@@ -11,6 +12,13 @@ public class DamageBoost : MonoBehaviour
     void Start()
     {
         
+    }
+
+    void startParticleSystem(){
+        if (particleSystem != null)
+        {                    
+            particleSystem.Play();
+        }
     }
 
     // Update is called once per frame
@@ -23,6 +31,7 @@ public class DamageBoost : MonoBehaviour
         {
             Debug.Log("Activated Damage Boost");
             isActive = true;
+            startParticleSystem();
             StartCoroutine(DeactivateBoostAfterDelay());
             
         }
