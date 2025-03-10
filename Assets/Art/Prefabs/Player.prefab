@@ -16252,7 +16252,7 @@ MonoBehaviour:
   sprint: 0
   aim: 0
   attack: 0
-  animator: {fileID: 0}
+  animator: {fileID: 7105402699739947193}
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -16368,6 +16368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  HealthBar: {fileID: 0}
+  HealthBarText: {fileID: 0}
   abilityCooldowns:
   - 1
   - 2

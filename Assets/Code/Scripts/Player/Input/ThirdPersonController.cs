@@ -363,6 +363,7 @@ namespace StarterAssets
         public float SpeedBoostDuration = 5f;
         public ParticleSystem speedBoostParticles;
         public void activateSpeedPowerup(){
+            StopCoroutine(DeactivateSpeedPowerup());
             MoveSpeed *= SpeedBoostMultiplier;
             SprintSpeed *= SpeedBoostMultiplier;
             if (speedBoostParticles != null) speedBoostParticles.Play();

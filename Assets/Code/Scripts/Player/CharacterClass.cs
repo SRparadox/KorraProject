@@ -243,13 +243,16 @@ public class CharacterClass: MonoBehaviour
             Debug.LogWarning("Trying to access non-existent ability index.");
             return;
         }
-        if ((animator.GetCurrentAnimatorStateInfo(1).IsName("RightPunch") || animator.GetCurrentAnimatorStateInfo(1).IsName("LeftPunch")) && abilityIndex == 0)
+        if ((animator.GetCurrentAnimatorStateInfo(1).IsName("RightPunch") || animator.GetCurrentAnimatorStateInfo(1).IsName("LeftPunch")) && abilityIndex == 0 && animator.GetLayerWeight(1) >= 0.7f)
         {
+            ResetAbilityCooldown(abilityIndex);
             animator.SetBool("BufferPunch", true);
+            return;
         }
         if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle") || animator.GetLayerWeight(1) < 0.7f)
         {
             Debug.Log("Can't use ability while in animation");
+            //Maybe play a audio cue here
             return;
         }
         if (IsAbilityReady(abilityIndex))

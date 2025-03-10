@@ -4,7 +4,8 @@ using UnityEngine;
 public class DamageBoost : MonoBehaviour
 {
     public ParticleSystem particleSystem;
-    public float DamageMultiplier = 1.5f;
+    float DamageMultiplier = 1.0f;
+    public float increaseMultiplierBy = 0.5f;
     public float Duration = 5.0f;
     private bool isActive = false;
 
@@ -31,6 +32,7 @@ public class DamageBoost : MonoBehaviour
         {
             Debug.Log("Activated Damage Boost");
             isActive = true;
+            DamageMultiplier += increaseMultiplierBy;
             startParticleSystem();
             StartCoroutine(DeactivateBoostAfterDelay());
             
@@ -41,11 +43,13 @@ public class DamageBoost : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(Duration);
         isActive = false;
+        DamageMultiplier -= increaseMultiplierBy;
         Debug.Log("Deactivated Damage Boost");
     }
 
     public float getDamageBoost(){
         if (isActive) {
+            Debug.Log("Damage Multiplier: " + DamageMultiplier);
             return DamageMultiplier;
         }
         else {
