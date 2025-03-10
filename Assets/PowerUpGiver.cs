@@ -86,7 +86,7 @@ public class PowerUpGiver : MonoBehaviour
         ThirdPersonController player = other.GetComponent<ThirdPersonController>();
         if (player != null)
         {
-            Debug.Log("PowerUpGiver: " + powerUpType);
+            Debug.Log("Player collected: " + powerUpType);
             switch (powerUpType)
             {
                 case PowerUpType.Speed:
@@ -114,7 +114,7 @@ public class PowerUpGiver : MonoBehaviour
 
     public void spawnPowerUp(){
         PowerUpType type = (PowerUpType)Random.Range(0, 3);
-        Debug.Log("PowerUpGiver: " + type);
+        Debug.Log("Spawning Powerup: " + type);
         powerUpType = type;
         isActive = true;
         setupObject();

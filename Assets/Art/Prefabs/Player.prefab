@@ -1475,7 +1475,7 @@ MonoBehaviour:
   aimSensitivityY: 1
   ignoreLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   LandingAudioClip: {fileID: 8300000, guid: ff697d3070687ce4583faa0561a145a2, type: 3}
   FootstepAudioClips:
   - {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}

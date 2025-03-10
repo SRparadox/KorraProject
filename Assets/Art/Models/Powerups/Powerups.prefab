@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5148560544278073200}
   - component: {fileID: 2500477223191203811}
   - component: {fileID: 868849853686098536}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 9020006100461049948}
   - component: {fileID: 4555097960919696507}
   - component: {fileID: 9196804459903674408}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Powerups
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpType: 0
+  isActive: 1
   speedMaterial: {fileID: 2100000, guid: 539c2b3fdd25d51419618a540a8d5120, type: 2}
   speedMaterial2: {fileID: 2100000, guid: 6a6d511cf1c767641af207f9a93740d6, type: 2}
   damageMaterial: {fileID: 2100000, guid: 1462714a569e8954d83c3441668bd4f1, type: 2}
@@ -226,6 +227,10 @@ PrefabInstance:
     - target: {fileID: 7193971575987901422, guid: ebf84c5a952f4ed44b340d00256ab973, type: 3}
       propertyPath: m_Name
       value: Scroll
+      objectReference: {fileID: 0}
+    - target: {fileID: 7193971575987901422, guid: ebf84c5a952f4ed44b340d00256ab973, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -330,9 +335,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 90efdb5b5aea7ae4399703230aae5215, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 90efdb5b5aea7ae4399703230aae5215, type: 3}
       propertyPath: m_Name
       value: lightTes2t
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 90efdb5b5aea7ae4399703230aae5215, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7202271454713460447, guid: 90efdb5b5aea7ae4399703230aae5215, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

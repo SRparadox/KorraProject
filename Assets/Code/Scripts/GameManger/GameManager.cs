@@ -58,25 +58,33 @@ public class GameManager : MonoBehaviour
     }
 
     void spawnAPowerup(){
+        // Get all children of the parent transform
         Transform parentTransform = PowerUpSpawnParent.transform;
         int childCount = parentTransform.childCount;
         Transform[] children = new Transform[childCount];
+        bool allAreActive = true;
         for (int i = 0; i < childCount; i++)
         {
             children[i] = parentTransform.GetChild(i);
+            if (children[i].GetComponent<PowerUpGiver>().isActive == false) allAreActive = false; //If theres nothing to spawn then dont spawn
         }
-        if (children.Length == 0) return;
+        if (children.Length == 0 || allAreActive == true) return;
+
+        // Choose a random child
         int randomIndex = Random.Range(0, children.Length);
         Transform randomChild = children[randomIndex];
         PowerUpGiver powerUpGiver = randomChild.GetComponent<PowerUpGiver>();
+        // Check if the PowerUpGiver component is found
         if (powerUpGiver == null) {
             Debug.LogError("PowerUpGiver component not found on the selected child.");
         }
+        // Pick a random child until we find one that is not active
         while (powerUpGiver.isActive){
             randomIndex = Random.Range(0, children.Length);
             randomChild = children[randomIndex];
             powerUpGiver = randomChild.GetComponent<PowerUpGiver>();
         }
+        // Spawn the power-up
         if (powerUpGiver != null)
         {
             powerUpGiver.spawnPowerUp();
