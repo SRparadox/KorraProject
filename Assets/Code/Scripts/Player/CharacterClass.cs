@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(FireballShooter))] // Attack 1
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
@@ -16,6 +17,8 @@ public class CharacterClass: MonoBehaviour
     // Character class variables
     [Header("Character Properties")]
     [SerializeField] protected float health = 100.0f;
+    [SerializeField] protected Slider HealthBar;
+    [SerializeField] TextMeshProUGUI HealthBarText;
 
     [Header("Ability Cooldowns")]
     [SerializeField] float[] abilityCooldowns = new float[5]; // define character cooldowns
@@ -68,6 +71,10 @@ public class CharacterClass: MonoBehaviour
 
     private void Awake()
     {
+        if (HealthBar) {
+            HealthBar.value = health;
+            HealthBarText.text = health.ToString() + " HP";
+        }
         currentCooldowns = new float[abilityCooldowns.Length];
         animator = GetComponent<Animator>();
         currentAttack1Uses = maxAttack1Uses;
@@ -323,6 +330,10 @@ public class CharacterClass: MonoBehaviour
         if (health <= 0)
         {
             Respawn();
+        }
+        if (HealthBar) {
+            HealthBar.value = health;
+            HealthBarText.text = health.ToString() + " HP";
         }
     }
 
