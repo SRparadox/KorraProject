@@ -19,6 +19,7 @@ public class SwitchScene : MonoBehaviour
 
     public void SwitchToPlayScene()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene("SampleScene");
     }
     public void SwitchToCreditsScene()

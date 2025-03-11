@@ -842,7 +842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &110079273
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4414,7 +4414,7 @@ GameObject:
   - component: {fileID: 659727914}
   - component: {fileID: 659727913}
   m_Layer: 0
-  m_Name: Background (1)
+  m_Name: Tutorial text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4436,8 +4436,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 50.500908, y: 111.552765}
-  m_SizeDelta: {x: 1.1326, y: 0.8514}
+  m_AnchoredPosition: {x: -17.4672, y: 94}
+  m_SizeDelta: {x: 0.9365, y: 0.6939}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &659727913
 MonoBehaviour:
@@ -4459,7 +4459,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 8e9de09cf304f584da9044f56fc6acf1, type: 3}
+  m_Texture: {fileID: 2800000, guid: 1c431aa24a73f594098cef8802bbaef4, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -4510,7 +4510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -434.68973, y: -61.342255}
+  m_AnchoredPosition: {x: -480, y: 407}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &701106877
@@ -4534,7 +4534,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.101960786, g: 0.101960786, b: 0.101960786, a: 1}
+    m_NormalColor: {r: 0, g: 0.13242912, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: 0.007843138, b: 0.6509804, a: 1}
     m_PressedColor: {r: 0.023529412, g: 0, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
