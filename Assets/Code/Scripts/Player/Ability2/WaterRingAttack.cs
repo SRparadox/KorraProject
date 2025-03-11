@@ -23,15 +23,19 @@ public class WaterRingAttack: MonoBehaviour
         {
             Vector3 spawnPosition = transform.position + new Vector3(0, 1, 0);
             GameObject waterRing = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
-            ParticleSystem ps = GetComponentInChildren<ParticleSystem>();
-            if (ps != null)
+            WaterRing waterring = waterRing.GetComponent<WaterRing>();
+
+            if(waterring != null)
             {
-                ps.Play();
+                waterring.SetPlayer(GetComponent<CharacterClass>());
             }
+
+            waterRing.tag = gameObject.tag;
             Debug.Log("Waterring spawned");
         } else
         {
             Debug.LogError("Water ring prefab not assigned in the Inspector");
         }
     }
+
 }

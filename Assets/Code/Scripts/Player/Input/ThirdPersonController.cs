@@ -1,8 +1,10 @@
-﻿using Cinemachine;
+﻿using System.Collections;
+using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -21,9 +23,11 @@ namespace StarterAssets
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
+        private float saveMoveSpeed;
 
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
+        private float saveSprintSpeed;
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -33,6 +37,9 @@ namespace StarterAssets
         public float SpeedChangeRate = 10.0f;
 
         [Header("Sensitivity")]
+
+        [SerializeField] protected Slider SensitivitySlider;
+
         public float normalSensitivityX = 2.0f;
         public float normalSensitivityY = 2.0f;
 
@@ -156,8 +163,11 @@ namespace StarterAssets
 
         private void Start()
         {
-            xSensitivity = normalSensitivityX;
-            ySensitivity = normalSensitivityY;
+            xSensitivity = normalSensitivityX * SensitivitySlider.value;
+            ySensitivity = normalSensitivityY * SensitivitySlider.value;
+
+            saveMoveSpeed = MoveSpeed;
+            saveSprintSpeed = SprintSpeed;
 
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
@@ -199,8 +209,8 @@ namespace StarterAssets
             if (staterAssetsInputs.aim)
             {
                 aimVirtualCamera.gameObject.SetActive(true);
-                xSensitivity = aimSensitivityX;
-                ySensitivity = aimSensitivityY;
+                xSensitivity = aimSensitivityX * SensitivitySlider.value;
+                ySensitivity = aimSensitivityY * SensitivitySlider.value;
 
                 Vector3 worldAimTarget = mouseWorldPosition;
                 worldAimTarget.y = transform.position.y;
@@ -213,8 +223,15 @@ namespace StarterAssets
             } else
             {
                 aimVirtualCamera.gameObject.SetActive(false);
-                xSensitivity = normalSensitivityX;
-                ySensitivity = normalSensitivityY;
+                xSensitivity = normalSensitivityX * SensitivitySlider.value;
+                ySensitivity = normalSensitivityY * SensitivitySlider.value;
+
+                Vector3 worldAimTarget = mouseWorldPosition;
+                worldAimTarget.y = transform.position.y;
+                Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+
+                // Face player forward
+                transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
 
                 isAiming = false;
             }
@@ -279,8 +296,7 @@ namespace StarterAssets
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero)
-                targetSpeed = 0.0f;
+            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
@@ -305,8 +321,8 @@ namespace StarterAssets
             }
 
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-            if (_animationBlend < 0.01f)
-                _animationBlend = 0f;
+            // if (_animationBlend < 0.01f)
+            //     _animationBlend = 0f;
 
             // normalise input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
@@ -324,7 +340,7 @@ namespace StarterAssets
                         RotationSmoothTime);
 
                     // rotate to face input direction relative to camera position
-                    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                    //transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
                 }
             }
 
@@ -341,6 +357,23 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
+        }
+
+        public float SpeedBoostMultiplier = 2f;
+        public float SpeedBoostDuration = 5f;
+        public ParticleSystem speedBoostParticles;
+        public void activateSpeedPowerup(){
+            StopCoroutine(DeactivateSpeedPowerup());
+            MoveSpeed *= SpeedBoostMultiplier;
+            SprintSpeed *= SpeedBoostMultiplier;
+            if (speedBoostParticles != null) speedBoostParticles.Play();
+            StartCoroutine(DeactivateSpeedPowerup());
+        }
+
+        private IEnumerator DeactivateSpeedPowerup(){
+            yield return new WaitForSecondsRealtime(SpeedBoostDuration);
+            MoveSpeed = saveMoveSpeed;
+            SprintSpeed = saveSprintSpeed;
         }
 
         private void JumpAndGravity()

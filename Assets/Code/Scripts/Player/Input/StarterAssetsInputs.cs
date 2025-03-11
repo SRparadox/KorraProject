@@ -1,3 +1,6 @@
+using System.Collections;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -8,12 +11,15 @@ namespace StarterAssets
     public class StarterAssetsInputs: MonoBehaviour
     {
         [Header("Character Input Values")]
-        public Vector2 move;
+        public Vector2 move = Vector2.zero;
         public Vector2 look;
         public bool jump;
         public bool sprint;
         public bool aim;
         public bool attack;
+        public Animator animator;
+        private bool LayerActive = true;
+        private float strafingValue = 0;
 
         [Header("Movement Settings")]
         public bool analogMovement;
@@ -45,6 +51,20 @@ namespace StarterAssets
         public void OnSprint(InputValue value)
         {
             SprintInput(value.isPressed);
+            if (value.isPressed) {
+                if (LayerActive) {
+                    StopAllCoroutines();
+                    StartCoroutine(slowlyDecreaseLayerWeight(1));
+                    LayerActive = false;
+                }
+            }
+            else {
+                if (!LayerActive) {
+                    StopAllCoroutines();
+                    StartCoroutine(slowlyIncreaseLayerWeight(1));
+                    LayerActive = true;
+                }
+            }
         }
 
         public void OnAim(InputValue value)
@@ -81,6 +101,18 @@ namespace StarterAssets
         public void MoveInput(Vector2 newMoveDirection)
         {
             move = newMoveDirection;
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("RoundKick"))
+            {
+                return;
+            }
+            else if (move.y < 0){
+                animator.SetLayerWeight(2, math.abs(move.y));
+                animator.SetBool("backwards", true);
+            }
+            else {
+                animator.SetBool("backwards", false);
+                animator.SetLayerWeight(2, math.abs(move.x));
+            }
         }
 
         public void LookInput(Vector2 newLookDirection)
@@ -117,5 +149,38 @@ namespace StarterAssets
         {
             Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
         }
+
+        void Update()
+        {
+            strafingValue = math.lerp(strafingValue, move.x, Time.deltaTime * 1);
+            animator.SetFloat("Strafe", strafingValue);
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("RoundKick"))
+            {
+                animator.SetLayerWeight(2, 0);
+            }
+            
+        }
+
+
+        IEnumerator slowlyDecreaseLayerWeight(int layerIndex)
+        {
+            while (animator.GetLayerWeight(layerIndex) > .2)
+            {
+                animator.SetLayerWeight(layerIndex, animator.GetLayerWeight(layerIndex) - 0.1f);
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        
+        IEnumerator slowlyIncreaseLayerWeight(int layerIndex)
+        {
+            while (animator.GetLayerWeight(layerIndex) < 1)
+            {
+                animator.SetLayerWeight(layerIndex, animator.GetLayerWeight(layerIndex) + 0.1f);
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
     }
+
+
+    
 }

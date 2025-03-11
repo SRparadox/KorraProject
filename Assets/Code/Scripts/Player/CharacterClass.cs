@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(FireballShooter))] // Attack 1
 [RequireComponent(typeof(GuidedStreamAttack))] // Attack 2
@@ -15,7 +16,10 @@ public class CharacterClass: MonoBehaviour
 {
     // Character class variables
     [Header("Character Properties")]
-    [SerializeField] protected float health = 100.0f;
+    [SerializeField] protected float health = 50.0f;
+    [SerializeField] protected float maxHealth = 100.0f;
+    [SerializeField] protected Slider HealthBar;
+    [SerializeField] TextMeshProUGUI HealthBarText;
 
     [Header("Ability Cooldowns")]
     [SerializeField] float[] abilityCooldowns = new float[5]; // define character cooldowns
@@ -55,18 +59,27 @@ public class CharacterClass: MonoBehaviour
 
     private int maxAttack1Uses = 4;
     private int currentAttack1Uses;
+    private int ultimateCharge = 0;
+    public int maxUltimateCharge = 30;
     private bool isAttack1OnCooldown = false;
 
     public bool isPlayer = true;
     public GameObject textSpawnLocation;
     public GameObject dmgTextPrefab;
+    private DamageBoost damageBoostScript;
+    public ParticleSystem healParticles;
 
 
     private void Awake()
     {
+        if (HealthBar) {
+            HealthBar.value = health;
+            HealthBarText.text = health.ToString() + " HP";
+        }
         currentCooldowns = new float[abilityCooldowns.Length];
         animator = GetComponent<Animator>();
         currentAttack1Uses = maxAttack1Uses;
+        damageBoostScript = GetComponent<DamageBoost>();
 
         // Retrieve ability references
         fireball = GetComponent<FireballShooter>();
@@ -118,6 +131,11 @@ public class CharacterClass: MonoBehaviour
         if (isPlayer) UpdateCooldowns();
     }
 
+    public float getDamageMultiplier()
+    {
+        return damageBoostScript.getDamageBoost();
+    }
+
     public void triggerFireball()
     {
         if (fireball != null)
@@ -164,10 +182,19 @@ public class CharacterClass: MonoBehaviour
     }
     public void PerformUltimate()
     {
-        if (ultimate != null)
+        if(ultimateCharge >= maxUltimateCharge)
         {
-            animator.SetTrigger("Ultimate");
-            ultimate.Trigger();
+            if (ultimate != null)
+            {
+                animator.SetTrigger("Ultimate");
+                ultimate.Trigger();
+                ultimateCharge = 0;
+                Debug.Log("Ultimate actived!");
+            }
+        }
+        else
+        {
+            Debug.Log("Ultimate not ready yet");
         }
     }
 
@@ -181,6 +208,16 @@ public class CharacterClass: MonoBehaviour
         
         for (int i = 0; i < currentCooldowns.Length; i++)
         {
+            if(i == 4)
+            {
+                float ultimatePercentage = (float)ultimateCharge / maxUltimateCharge * 100f;
+                AbilityCooldownTexts[i].text = $"{ultimatePercentage:F0}%";
+                if(ultimatePercentage == 100)
+                {
+                    AbilityCooldownTexts[i].text = "Ready";
+                }
+                continue;
+            }
             if (currentCooldowns[i] > 0.0f)
             {
                 currentCooldowns[i] -= Time.deltaTime;
@@ -207,13 +244,16 @@ public class CharacterClass: MonoBehaviour
             Debug.LogWarning("Trying to access non-existent ability index.");
             return;
         }
-        if ((animator.GetCurrentAnimatorStateInfo(1).IsName("RightPunch") || animator.GetCurrentAnimatorStateInfo(1).IsName("LeftPunch")) && abilityIndex == 0)
+        if ((animator.GetCurrentAnimatorStateInfo(1).IsName("RightPunch") || animator.GetCurrentAnimatorStateInfo(1).IsName("LeftPunch")) && abilityIndex == 0 && animator.GetLayerWeight(1) >= 0.7f)
         {
+            ResetAbilityCooldown(abilityIndex);
             animator.SetBool("BufferPunch", true);
+            return;
         }
-        if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle"))
+        if (!animator.GetCurrentAnimatorStateInfo(1).IsName("UpperBodyIdle") || animator.GetLayerWeight(1) < 0.7f)
         {
             Debug.Log("Can't use ability while in animation");
+            //Maybe play a audio cue here
             return;
         }
         if (IsAbilityReady(abilityIndex))
@@ -277,19 +317,55 @@ public class CharacterClass: MonoBehaviour
         GameObject dmgText = Instantiate(dmgTextPrefab, textSpawnLocation.transform.position, Quaternion.identity);
         dmgText.GetComponent<DamageText>().setDamageText(damage);
     }
+    public ParticleSystem takeDamageParticles;
 
     public void TakeDamage(float damage)
     {
         if (!canTakeDamage) return;
         Debug.Log("Player has taken " + damage + " damage.");
         health -= damage;
+        if (takeDamageParticles != null)
+        {
+            takeDamageParticles.Play();
+        }
         spawnDamageText(damage);
         canTakeDamage = false;
         StartCoroutine(ResetDamageCooldown());
         if (health <= 0)
         {
-            //Die();
-            //Add dead mechanic herre
+            Respawn();
+        }
+        if (HealthBar) {
+            HealthBar.value = health;
+            HealthBarText.text = health.ToString() + " HP";
+        }
+    }
+
+    public void Respawn(){
+        health = maxHealth;
+        //Add respawn mechanic here
+    }
+
+    public void Heal(float amount)
+    {
+        Debug.Log("Player has healed " + amount + " health.");
+        if (healParticles != null)
+        {
+            healParticles.Play();
+        }
+        health = Mathf.Min(health + amount, maxHealth);
+        if (HealthBar) {
+            HealthBar.value = health;
+            HealthBarText.text = health.ToString() + " HP";
+        }
+    }
+
+    public void OnSuccessfulHit()
+    {
+        ultimateCharge = Mathf.Min(ultimateCharge + 1, maxUltimateCharge);
+        if(ultimateCharge >= maxUltimateCharge)
+        {
+            Debug.Log("Ultimate is ready!");
         }
     }
 
