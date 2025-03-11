@@ -26,7 +26,7 @@ public class SwitchScene : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         //Change scene name here when ready
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SampleScene-Fire");
     }
     public void SwitchToCreditsScene()
     {
