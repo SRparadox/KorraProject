@@ -464,7 +464,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 357094266}
         m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
-        m_MethodName: SwitchToPlayScene
+        m_MethodName: SwitchToPlaySceneFire
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

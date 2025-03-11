@@ -16178,6 +16178,7 @@ MonoBehaviour:
   SprintSpeed: 10
   RotationSmoothTime: 0.07
   SpeedChangeRate: 10
+  SensitivitySlider: {fileID: 0}
   normalSensitivityX: 2
   normalSensitivityY: 2
   aimSensitivityX: 1
@@ -16368,6 +16369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  maxHealth: 100
   HealthBar: {fileID: 0}
   HealthBarText: {fileID: 0}
   abilityCooldowns:
@@ -16522,7 +16524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleSystem: {fileID: 5818077384970534914}
-  DamageMultiplier: 1.5
+  increaseMultiplierBy: 0.5
   Duration: 8
 --- !u!1 &4831288405876513415
 GameObject:
