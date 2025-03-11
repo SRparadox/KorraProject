@@ -92,9 +92,18 @@ public class GuidedStream: MonoBehaviour
                     {
                         CheckForEnemyHit();
 
-                        splashParticle.gameObject.SetActive(true);
-                        splashParticle.transform.position = target;
-                        splashParticle.Play();
+                        RaycastHit hit;
+                        if (Physics.Raycast(target + Vector3.up * 10f, Vector3.down, out hit, Mathf.Infinity))
+                        {
+                            splashParticle.gameObject.SetActive(true);
+                            splashParticle.transform.position = hit.point;
+
+                            splashParticle.transform.position += hit.normal * 0.2f;
+
+                            splashParticle.transform.up = hit.normal;
+
+                            splashParticle.Play();
+                        }
                     }
                 }
             }
@@ -158,7 +167,8 @@ public class GuidedStream: MonoBehaviour
         spline.AddNode(node);
     }
 
-    public void setDamage(float damage){
+    public void setDamage(float damage)
+    {
         damageAmount = damage;
     }
 

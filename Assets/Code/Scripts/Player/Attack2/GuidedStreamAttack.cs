@@ -12,16 +12,13 @@ public class GuidedStreamAttack: MonoBehaviour
 
     public void Trigger()
     {
-        Ray ray = new Ray(camera.transform.position, camera.transform.forward);
-        RaycastHit[] hits = Physics.RaycastAll(ray);
+        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
-        foreach (RaycastHit hit in hits)
+        int ignoreLayer = LayerMask.GetMask("Player");
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, ~ignoreLayer))
         {
-            if (!hit.collider.CompareTag("Player"))
-            {
-                SpawnGuidedStream(hit.point);
-                break;
-            }
+            SpawnGuidedStream(raycastHit.point);
         }
     }
 
