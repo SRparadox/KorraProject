@@ -9,6 +9,8 @@ public class SwitchSettings : MonoBehaviour
 {
     [SerializeField] private GameObject Menu;
     [SerializeField] private GameObject Settings;
+    [SerializeField] private GameObject Credits;
+
     [SerializeField] private GameObject Gameplay;
     [SerializeField] private GameObject Audio;
     [SerializeField] private GameObject Accessibility;
@@ -29,10 +31,18 @@ public class SwitchSettings : MonoBehaviour
     {
         Menu.SetActive(true);
         Settings.SetActive(false);
+        Credits.SetActive(false);
     }
     public void EnableSettings()
     {
         Settings.SetActive(true);
+        Menu.SetActive(false);
+        Credits.SetActive(false);
+    }
+    public void EnableCredits()
+    {
+        Credits.SetActive(true);
+        Settings.SetActive(false);
         Menu.SetActive(false);
     }
     public void EnableGameplay()

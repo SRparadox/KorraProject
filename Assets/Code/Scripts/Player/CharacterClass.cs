@@ -16,7 +16,8 @@ public class CharacterClass: MonoBehaviour
 {
     // Character class variables
     [Header("Character Properties")]
-    [SerializeField] protected float health = 100.0f;
+    [SerializeField] protected float health = 50.0f;
+    [SerializeField] protected float maxHealth = 100.0f;
     [SerializeField] protected Slider HealthBar;
     [SerializeField] TextMeshProUGUI HealthBarText;
 
@@ -341,7 +342,7 @@ public class CharacterClass: MonoBehaviour
     }
 
     public void Respawn(){
-        health = 100;
+        health = maxHealth;
         //Add respawn mechanic here
     }
 
@@ -352,7 +353,11 @@ public class CharacterClass: MonoBehaviour
         {
             healParticles.Play();
         }
-        health = Mathf.Min(health + amount, 100);
+        health = Mathf.Min(health + amount, maxHealth);
+        if (HealthBar) {
+            HealthBar.value = health;
+            HealthBarText.text = health.ToString() + " HP";
+        }
     }
 
     public void OnSuccessfulHit()
