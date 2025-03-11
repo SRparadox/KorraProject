@@ -13077,7 +13077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zones: []
-  Firespawn: {fileID: 1908922219}
+  Firespawn: {fileID: 0}
   Waterspawn: {fileID: 1908922219}
   roundDuration: 300
   maxControlScore: 100
