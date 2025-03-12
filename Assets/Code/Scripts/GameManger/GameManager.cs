@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text timerText;
     public GameObject PowerUpSpawnParent;
     public float powerUpSpawnInterval = 8f;
+    public int initialPowers = 3;
 
     private float roundTimer;
     private float scoreTimer = 0f;
@@ -41,7 +42,7 @@ public class GameManager : MonoBehaviour
         ChooseNewZone();
         SpawnPlayers();
         roundTimer = roundDuration;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < initialPowers; i++)
         {
             spawnAPowerup();
         }
@@ -68,7 +69,10 @@ public class GameManager : MonoBehaviour
             children[i] = parentTransform.GetChild(i);
             if (children[i].GetComponent<PowerUpGiver>().isActive == false) allAreActive = false; //If theres nothing to spawn then dont spawn
         }
-        if (children.Length == 0 || allAreActive == true) return;
+        if (children.Length == 0 || allAreActive == true) {
+            Debug.LogError("Powerups: No children found under the parent transform or all children are active.");
+            return;
+        } 
 
         // Choose a random child
         int randomIndex = Random.Range(0, children.Length);

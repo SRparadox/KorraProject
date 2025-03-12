@@ -23,23 +23,15 @@ public class PowerUpGiver : MonoBehaviour
     public Material healthMaterial2;
     public GameObject lightEffect;
     public GameObject icon;
-    private GameObject scroll;
-    private Collider col;
+    [SerializeField] private GameObject scroll;
+    [SerializeField] private Collider col;
+    
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        col = GetComponent<Collider>();
-        scroll = GameObject.Find("Scroll");
-        if (scroll == null)
-        {
-            Debug.LogError("Scroll GameObject not found in the scene.");
-        }
-        else
-        {
-            scroll.SetActive(false);
-        }
+        scroll.SetActive(false);
         setupObject();
     }
 

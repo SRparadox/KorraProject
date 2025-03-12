@@ -164,6 +164,8 @@ MonoBehaviour:
   healthMaterial2: {fileID: 2100000, guid: 996e42388d27a89408772c8245af1e9e, type: 2}
   lightEffect: {fileID: 1005980569406701233}
   icon: {fileID: 4783203759887678921}
+  scroll: {fileID: 4744947799851199591}
+  col: {fileID: 4555097960919696507}
 --- !u!1001 &2454303373304987529
 PrefabInstance:
   m_ObjectHideFlags: 0
