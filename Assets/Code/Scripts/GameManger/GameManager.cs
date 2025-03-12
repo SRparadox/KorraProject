@@ -127,7 +127,17 @@ public class GameManager : MonoBehaviour
     {
         if (zones.Length == 0) return;
 
+        if(activeZone != null && activeZone.lightPillar != null)
+        {
+            activeZone.lightPillar.SetActive(false);
+        } 
+
         activeZone = zones[Random.Range(0, zones.Length)];
+        if (activeZone.lightPillar != null)
+        {
+            activeZone.lightPillar.SetActive(true);
+        }
+
         Debug.Log($"New active zone:{activeZone.gameObject.name}");
     }
 

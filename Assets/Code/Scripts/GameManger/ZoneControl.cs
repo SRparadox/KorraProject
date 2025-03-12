@@ -7,6 +7,7 @@ public class ZoneControl : MonoBehaviour
     private HashSet<GameObject> waterPlayers = new HashSet<GameObject>();
 
     public string controllingTeam = "Neutral";
+    public GameObject lightPillar;
 
     private void OnTriggerEnter(Collider other)
     {
