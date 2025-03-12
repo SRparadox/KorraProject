@@ -10336,6 +10336,7 @@ GameObject:
   - component: {fileID: 932852463}
   - component: {fileID: 932852462}
   - component: {fileID: 932852461}
+  - component: {fileID: 932852465}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -10454,13 +10455,35 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932852460}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.70258784, z: 0, w: 0.711597}
-  m_LocalPosition: {x: 391.23, y: 68.83, z: 5.79}
+  m_LocalRotation: {x: 0.028688826, y: -0.7138719, z: 0.029296067, w: 0.69907486}
+  m_LocalPosition: {x: 389.54, y: 67.48, z: 2.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -89.27, z: 0}
+  m_LocalEulerAnglesHint: {x: 4.7, y: -91.2, z: 0}
+--- !u!95 &932852465
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932852460}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b81431db951e85489a1e833c14dd80f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &948101593 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9020006100461049948, guid: eed644a5409f10140a9926c759f57f49, type: 3}
