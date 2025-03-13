@@ -7995,7 +7995,7 @@ MonoBehaviour:
   PauseMenu: {fileID: 1744032401}
   SettingsMenu: {fileID: 1200540820}
   HUD: {fileID: 857328519}
-  AbilityButtons: {fileID: 0}
+  AbilityButtons: {fileID: 516993034}
   AudioSource: {fileID: 203398212}
   MusicVolume: {fileID: 676011554}
 --- !u!1 &676011552
@@ -14587,6 +14587,7 @@ MonoBehaviour:
   timerText: {fileID: 513356035}
   PowerUpSpawnParent: {fileID: 1822101211}
   powerUpSpawnInterval: 8
+  initialPowers: 3
 --- !u!4 &1163296466
 Transform:
   m_ObjectHideFlags: 0
