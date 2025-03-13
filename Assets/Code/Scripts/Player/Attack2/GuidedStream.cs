@@ -1,25 +1,20 @@
+using Unity.Netcode;
 using SplineMesh;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// code modified from https://youtu.be/3CcWus6d_B8?feature=shared
-
-public class GuidedStream: MonoBehaviour
+public class GuidedStream : NetworkBehaviour
 {
     [SerializeField] float pointCount;
     [SerializeField] float radius;
     [SerializeField] Vector3 scale;
-
     [SerializeField] Spline spline;
     [SerializeField] ExampleContortAlong contortAlong;
-
     [SerializeField] float speedDelta;
     [SerializeField] float animSpeed;
-
     [SerializeField] ParticleSystem puddleParticle;
     [SerializeField] ParticleSystem splashParticle;
-
     [SerializeField] float splashActivationOffset;
     [SerializeField] float puddleScaleSpeed;
     [SerializeField] float hitDetectionRadius;
@@ -31,13 +26,13 @@ public class GuidedStream: MonoBehaviour
     public void SendTo(Vector3 target)
     {
         this.target = target;
-
         StopAllCoroutines();
         StartCoroutine(Coroutine_SendTo());
     }
 
     IEnumerator Coroutine_SendTo()
     {
+        if (!IsServer) yield break;
         spline.gameObject.SetActive(false);
         splashParticle.gameObject.SetActive(false);
         puddleParticle.gameObject.SetActive(false);
@@ -78,12 +73,11 @@ public class GuidedStream: MonoBehaviour
             if (length < meshLength)
             {
                 contortAlong.ScaleMesh(Vector3.Lerp(startScale, targetScale, length / meshLength));
-            } else
+            }
+            else
             {
                 if (puddleParticle.isPlaying)
-                {
                     puddleParticle.Stop();
-                }
 
                 contortAlong.Contort((length - meshLength) / spline.Length);
                 if (length + meshLength > (totalLength + splashActivationOffset))
@@ -91,23 +85,18 @@ public class GuidedStream: MonoBehaviour
                     if (!splashParticle.isPlaying)
                     {
                         CheckForEnemyHit();
-
                         RaycastHit hit;
                         if (Physics.Raycast(target + Vector3.up * 10f, Vector3.down, out hit, Mathf.Infinity))
                         {
                             splashParticle.gameObject.SetActive(true);
                             splashParticle.transform.position = hit.point;
-
                             splashParticle.transform.position += hit.normal * 0.2f;
-
                             splashParticle.transform.up = hit.normal;
-
                             splashParticle.Play();
                         }
                     }
                 }
             }
-
             length += Time.deltaTime * animSpeed * speedCurveLerp;
             speedCurveLerp += speedDelta * Time.deltaTime;
             yield return null;
@@ -125,43 +114,28 @@ public class GuidedStream: MonoBehaviour
         {
             spline.RemoveNode(nodes[i]);
         }
-
         Vector3 targetDirection = (target - transform.position);
         transform.forward = new Vector3(targetDirection.x, 0, targetDirection.z).normalized;
-
         int sign = Random.Range(0, 2) == 0 ? 1 : -1;
         float angle = 90 * sign;
         float streamSpawnHeight = transform.position.y;
-
         for (int i = 0; i < pointCount; i++)
         {
             if (spline.nodes.Count <= i)
-            {
                 spline.AddNode(new SplineNode(Vector3.zero, Vector3.forward));
-            }
-
             Vector3 normal = Quaternion.Euler(0, angle, 0) * transform.forward;
             Vector3 pos = transform.position + normal * radius;
             pos.y = streamSpawnHeight;
-
             Vector3 direction = pos + Quaternion.Euler(Random.Range(-30, 30), Random.Range(60, 120) * sign, Random.Range(-30, 30)) * normal * radius / 2f;
-
             if (i == 0)
-            {
                 direction = pos + Vector3.up * radius;
-            }
-
             spline.nodes[i].Position = transform.InverseTransformPoint(pos);
             spline.nodes[i].Direction = transform.InverseTransformPoint(direction);
-
             angle += 90 * sign;
         }
-
         Vector3 targetNodePosition = transform.InverseTransformPoint(target);
-
         Quaternion randomRotation = Quaternion.Euler(Random.Range(0, 90), Random.Range(-40, 40), 0);
         Vector3 targetNodeDirection = target + randomRotation * (transform.forward * (target - transform.position).magnitude * Random.Range(0.2f, 1f));
-
         targetNodeDirection = transform.InverseTransformPoint(targetNodeDirection);
         SplineNode node = new SplineNode(targetNodePosition, targetNodeDirection);
         spline.AddNode(node);
@@ -177,28 +151,19 @@ public class GuidedStream: MonoBehaviour
         player = character;
     }
 
-
     private void CheckForEnemyHit()
     {
         Collider[] hitColliders = Physics.OverlapSphere(target, hitDetectionRadius);
-        HashSet<GameObject> damagedObjects = new HashSet<GameObject>();
-
         foreach (Collider hit in hitColliders)
         {
             GameObject hitObject = hit.gameObject;
-
-            if (hitObject.GetComponent<CharacterClass>() != null && !damagedObjects.Contains(hitObject) && hitObject.GetComponent<CharacterClass>().getPlayersTeam() != player.getPlayersTeam())
+            if (hitObject.GetComponent<CharacterClass>() != null && hitObject.GetComponent<CharacterClass>().getPlayersTeam() != player.getPlayersTeam())
             {
                 hitObject.GetComponent<CharacterClass>().TakeDamage(damageAmount * player.getDamageMultiplier());
-                damagedObjects.Add(hitObject);
-
                 if (player != null)
-                {
                     player.OnSuccessfulHit();
-                }
                 return;
             }
         }
     }
-
 }

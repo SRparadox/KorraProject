@@ -1,55 +1,54 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FireballShooter: MonoBehaviour
+public class FireballShooter : NetworkBehaviour
 {
     public Transform fireballSpawnPoint;
     public float fireballSpeed = 10f;
     private Animator animator;
-
-    private GameObject selectedPrefab; //stores which prefab the player will use
+    private GameObject selectedPrefab; // Which prefab the player will use
 
     private void Start()
     {
-        //UpdateSelectedPrefab();
         animator = GetComponent<Animator>();
     }
+
     public void Trigger()
     {
-        ShootFireball();
+        if (IsOwner)
+            ShootFireballServerRpc();
     }
 
-    public void disableBuffer()
+    [ServerRpc]
+    private void ShootFireballServerRpc()
     {
-        if (animator != null)
-            animator.SetBool("BufferPunch", false);
+        ShootFireball();
     }
 
     void ShootFireball()
     {
         if (selectedPrefab != null && fireballSpawnPoint != null)
         {
-            GameObject Fireball = Instantiate(selectedPrefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
-            Fireball fireball = Fireball.GetComponent<Fireball>();
+            GameObject fireballObj = Instantiate(selectedPrefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
+            var netObj = fireballObj.GetComponent<NetworkObject>();
+            if (netObj != null)
+                netObj.Spawn();
+            Fireball fireball = fireballObj.GetComponent<Fireball>();
             Camera mainCamera = Camera.main;
-
-            if(fireball != null)
-            {
+            if (fireball != null)
                 fireball.SetPlayer(GetComponent<CharacterClass>());
-            }
-
             if (mainCamera != null)
             {
                 Vector3 cameraForward = mainCamera.transform.forward;
-                Rigidbody rb = Fireball.GetComponent<Rigidbody>();
+                Rigidbody rb = fireballObj.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
                     rb.useGravity = false;
                     rb.linearVelocity = cameraForward * fireballSpeed;
                 }
             }
-
-            Destroy(Fireball, 3f);
+            Destroy(fireballObj, 3f);
         }
     }
 

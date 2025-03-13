@@ -5,22 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class SwitchScene : MonoBehaviour
 {
-
     private PlayerTracker playerTracker;
-    // Start is called before the first frame update
+
     void Start()
     {
-        playerTracker = GameObject.Find("KeepTrackOfPlayer").GetComponent<PlayerTracker>();
-        if (playerTracker == null)
+        GameObject keepTrackObject = GameObject.Find("KeepTrackOfPlayer");
+        if (keepTrackObject != null)
         {
-            Debug.LogError("PlayerTracker not found");
+            playerTracker = keepTrackObject.GetComponent<PlayerTracker>();
+            if (playerTracker == null)
+            {
+                Debug.LogError("SwitchScene: PlayerTracker component not found on 'KeepTrackOfPlayer'!");
+            }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        else
+        {
+            Debug.LogError("SwitchScene: 'KeepTrackOfPlayer' object not found in the scene!");
+        }
     }
 
     public void SwitchToPlayScene()
@@ -28,30 +29,41 @@ public class SwitchScene : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene("SampleScene");
     }
+
     public void SwitchToPlaySceneFire()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        //Change scene name here when ready
-        playerTracker.SetPlayerTeam(CharacterClass.PlayerTeam.Fire);
+        if (playerTracker != null)
+        {
+            playerTracker.SetPlayerTeam(CharacterClass.PlayerTeam.Fire);
+        }
+        else
+        {
+            Debug.LogWarning("SwitchToPlaySceneFire: PlayerTracker is null; cannot set player team.");
+        }
         SceneManager.LoadScene("SampleScene");
-
     }
+
     public void SwitchToCreditsScene()
     {
         SceneManager.LoadScene("CreditsScene");
     }
+
     public void SwitchToSettingsScene()
     {
         SceneManager.LoadScene("SettingsScene");
     }
+
     public void SwitchToMenuScene()
     {
         SceneManager.LoadScene("MenuScene");
     }
+
     public void SwitchToCharacterSelectionScene()
     {
         SceneManager.LoadScene("CharacterSelectionScene");
     }
+
     public void ExitGame()
     {
         Application.Quit();
