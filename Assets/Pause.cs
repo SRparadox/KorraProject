@@ -8,6 +8,8 @@ public class Pause : MonoBehaviour
 
     [SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject SettingsMenu;
+    [SerializeField] private GameObject CreditsMenu;
+
     [SerializeField] private GameObject HUD;
     [SerializeField] private GameObject AbilityButtons;
     [SerializeField] private AudioSource AudioSource;
@@ -28,6 +30,7 @@ public class Pause : MonoBehaviour
                 ToggleMenu = !ToggleMenu;
                 PauseMenu.SetActive(ToggleMenu);
                 SettingsMenu.SetActive(false);
+                CreditsMenu.SetActive(false);
                 Cursor.lockState = ToggleMenu ? CursorLockMode.None : CursorLockMode.Locked;
         }
 

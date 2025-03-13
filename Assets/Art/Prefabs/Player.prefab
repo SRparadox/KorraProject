@@ -16175,10 +16175,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 7.5
-  SprintSpeed: 10
+  SprintSpeed: 12.5
   RotationSmoothTime: 0.07
   SpeedChangeRate: 10
-  SensitivitySlider: {fileID: 0}
   normalSensitivityX: 2
   normalSensitivityY: 2
   aimSensitivityX: 1
@@ -16371,20 +16370,13 @@ MonoBehaviour:
   team: 1
   health: 50
   maxHealth: 100
-  HealthBar: {fileID: 0}
-  HealthBarText: {fileID: 0}
   abilityCooldowns:
   - 1
   - 4
   - 3
   - 5
   - 2
-  AbilityCooldownTexts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  currentCooldowns: []
   fireUlt: {fileID: 6533730809385208864, guid: 76b6dfbe4e27eab4d89f12f049cf0ecf, type: 3}
   waterUlt: {fileID: 2398402702540021952, guid: fc2bfafd7cec320489659c81ee5d33d4, type: 3}
   fireRingPrefab: {fileID: 3637822239372596547, guid: 85dae3f884a5614469d4a28bd0d9cce7, type: 3}
