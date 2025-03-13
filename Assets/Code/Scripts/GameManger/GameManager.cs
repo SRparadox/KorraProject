@@ -215,9 +215,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject CreatePlayer(CharacterClass.PlayerTeam team)
     {
-        GameObject player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        GameObject player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity, playersParent.transform);
         player.GetComponent<CharacterClass>().setPlayersTeam(team);
-        player.transform.parent = playersParent.transform;
         RespawnPlayer(player);
         return player;
     }
