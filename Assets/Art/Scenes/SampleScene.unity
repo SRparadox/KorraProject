@@ -9068,6 +9068,7 @@ MonoBehaviour:
   Menu: {fileID: 1744032401}
   Settings: {fileID: 1200540820}
   Credits: {fileID: 1636959008}
+  Tutorial: {fileID: 0}
   Gameplay: {fileID: 1302032427}
   Audio: {fileID: 312004322}
   Accessibility: {fileID: 6369538}
@@ -9092,6 +9093,7 @@ MonoBehaviour:
   AbilityButtons: {fileID: 3412534893666343791}
   AudioSource: {fileID: 203398212}
   MusicVolume: {fileID: 676011554}
+  SensitivitySlider: {fileID: 837906541}
 --- !u!1 &676011552
 GameObject:
   m_ObjectHideFlags: 0

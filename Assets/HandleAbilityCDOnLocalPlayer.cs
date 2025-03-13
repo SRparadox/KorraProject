@@ -29,6 +29,9 @@ public class HandleAbilityCDOnLocalPlayer : MonoBehaviour
             playerTracker = playerTrackerObj.GetComponent<PlayerTracker>();
             localPlayer = playerTracker.GetPlayer();
         }
+        
+        // line of code below was added to allow player settings to carry across scenes
+        localPlayer.GetComponent<ThirdPersonController>().updateSensitive(SensitivitySlider.value);
 
     }
 

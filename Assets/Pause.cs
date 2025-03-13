@@ -13,17 +13,26 @@ public class Pause : MonoBehaviour
     [SerializeField] private GameObject HUD;
     [SerializeField] private GameObject AbilityButtons;
     [SerializeField] private AudioSource AudioSource;
+    
     [SerializeField] private Slider MusicVolume;
+    [SerializeField] private Slider SensitivitySlider;
+
+    public static float CurrentSensitivity = 4;
+    public static float CurrentVolume = 7;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
+        SensitivitySlider.value = CurrentSensitivity;
+        MusicVolume.value = CurrentVolume;
     }
 
     // Update is called once per frame
     void Update()
     {
+        CurrentSensitivity = SensitivitySlider.value;
+        CurrentVolume = MusicVolume.value;
         if(Input.GetKeyDown(KeyCode.Escape)) {
                 HUD.SetActive(ToggleMenu);
                 AbilityButtons.SetActive(ToggleMenu);
