@@ -27,16 +27,12 @@ public class CharacterClass: MonoBehaviour
     public PlayerTeam team;
     [SerializeField] protected float health = 50.0f;
     [SerializeField] protected float maxHealth = 100.0f;
-    [SerializeField] protected Slider HealthBar;
-    [SerializeField] TextMeshProUGUI HealthBarText;
 
     [Header("Ability Cooldowns")]
     [SerializeField] float[] abilityCooldowns = new float[5]; // define character cooldowns
-    private float[] currentCooldowns; // track cooldown statuses
+    public float[] currentCooldowns; // track cooldown statuses
 
     [Header("UI Elements")]
-    [SerializeField] TextMeshProUGUI[] AbilityCooldownTexts = new TextMeshProUGUI[5];
-
     FireballShooter fireball;
     GuidedStreamAttack guidedStream;
     ElementalDash elementalDash;
@@ -82,10 +78,6 @@ public class CharacterClass: MonoBehaviour
 
     private void Awake()
     {
-        if (HealthBar) {
-            HealthBar.value = health;
-            HealthBarText.text = health.ToString() + " HP";
-        }
         currentCooldowns = new float[abilityCooldowns.Length];
         animator = GetComponent<Animator>();
         currentAttack1Uses = maxAttack1Uses;
@@ -241,22 +233,15 @@ public class CharacterClass: MonoBehaviour
         {
             if(i == 4)
             {
-                float ultimatePercentage = (float)ultimateCharge / maxUltimateCharge * 100f;
-                AbilityCooldownTexts[i].text = $"{ultimatePercentage:F0}%";
-                if(ultimatePercentage == 100)
-                {
-                    AbilityCooldownTexts[i].text = "Ready";
-                }
                 continue;
             }
             if (currentCooldowns[i] > 0.0f)
             {
                 currentCooldowns[i] -= Time.deltaTime;
-                AbilityCooldownTexts[i].text = currentCooldowns[i].ToString("F1");
+                
             } else
             {
                 currentCooldowns[i] = 0;
-                AbilityCooldownTexts[i].text = "Ready";
 
                 if (i == 0 && isAttack1OnCooldown)
                 {
@@ -266,6 +251,22 @@ public class CharacterClass: MonoBehaviour
                 }
             }
         }
+    }
+
+    public string getTextForCD(int index)
+    {
+        if (index < 0 || index >= abilityCooldowns.Length)
+        {
+            Debug.LogWarning("Trying to access non-existent ability index.");
+            return "";
+        }
+        if (index == 4)
+        {
+            float ultimatePercentage = (float)ultimateCharge / maxUltimateCharge * 100f;
+            return $"{ultimatePercentage:F0}%";
+        }
+        string text = currentCooldowns[index] > 0 ? currentCooldowns[index].ToString("F1") + "s" : "Ready";
+        return text;
     }
 
     public void UseAbility(int abilityIndex)
@@ -366,10 +367,11 @@ public class CharacterClass: MonoBehaviour
         {
             Respawn();
         }
-        if (HealthBar) {
-            HealthBar.value = health;
-            HealthBarText.text = health.ToString() + " HP";
-        }
+    }
+
+
+    public float getHealth(){
+        return health;
     }
 
     public void Respawn(){
@@ -385,10 +387,6 @@ public class CharacterClass: MonoBehaviour
             healParticles.Play();
         }
         health = Mathf.Min(health + amount, maxHealth);
-        if (HealthBar) {
-            HealthBar.value = health;
-            HealthBarText.text = health.ToString() + " HP";
-        }
     }
 
     public void OnSuccessfulHit()

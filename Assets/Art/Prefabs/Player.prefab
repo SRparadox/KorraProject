@@ -16088,7 +16088,7 @@ GameObject:
   - component: {fileID: 6782562874022981665}
   m_Layer: 8
   m_Name: Player
-  m_TagString: Fire
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16368,15 +16368,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b20d75c4d6bed46841c19f93353e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  team: 1
+  health: 50
   maxHealth: 100
   HealthBar: {fileID: 0}
   HealthBarText: {fileID: 0}
   abilityCooldowns:
   - 1
-  - 2
-  - 2
-  - 2
+  - 4
+  - 3
+  - 5
   - 2
   AbilityCooldownTexts:
   - {fileID: 0}

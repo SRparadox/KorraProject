@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -38,7 +39,7 @@ namespace StarterAssets
 
         [Header("Sensitivity")]
 
-        [SerializeField] protected Slider SensitivitySlider;
+        [NonSerialized] private float sensitivityValue = 4.0f;
 
         public float normalSensitivityX = 2.0f;
         public float normalSensitivityY = 2.0f;
@@ -159,14 +160,19 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
-
             staterAssetsInputs = GetComponent<StarterAssetsInputs>();
+        }
+
+        public void updateSensitive(float newValue){
+            sensitivityValue = newValue;
+            xSensitivity = normalSensitivityX * sensitivityValue;
+            ySensitivity = normalSensitivityY * sensitivityValue;
         }
 
         private void Start()
         {
-            xSensitivity = normalSensitivityX * SensitivitySlider.value;
-            ySensitivity = normalSensitivityY * SensitivitySlider.value;
+            xSensitivity = normalSensitivityX * sensitivityValue;
+            ySensitivity = normalSensitivityY * sensitivityValue;
 
             saveMoveSpeed = MoveSpeed;
             saveSprintSpeed = SprintSpeed;
@@ -209,8 +215,8 @@ namespace StarterAssets
             if (staterAssetsInputs.aim)
             {
                 aimVirtualCamera.gameObject.SetActive(true);
-                xSensitivity = aimSensitivityX * SensitivitySlider.value;
-                ySensitivity = aimSensitivityY * SensitivitySlider.value;
+                xSensitivity = aimSensitivityX * sensitivityValue;
+                ySensitivity = aimSensitivityY * sensitivityValue;
 
                 Vector3 worldAimTarget = mouseWorldPosition;
                 worldAimTarget.y = transform.position.y;
@@ -223,8 +229,8 @@ namespace StarterAssets
             } else
             {
                 aimVirtualCamera.gameObject.SetActive(false);
-                xSensitivity = normalSensitivityX * SensitivitySlider.value;
-                ySensitivity = normalSensitivityY * SensitivitySlider.value;
+                xSensitivity = normalSensitivityX * sensitivityValue;
+                ySensitivity = normalSensitivityY * sensitivityValue;
 
                 Vector3 worldAimTarget = mouseWorldPosition;
                 worldAimTarget.y = transform.position.y;
@@ -474,7 +480,7 @@ namespace StarterAssets
             {
                 if (FootstepAudioClips.Length > 0)
                 {
-                    var index = Random.Range(0, FootstepAudioClips.Length);
+                    var index = UnityEngine.Random.Range(0, FootstepAudioClips.Length);
                     AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
                 }
             }

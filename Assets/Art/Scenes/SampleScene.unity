@@ -2293,6 +2293,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9020006100461049948, guid: eed644a5409f10140a9926c759f57f49, type: 3}
   m_PrefabInstance: {fileID: 519650319}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &164611432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4705826424688216604, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
+  m_PrefabInstance: {fileID: 1509351839}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &168634686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5691,8 +5696,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1697093502}
-        m_TargetAssemblyTypeName: CharacterClass, Assembly-CSharp
+      - m_Target: {fileID: 8417261331921991335}
+        m_TargetAssemblyTypeName: HandleAbilityCDOnLocalPlayer, Assembly-CSharp
         m_MethodName: SwitchTeams
         m_Mode: 1
         m_Arguments:
@@ -7531,7 +7536,6 @@ RectTransform:
   m_Children:
   - {fileID: 1744032402}
   - {fileID: 1200540821}
-  - {fileID: 6702068902381337659}
   - {fileID: 857328520}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9938,7 +9942,19 @@ MonoBehaviour:
   m_Value: 4
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8417261331921991335}
+        m_TargetAssemblyTypeName: HandleAbilityCDOnLocalPlayer, Assembly-CSharp
+        m_MethodName: updateSensitivityValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &839871758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14011,6 +14027,7 @@ MonoBehaviour:
   PowerUpSpawnParent: {fileID: 1822101211}
   powerUpSpawnInterval: 8
   initialPowers: 3
+  playerPrefab: {fileID: 4705826424688216604, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
   playersParent: {fileID: 709991405}
 --- !u!4 &1163296466
 Transform:
@@ -18704,10 +18721,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 709991406}
     m_Modifications:
-    - target: {fileID: 30990453929750715, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1697093493}
     - target: {fileID: 46528980917580606, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -19018,7 +19031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4705826424688216604, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: m_TagString
-      value: Fire
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4831288405876513415, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: m_Layer
@@ -19237,14 +19250,6 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-      propertyPath: team
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-      propertyPath: health
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: HealthBar
       value: 
       objectReference: {fileID: 1073434252}
@@ -19252,18 +19257,6 @@ PrefabInstance:
       propertyPath: HealthBarText
       value: 
       objectReference: {fileID: 672359670}
-    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-      propertyPath: 'abilityCooldowns.Array.data[1]'
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-      propertyPath: 'abilityCooldowns.Array.data[2]'
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-      propertyPath: 'abilityCooldowns.Array.data[3]'
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: 'AbilityCooldownTexts.Array.data[0]'
       value: 
@@ -19372,10 +19365,6 @@ PrefabInstance:
       propertyPath: SensitivitySlider
       value: 
       objectReference: {fileID: 837906541}
-    - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-      propertyPath: ignoreLayer.m_Bits
-      value: 192
-      objectReference: {fileID: 0}
     - target: {fileID: 8601454794748308458, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
       propertyPath: aimColliderMask.m_Bits
       value: 1
@@ -22330,22 +22319,6 @@ Transform:
   - {fileID: 12019811}
   m_Father: {fileID: 1200540821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1697093493 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7105402699739947193, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-  m_PrefabInstance: {fileID: 1509351839}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1697093502 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7233193356939096023, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-  m_PrefabInstance: {fileID: 1509351839}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19b20d75c4d6bed46841c19f93353e54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1697093503 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2594412360563584971, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
@@ -26755,22 +26728,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6239476548038483899}
   m_CullTransparentMesh: 1
---- !u!1 &2681407478141120084
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6702068902381337659}
-  m_Layer: 5
-  m_Name: HandleAbilities
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!114 &3004891413821258354
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26827,6 +26784,7 @@ GameObject:
   - component: {fileID: 3638912940697730292}
   - component: {fileID: 7607745671448447774}
   - component: {fileID: 8417261331921991334}
+  - component: {fileID: 8417261331921991335}
   m_Layer: 5
   m_Name: Abilities
   m_TagString: Untagged
@@ -27574,25 +27532,6 @@ RectTransform:
   m_AnchoredPosition: {x: 64, y: -49.1}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &6702068902381337659
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2681407478141120084}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 0.766875, y: 0.766875, z: 0.766875}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 675305833}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6816834008092449226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28276,6 +28215,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8417261331921991335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3412534893666343791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed460f8431eb904ba787ac9abb2fbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localPlayer: {fileID: 164611432}
+  Attack1CDText: {fileID: 2470516001548406293}
+  Attack2CDText: {fileID: 5162191766182137736}
+  Ability1CDText: {fileID: 6816834008092449226}
+  Ability2CDText: {fileID: 6893414043714204044}
+  UltimateCDText: {fileID: 8327734968252762105}
+  HealthBar: {fileID: 1073434252}
+  SensitivitySlider: {fileID: 837906541}
+  HealthBarText: {fileID: 672359670}
 --- !u!224 &8681522162093898207
 RectTransform:
   m_ObjectHideFlags: 0

@@ -10,6 +10,14 @@ public class GuidedStreamAttack: MonoBehaviour
     [SerializeField] Camera camera;
     [SerializeField] float damage = 25;
 
+    private void Start()
+    {
+        if (camera == null)
+        {
+            camera = Camera.main;
+        }
+    }
+
     public void Trigger()
     {
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);

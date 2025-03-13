@@ -28,19 +28,33 @@ public class GameManager : MonoBehaviour
     public GameObject PowerUpSpawnParent;
     public float powerUpSpawnInterval = 8f;
     public int initialPowers = 3;
-
+    public GameObject playerPrefab;
     private float roundTimer;
     private float scoreTimer = 0f;
     private ZoneControl activeZone;
     private string currentWinningTeam = "Neutral";
     private int fireScore = 0;
     private int waterScore = 0;
+    private PlayerTracker localPlayer;
     [SerializeField] private GameObject playersParent;
     private int fireWins = 0;
     private int waterWins = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
+        GameObject localPlayerInput = GameObject.Find("KeepTrackOfPlayer");
+        if (localPlayerInput != null)
+        {
+            localPlayer = localPlayerInput.GetComponent<PlayerTracker>();
+            Debug.Log("Deleting Players...");
+            DeleteAllPlayers();
+            //Then we spawn a player.
+            localPlayer.OnSceneLoad(this);
+        }
+        else Debug.LogError("PlayerTracker not found");
+
+
         ChooseNewZone();
         SpawnPlayers();
         roundTimer = roundDuration;
@@ -199,6 +213,15 @@ public class GameManager : MonoBehaviour
         DynamicGI.UpdateEnvironment();
     }
 
+    public GameObject CreatePlayer(CharacterClass.PlayerTeam team)
+    {
+        GameObject player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        player.GetComponent<CharacterClass>().setPlayersTeam(team);
+        player.transform.parent = playersParent.transform;
+        RespawnPlayer(player);
+        return player;
+    }
+
     void SpawnPlayers()
     {
         //Spawns all the players in the game currently at their spawn point.
@@ -302,6 +325,17 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < teamIcons.Length; i++)
         {
             teamIcons[i].sprite = teamSprites[0];
+        }
+    }
+
+    void DeleteAllPlayers(){
+        foreach (Transform child in playersParent.transform)
+        {
+            Debug.Log("Checking if player: " + child.name);
+            if (child.tag == "Player") {
+                Debug.Log("Destroying player: " + child.name);
+                Destroy(child.gameObject);
+            }
         }
     }
 

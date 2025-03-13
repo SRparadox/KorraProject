@@ -5,10 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class SwitchScene : MonoBehaviour
 {
+
+    private PlayerTracker playerTracker;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerTracker = GameObject.Find("KeepTrackOfPlayer").GetComponent<PlayerTracker>();
+        if (playerTracker == null)
+        {
+            Debug.LogError("PlayerTracker not found");
+        }
     }
 
     // Update is called once per frame
@@ -26,7 +32,9 @@ public class SwitchScene : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         //Change scene name here when ready
-        SceneManager.LoadScene("SampleScene-Fire");
+        playerTracker.SetPlayerTeam(CharacterClass.PlayerTeam.Fire);
+        SceneManager.LoadScene("SampleScene");
+
     }
     public void SwitchToCreditsScene()
     {
