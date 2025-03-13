@@ -6,9 +6,9 @@ public class Fireball : MonoBehaviour
     private CharacterClass player;
     private void OnCollisionEnter(Collision collision)
     {
-        string tag = collision.gameObject.tag;
+        CharacterClass.PlayerTeam team = player.getPlayersTeam();
 
-        if (collision.gameObject.GetComponent<CharacterClass>() != null && collision.gameObject.tag != gameObject.tag)
+        if (collision.gameObject.GetComponent<CharacterClass>() != null && collision.gameObject.GetComponent<CharacterClass>().getPlayersTeam() != team)
         {
             collision.gameObject.GetComponent<CharacterClass>().TakeDamage(damage * player.getDamageMultiplier());
             Debug.Log("Damage Dealt: " + damage * player.getDamageMultiplier());

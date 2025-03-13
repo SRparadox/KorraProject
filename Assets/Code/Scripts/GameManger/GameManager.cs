@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     private string currentWinningTeam = "Neutral";
     private int fireScore = 0;
     private int waterScore = 0;
+    [SerializeField] private GameObject playersParent;
     private int fireWins = 0;
     private int waterWins = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -78,10 +80,6 @@ public class GameManager : MonoBehaviour
         int randomIndex = Random.Range(0, children.Length);
         Transform randomChild = children[randomIndex];
         PowerUpGiver powerUpGiver = randomChild.GetComponent<PowerUpGiver>();
-        // Check if the PowerUpGiver component is found
-        if (powerUpGiver == null) {
-            Debug.LogError("PowerUpGiver component not found on the selected child.");
-        }
         // Pick a random child until we find one that is not active
         while (powerUpGiver.isActive){
             randomIndex = Random.Range(0, children.Length);
@@ -203,11 +201,24 @@ public class GameManager : MonoBehaviour
 
     void SpawnPlayers()
     {
-        GameObject[] fireplayers = GameObject.FindGameObjectsWithTag("Fire");
-        GameObject[] waterplayers = GameObject.FindGameObjectsWithTag("Water");
+        //Spawns all the players in the game currently at their spawn point.
+        List<GameObject> fireplayers = new List<GameObject>();
+        List<GameObject> waterplayers = new List<GameObject>();
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach(GameObject player in players)
+        {
+            if (player.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Fire)
+            {
+                fireplayers.Add(player);
+            }
+            else if (player.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Water)
+            {
+                waterplayers.Add(player);
+            }
+        }
 
-        SpawnTeam(fireplayers, Firespawn);
-        SpawnTeam(waterplayers, Waterspawn);
+        SpawnTeam(fireplayers.ToArray(), Firespawn);
+        SpawnTeam(waterplayers.ToArray(), Waterspawn);
     }
 
    void SpawnTeam(GameObject[] players, Transform spawnPoint)
@@ -223,18 +234,24 @@ public class GameManager : MonoBehaviour
 
    public void RespawnPlayer(GameObject player)
    {
-        if (player.CompareTag("Fire"))
+        player.GetComponent<CharacterController>().enabled = false;
+        string teamName = "None";
+        if (player.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Fire)
         {
+            teamName = "Fire";
             player.transform.position = Firespawn.position;
             player.transform.rotation = Firespawn.rotation;
         }
-        else if (player.CompareTag("Water"))
+        else if (player.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Water)
         {
+            teamName = "Water";
             player.transform.position = Waterspawn.position;
             player.transform.rotation = Waterspawn.rotation;
         }
+        else Debug.Log("Player team not set");
+        player.GetComponent<CharacterController>().enabled = true;
 
-        Debug.Log($"{player.name} respawned at {player.transform.position}");
+        Debug.Log($"{player.name}/{teamName} respawned at {player.transform.position}");
    }
 
     void EndRound()

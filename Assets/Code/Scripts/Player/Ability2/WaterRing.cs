@@ -51,10 +51,10 @@ public class WaterRing : MonoBehaviour
         CharacterClass character = other.GetComponent<CharacterClass>();
         if (character == null) return;
 
-        string myTeam = transform.root.tag;
-        string otherTeam = other.tag;
+        CharacterClass.PlayerTeam myTeam = player.getPlayersTeam();
+        CharacterClass.PlayerTeam otherTeam = character.getPlayersTeam();
 
-        if (!other.CompareTag(myTeam))
+        if (myTeam != otherTeam)
         {
             Debug.Log("Applying Damage and Knockback to: " + other.name);
             character.TakeDamage(damage * player.getDamageMultiplier());

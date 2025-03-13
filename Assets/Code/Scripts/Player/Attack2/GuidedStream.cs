@@ -187,7 +187,7 @@ public class GuidedStream: MonoBehaviour
         {
             GameObject hitObject = hit.gameObject;
 
-            if (hitObject.GetComponent<CharacterClass>() != null && !damagedObjects.Contains(hitObject) && hitObject.tag != gameObject.tag)
+            if (hitObject.GetComponent<CharacterClass>() != null && !damagedObjects.Contains(hitObject) && hitObject.GetComponent<CharacterClass>().getPlayersTeam() != player.getPlayersTeam())
             {
                 hitObject.GetComponent<CharacterClass>().TakeDamage(damageAmount * player.getDamageMultiplier());
                 damagedObjects.Add(hitObject);

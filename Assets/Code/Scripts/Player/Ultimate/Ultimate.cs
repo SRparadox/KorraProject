@@ -10,7 +10,7 @@ public class Ultimate: MonoBehaviour
     public float lifeTime = 5f;
     public float damage = 75;
 
-    private string playertag;
+    private CharacterClass.PlayerTeam playerTeam;
     private float currentTime = 0f;
     private bool hasExpanded = false;
     private Rigidbody rb;
@@ -18,9 +18,10 @@ public class Ultimate: MonoBehaviour
     private UltimateAttack attackScript;
     private bool hasSpawnedRing = false;
 
-    public void Initialize(string tag)
+    public void Initialize(CharacterClass.PlayerTeam team)
     {
-        playertag = tag;
+        playerTeam = team;
+        Debug.Log("Ultimate initialized for " + playerTeam);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -76,7 +77,7 @@ public class Ultimate: MonoBehaviour
     {
         if (hasSpawnedRing) return;
         bool hitCharacter = false;
-        if (collision.gameObject.GetComponent<CharacterClass>() != null)
+        if (collision.gameObject.GetComponent<CharacterClass>() != null && collision.gameObject.GetComponent<CharacterClass>().getPlayersTeam() != playerTeam)
         {
             //Todo Setup Damage Boost on the ultimate
             collision.gameObject.GetComponent<CharacterClass>().TakeDamage(damage);
@@ -88,10 +89,10 @@ public class Ultimate: MonoBehaviour
             Vector3 impactPosition = collision.contacts[0].point;
             GameObject ringToSpawn = null;
 
-            if (playertag == "Fire" && fireRingPrefab != null)
+            if (playerTeam == CharacterClass.PlayerTeam.Fire && fireRingPrefab != null)
             {
                 ringToSpawn = fireRingPrefab;
-            } else if (playertag == "Water" && waterRingPrefab != null)
+            } else if (playerTeam == CharacterClass.PlayerTeam.Water && waterRingPrefab != null)
             {
                 ringToSpawn = waterRingPrefab;
             }
@@ -102,7 +103,7 @@ public class Ultimate: MonoBehaviour
                 hasSpawnedRing = true;
             } else
             {
-                Debug.LogError("No valid ring prefab assigned for " + playertag);
+                Debug.LogError("No valid ring prefab assigned for " + playerTeam);
             }
 
             Destroy(gameObject);

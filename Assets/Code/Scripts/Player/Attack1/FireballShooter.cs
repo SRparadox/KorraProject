@@ -37,7 +37,6 @@ public class FireballShooter: MonoBehaviour
             {
                 fireball.SetPlayer(GetComponent<CharacterClass>());
             }
-            fireball.tag = gameObject.tag;
 
             if (mainCamera != null)
             {

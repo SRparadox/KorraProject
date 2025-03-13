@@ -30,7 +30,6 @@ public class WaterRingAttack: MonoBehaviour
                 waterring.SetPlayer(GetComponent<CharacterClass>());
             }
 
-            waterRing.tag = gameObject.tag;
             Debug.Log("Waterring spawned");
         } else
         {

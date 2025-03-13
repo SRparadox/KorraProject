@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ZoneControl : MonoBehaviour
@@ -11,11 +12,15 @@ public class ZoneControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Fire"))
+        if (other.gameObject.GetComponent<CharacterClass>() == null)
+        {
+            return;
+        }
+        if (other.gameObject.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Fire)
         {
             firePlayers.Add(other.gameObject);
         }
-        else if (other.CompareTag("Water"))
+        else if (other.gameObject.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Water)
         {
             waterPlayers.Add(other.gameObject);
         }
@@ -25,11 +30,11 @@ public class ZoneControl : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Fire"))
+        if (other.gameObject.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Fire)
         {
             firePlayers.Remove(other.gameObject);
         }
-        else if (other.CompareTag("Water"))
+        else if (other.gameObject.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Water)
         {
             waterPlayers.Remove(other.gameObject);
         }

@@ -6,6 +6,7 @@ public class UltimateAttack: MonoBehaviour
 {
     public float zoomOutDistance = 15f;
     public float transitionSpeed = 2f;
+    private CharacterClass characterClass;
 
     private GameObject selectedPrefab;
     private Vector3 originalCameraPosition;
@@ -16,6 +17,7 @@ public class UltimateAttack: MonoBehaviour
 
     private void Start()
     {
+        characterClass = GetComponent<CharacterClass>();
         cameraTransform = Camera.main.transform;
         followCamera = (CinemachineVirtualCamera) FindFirstObjectByType(typeof(CinemachineVirtualCamera));
         if (followCamera == null)
@@ -52,7 +54,7 @@ public class UltimateAttack: MonoBehaviour
             Ultimate ultimateScript = ultimate.GetComponent<Ultimate>();
             if (ultimateScript != null)
             {
-                ultimateScript.Initialize(gameObject.tag);
+                ultimateScript.Initialize(characterClass.getPlayersTeam());
                 ultimateScript.StartExpansion(direction, this);
             }
             Debug.Log(selectedPrefab.name + "Spawned");

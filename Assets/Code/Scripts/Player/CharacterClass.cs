@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.Services.Lobbies.Models;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,8 +15,16 @@ using UnityEngine.UI;
 
 public class CharacterClass: MonoBehaviour
 {
+
+    public enum PlayerTeam
+    {
+        Fire,
+        Water
+    };
+
     // Character class variables
     [Header("Character Properties")]
+    public PlayerTeam team;
     [SerializeField] protected float health = 50.0f;
     [SerializeField] protected float maxHealth = 100.0f;
     [SerializeField] protected Slider HealthBar;
@@ -68,6 +77,7 @@ public class CharacterClass: MonoBehaviour
     public GameObject dmgTextPrefab;
     private DamageBoost damageBoostScript;
     public ParticleSystem healParticles;
+    private GameManager GameManager;
 
 
     private void Awake()
@@ -80,6 +90,7 @@ public class CharacterClass: MonoBehaviour
         animator = GetComponent<Animator>();
         currentAttack1Uses = maxAttack1Uses;
         damageBoostScript = GetComponent<DamageBoost>();
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         // Retrieve ability references
         fireball = GetComponent<FireballShooter>();
@@ -88,9 +99,13 @@ public class CharacterClass: MonoBehaviour
         waterRing = GetComponent<WaterRingAttack>();
         ultimate = GetComponent<UltimateAttack>();
 
-        switch (gameObject.tag)
+        setupAbilities();
+    }
+
+    private void setupAbilities(){
+        switch (getPlayersTeam())
         {
-            case "Fire":
+            case PlayerTeam.Fire:
             selectedAt1 = fireBall;
             selectedAt2 = firestream;
             selectedAb1 = firePs;
@@ -99,7 +114,7 @@ public class CharacterClass: MonoBehaviour
             playerBody.GetComponent<Renderer>().material = fireMaterial;
             break;
 
-            case "Water":
+            case PlayerTeam.Water:
             selectedAt1 = waterBall;
             selectedAt2 = waterstream;
             selectedAb1 = waterPs;
@@ -108,8 +123,24 @@ public class CharacterClass: MonoBehaviour
             playerBody.GetComponent<Renderer>().material = waterMaterial;
             break;
         }
-        Debug.Log("Assigning Prefabs");
         AssignPrefabs();
+    }
+
+    public PlayerTeam getPlayersTeam(){
+        return team;
+    }
+    public PlayerTeam getEnemyTeam(){
+        //return the opposite of team
+        return team == PlayerTeam.Fire ? PlayerTeam.Water : PlayerTeam.Fire;
+    }
+    public void setPlayersTeam(PlayerTeam newTeam){
+        if (team == newTeam) return;
+        team = newTeam;
+        Respawn();
+        setupAbilities();
+    }
+    public void SwitchTeams(){
+        setPlayersTeam(getEnemyTeam());
     }
 
     private void AssignPrefabs()
@@ -343,7 +374,7 @@ public class CharacterClass: MonoBehaviour
 
     public void Respawn(){
         health = maxHealth;
-        //Add respawn mechanic here
+        GameManager.RespawnPlayer(gameObject);
     }
 
     public void Heal(float amount)
