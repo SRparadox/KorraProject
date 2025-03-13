@@ -321,6 +321,10 @@ public class CharacterClass: MonoBehaviour
             Debug.LogWarning("Trying to access non-existent ability index.");
             return false;
         }
+        if (abilityIndex == 4)
+        {
+            return (ultimateCharge >= maxUltimateCharge);
+        }
 
         return (currentCooldowns[abilityIndex] == 0);
     }
