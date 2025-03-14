@@ -34,12 +34,12 @@
                 },
                 {
                     "name": "Attack2",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "abdb1fc9-522a-4a05-8b86-fa579c5566f9",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Ability1",
