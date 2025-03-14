@@ -1,7 +1,9 @@
 using TMPro;
 using UnityEngine;
 
-public class FPSCounter : MonoBehaviour
+// Code sourced from ChatGPT
+
+public class FPSCounter: MonoBehaviour
 {
     public TMP_Text fpsText;
     private float deltaTime = 0.0f;

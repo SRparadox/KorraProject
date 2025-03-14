@@ -5,23 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class SwitchScene : MonoBehaviour
 {
-    private PlayerTracker playerTracker;
 
+    private PlayerTracker playerTracker;
+    // Start is called before the first frame update
     void Start()
     {
-        GameObject keepTrackObject = GameObject.Find("KeepTrackOfPlayer");
-        if (keepTrackObject != null)
+        playerTracker = GameObject.Find("KeepTrackOfPlayer").GetComponent<PlayerTracker>();
+        if (playerTracker == null)
         {
-            playerTracker = keepTrackObject.GetComponent<PlayerTracker>();
-            if (playerTracker == null)
-            {
-                Debug.LogError("SwitchScene: PlayerTracker component not found on 'KeepTrackOfPlayer'!");
-            }
+            Debug.LogError("PlayerTracker not found");
         }
-        else
-        {
-            Debug.LogError("SwitchScene: 'KeepTrackOfPlayer' object not found in the scene!");
-        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 
     public void SwitchToPlayScene()
@@ -29,41 +28,30 @@ public class SwitchScene : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         SceneManager.LoadScene("SampleScene");
     }
-
     public void SwitchToPlaySceneFire()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        if (playerTracker != null)
-        {
-            playerTracker.SetPlayerTeam(CharacterClass.PlayerTeam.Fire);
-        }
-        else
-        {
-            Debug.LogWarning("SwitchToPlaySceneFire: PlayerTracker is null; cannot set player team.");
-        }
+        //Change scene name here when ready
+        playerTracker.SetPlayerTeam(CharacterClass.PlayerTeam.Fire);
         SceneManager.LoadScene("SampleScene");
-    }
 
+    }
     public void SwitchToCreditsScene()
     {
         SceneManager.LoadScene("CreditsScene");
     }
-
     public void SwitchToSettingsScene()
     {
         SceneManager.LoadScene("SettingsScene");
     }
-
     public void SwitchToMenuScene()
     {
         SceneManager.LoadScene("MenuScene");
     }
-
     public void SwitchToCharacterSelectionScene()
     {
         SceneManager.LoadScene("CharacterSelectionScene");
     }
-
     public void ExitGame()
     {
         Application.Quit();

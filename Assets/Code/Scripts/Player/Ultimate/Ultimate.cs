@@ -1,7 +1,6 @@
-using Unity.Netcode;
 using UnityEngine;
 
-public class Ultimate : NetworkBehaviour
+public class Ultimate: MonoBehaviour
 {
     public GameObject fireRingPrefab;
     public GameObject waterRingPrefab;
@@ -9,7 +8,7 @@ public class Ultimate : NetworkBehaviour
     public float maxScale = 8f;
     public float Speed = 20f;
     public float lifeTime = 5f;
-    public float damage = 75f;
+    public float damage = 75;
 
     private CharacterClass.PlayerTeam playerTeam;
     private float currentTime = 0f;
@@ -24,14 +23,17 @@ public class Ultimate : NetworkBehaviour
         playerTeam = team;
         Debug.Log("Ultimate initialized for " + playerTeam);
     }
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
         if (rb != null)
         {
             rb.useGravity = false;
             rb.isKinematic = true;
         }
+
         transform.localScale = Vector3.zero;
     }
     public void StartExpansion(Vector3 direction, UltimateAttack attack)
@@ -39,15 +41,17 @@ public class Ultimate : NetworkBehaviour
         launchDirection = direction;
         attackScript = attack;
     }
+
+    // Update is called once per frame
     void Update()
     {
-        if (!IsServer) return;
         if (!hasExpanded)
         {
             currentTime += Time.deltaTime;
             float progress = Mathf.Clamp01(currentTime / expansionTime);
             float scaleFactor = Mathf.Lerp(0.1f, maxScale, progress);
             transform.localScale = Vector3.one * scaleFactor;
+
             if (progress >= 1f)
             {
                 hasExpanded = true;
@@ -55,6 +59,7 @@ public class Ultimate : NetworkBehaviour
             }
         }
     }
+
     void LaunchForward()
     {
         if (rb != null)
@@ -67,36 +72,40 @@ public class Ultimate : NetworkBehaviour
         attackScript.ResetCamera();
         Destroy(gameObject, lifeTime);
     }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (!IsServer || hasSpawnedRing) return;
+        if (hasSpawnedRing) return;
         bool hitCharacter = false;
-        CharacterClass target = collision.gameObject.GetComponent<CharacterClass>();
-        if (target != null && target.getPlayersTeam() != playerTeam)
+        if (collision.gameObject.GetComponent<CharacterClass>() != null && collision.gameObject.GetComponent<CharacterClass>().getPlayersTeam() != playerTeam)
         {
-            target.TakeDamage(damage);
+            //Todo Setup Damage Boost on the ultimate
+            collision.gameObject.GetComponent<CharacterClass>().TakeDamage(damage);
             hitCharacter = true;
         }
+
         if (collision.gameObject.CompareTag("Ground") || hitCharacter)
         {
             Vector3 impactPosition = collision.contacts[0].point;
             GameObject ringToSpawn = null;
+
             if (playerTeam == CharacterClass.PlayerTeam.Fire && fireRingPrefab != null)
+            {
                 ringToSpawn = fireRingPrefab;
-            else if (playerTeam == CharacterClass.PlayerTeam.Water && waterRingPrefab != null)
+            } else if (playerTeam == CharacterClass.PlayerTeam.Water && waterRingPrefab != null)
+            {
                 ringToSpawn = waterRingPrefab;
+            }
+
             if (ringToSpawn != null)
             {
-                GameObject ringObj = Instantiate(ringToSpawn, impactPosition, Quaternion.identity);
-                var netObj = ringObj.GetComponent<NetworkObject>();
-                if (netObj != null)
-                    netObj.Spawn();
+                Instantiate(ringToSpawn, impactPosition, Quaternion.identity);
                 hasSpawnedRing = true;
-            }
-            else
+            } else
             {
                 Debug.LogError("No valid ring prefab assigned for " + playerTeam);
             }
+
             Destroy(gameObject);
         }
     }
