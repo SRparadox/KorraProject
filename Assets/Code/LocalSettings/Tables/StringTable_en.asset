@@ -42,6 +42,70 @@ MonoBehaviour:
     m_Localized: SETTINGS
     m_Metadata:
       m_Items: []
+  - m_Id: 25629755183104
+    m_Localized: CHOOSE YOUR CHARACTER CLASS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26262197506048
+    m_Localized: 'ESC: PAUSE'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27809937625088
+    m_Localized: GAMEPLAY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27932969144320
+    m_Localized: 'AUDIO '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28658537598976
+    m_Localized: Adjust keybinds
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28034160922624
+    m_Localized: ACCESSIBILITY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28138662006784
+    m_Localized: RETURN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28191426351104
+    m_Localized: Adjust mouse sensitivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28762355011584
+    m_Localized: Switch Teams
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28925861564416
+    m_Localized: PAUSED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29268649447424
+    m_Localized: Resume Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29556097683456
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29736272400384
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29976740237312
+    m_Localized: Exit To Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30232366288896
+    m_Localized: Session Code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30432711413760
+    m_Localized: Code
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

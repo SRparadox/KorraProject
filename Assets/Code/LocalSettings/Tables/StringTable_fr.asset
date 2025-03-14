@@ -42,6 +42,70 @@ MonoBehaviour:
     m_Localized: "PARAM\xC8TRES"
     m_Metadata:
       m_Items: []
+  - m_Id: 25629755183104
+    m_Localized: CHOISISSEZ VOTRE CLASSE DE PERSONNAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26262197506048
+    m_Localized: 'ESC: PAUSE'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27809937625088
+    m_Localized: "JOUABILIT\xC9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28658537598976
+    m_Localized: Ajuster les raccourcis clavier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28034160922624
+    m_Localized: "ACCESSIBILIT\xC9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28138662006784
+    m_Localized: RETOUR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28191426351104
+    m_Localized: "Ajuster la sensibilit\xE9 de la souris"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27932969144320
+    m_Localized: AUDIO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28762355011584
+    m_Localized: "Changer d'\xE9quipe"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28925861564416
+    m_Localized: EN PAUSE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29268649447424
+    m_Localized: Reprendre La Partie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29556097683456
+    m_Localized: "Param\xE8tres"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29736272400384
+    m_Localized: Tutoriel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29976740237312
+    m_Localized: Sortir vers le Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30232366288896
+    m_Localized: Code de Session
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30432711413760
+    m_Localized: Code
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

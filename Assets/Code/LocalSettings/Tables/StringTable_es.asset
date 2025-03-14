@@ -42,6 +42,70 @@ MonoBehaviour:
     m_Localized: "CONFIGURACI\xD3N"
     m_Metadata:
       m_Items: []
+  - m_Id: 25629755183104
+    m_Localized: ELIGE TU CLASE DE PERSONAJE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26262197506048
+    m_Localized: 'ESC: PAUSA'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27809937625088
+    m_Localized: JUGABILIDAD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28034160922624
+    m_Localized: ACCESIBILIDAD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28138662006784
+    m_Localized: VOLVER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28191426351104
+    m_Localized: "Ajustar sensibilidad del rat\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27932969144320
+    m_Localized: AUDIO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28658537598976
+    m_Localized: "Ajustar asignaci\xF3n de teclas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28762355011584
+    m_Localized: Cambiar de equipo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28925861564416
+    m_Localized: PAUSADO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29268649447424
+    m_Localized: Reanudar Juego
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29556097683456
+    m_Localized: "Configuraci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29736272400384
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29976740237312
+    m_Localized: "Salir al Men\xFA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30232366288896
+    m_Localized: "C\xF3digo de Sesi\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30432711413760
+    m_Localized: "C\xF3digo"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

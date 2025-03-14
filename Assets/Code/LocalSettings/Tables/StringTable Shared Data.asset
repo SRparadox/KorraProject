@@ -15,20 +15,24 @@ MonoBehaviour:
   m_TableCollectionName: StringTable
   m_TableCollectionNameGuidString: fb8038d9e15ac274a871088302a61db5
   m_Entries:
-  - m_Id: 87387541504
-    m_Key: gameTitle
+  - m_Id: 28034160922624
+    m_Key: accessibility
     m_Metadata:
       m_Items: []
-  - m_Id: 4948829147136
-    m_Key: settingsButton
+  - m_Id: 28658537598976
+    m_Key: adjustKeybinds
     m_Metadata:
       m_Items: []
-  - m_Id: 718110199808
-    m_Key: playButton
+  - m_Id: 28191426351104
+    m_Key: adjustSensitivity
     m_Metadata:
       m_Items: []
-  - m_Id: 3673534238720
-    m_Key: tutorialButton
+  - m_Id: 27932969144320
+    m_Key: audio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25629755183104
+    m_Key: classSelection
     m_Metadata:
       m_Items: []
   - m_Id: 3764219285504
@@ -37,6 +41,66 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3783651495936
     m_Key: exitButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29976740237312
+    m_Key: exitToMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27809937625088
+    m_Key: gameplay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87387541504
+    m_Key: gameTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30432711413760
+    m_Key: code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 26262197506048
+    m_Key: pauseCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28925861564416
+    m_Key: paused
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718110199808
+    m_Key: playButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29268649447424
+    m_Key: resume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28138662006784
+    m_Key: return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30232366288896
+    m_Key: sessionCode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29556097683456
+    m_Key: settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4948829147136
+    m_Key: settingsButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28762355011584
+    m_Key: switchTeams
+    m_Metadata:
+      m_Items: []
+  - m_Id: 29736272400384
+    m_Key: tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3673534238720
+    m_Key: tutorialButton
     m_Metadata:
       m_Items: []
   m_Metadata:
