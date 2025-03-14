@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: StringTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: StringTable
+  m_TableCollectionNameGuidString: fb8038d9e15ac274a871088302a61db5
+  m_Entries:
+  - m_Id: 87387541504
+    m_Key: gameTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4948829147136
+    m_Key: settingsButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 718110199808
+    m_Key: playButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3673534238720
+    m_Key: tutorialButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3764219285504
+    m_Key: creditsButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3783651495936
+    m_Key: exitButton
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 8799930653503389927
+  references:
+    version: 2
+    RefIds:
+    - rid: 8799930653503389927
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1741981828855

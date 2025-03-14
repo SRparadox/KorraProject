@@ -18,6 +18,8 @@ EditorBuildSettings:
     path: Assets/Art/Scenes/SampleScene-Fire.unity
     guid: 8adf453a31b726d46b2ae755c4f879c0
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: f3a0b22873ae689448809bdec47bf8e3, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: f053cc25b6276a4459254d4a1cd942e6, type: 2}
   m_UseUCBPForAssetBundles: 0
