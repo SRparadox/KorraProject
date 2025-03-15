@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SwitchScene : MonoBehaviour
+public class SwitchScene: MonoBehaviour
 {
 
     private PlayerTracker playerTracker;
@@ -16,13 +16,6 @@ public class SwitchScene : MonoBehaviour
             Debug.LogError("PlayerTracker not found");
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SwitchToPlayScene()
     {
         Cursor.lockState = CursorLockMode.Locked;
