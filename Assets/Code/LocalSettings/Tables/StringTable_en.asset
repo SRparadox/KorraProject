@@ -74,10 +74,6 @@ MonoBehaviour:
     m_Localized: Adjust mouse sensitivity
     m_Metadata:
       m_Items: []
-  - m_Id: 28762355011584
-    m_Localized: Switch Teams
-    m_Metadata:
-      m_Items: []
   - m_Id: 28925861564416
     m_Localized: PAUSED
     m_Metadata:
@@ -104,6 +100,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 30432711413760
     m_Localized: Code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 367426972946432
+    m_Localized: WATER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 367589837770752
+    m_Localized: FIRE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 368917100105728
+    m_Localized: Create
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369005566365696
+    m_Localized: Session Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369119240392704
+    m_Localized: Join
+    m_Metadata:
+      m_Items: []
+  - m_Id: 370656092098560
+    m_Localized: Switch Teams
     m_Metadata:
       m_Items: []
   references:

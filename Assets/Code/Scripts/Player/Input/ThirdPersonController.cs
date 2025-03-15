@@ -163,7 +163,8 @@ namespace StarterAssets
             staterAssetsInputs = GetComponent<StarterAssetsInputs>();
         }
 
-        public void updateSensitive(float newValue){
+        public void updateSensitive(float newValue)
+        {
             sensitivityValue = newValue;
             xSensitivity = normalSensitivityX * sensitivityValue;
             ySensitivity = normalSensitivityY * sensitivityValue;
@@ -212,35 +213,18 @@ namespace StarterAssets
                 mouseWorldPosition = raycastHit.point;
             }
 
-            if (staterAssetsInputs.aim)
-            {
-                aimVirtualCamera.gameObject.SetActive(true);
-                xSensitivity = aimSensitivityX * sensitivityValue;
-                ySensitivity = aimSensitivityY * sensitivityValue;
+            Vector3 cameraForward = Camera.main.transform.forward;
+            cameraForward.y = 0f;
+            cameraForward.Normalize();
 
-                Vector3 worldAimTarget = mouseWorldPosition;
-                worldAimTarget.y = transform.position.y;
-                Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+            // isAiming code refactored with the help of ChatGPT
+            bool isAiming = staterAssetsInputs.aim;
+            aimVirtualCamera.gameObject.SetActive(isAiming);
+            xSensitivity = (isAiming ? aimSensitivityX : normalSensitivityX) * sensitivityValue;
+            ySensitivity = (isAiming ? aimSensitivityY : normalSensitivityY) * sensitivityValue;
 
-                // Face player forward
-                transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
-
-                isAiming = true;
-            } else
-            {
-                aimVirtualCamera.gameObject.SetActive(false);
-                xSensitivity = normalSensitivityX * sensitivityValue;
-                ySensitivity = normalSensitivityY * sensitivityValue;
-
-                Vector3 worldAimTarget = mouseWorldPosition;
-                worldAimTarget.y = transform.position.y;
-                Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
-
-                // Face player forward
-                transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
-
-                isAiming = false;
-            }
+            // Face the player forward
+            transform.forward = Vector3.Lerp(transform.forward, cameraForward, Time.deltaTime * 20f);
         }
 
         private void LateUpdate()
@@ -302,7 +286,8 @@ namespace StarterAssets
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+            if (_input.move == Vector2.zero)
+                targetSpeed = 0.0f;
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
@@ -368,15 +353,18 @@ namespace StarterAssets
         public float SpeedBoostMultiplier = 2f;
         public float SpeedBoostDuration = 5f;
         public ParticleSystem speedBoostParticles;
-        public void activateSpeedPowerup(){
+        public void activateSpeedPowerup()
+        {
             StopCoroutine(DeactivateSpeedPowerup());
             MoveSpeed *= SpeedBoostMultiplier;
             SprintSpeed *= SpeedBoostMultiplier;
-            if (speedBoostParticles != null) speedBoostParticles.Play();
+            if (speedBoostParticles != null)
+                speedBoostParticles.Play();
             StartCoroutine(DeactivateSpeedPowerup());
         }
 
-        private IEnumerator DeactivateSpeedPowerup(){
+        private IEnumerator DeactivateSpeedPowerup()
+        {
             yield return new WaitForSecondsRealtime(SpeedBoostDuration);
             MoveSpeed = saveMoveSpeed;
             SprintSpeed = saveSprintSpeed;

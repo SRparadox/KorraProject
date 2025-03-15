@@ -91,16 +91,38 @@ MonoBehaviour:
     m_Key: settingsButton
     m_Metadata:
       m_Items: []
-  - m_Id: 28762355011584
-    m_Key: switchTeams
-    m_Metadata:
-      m_Items: []
   - m_Id: 29736272400384
     m_Key: tutorial
     m_Metadata:
       m_Items: []
   - m_Id: 3673534238720
     m_Key: tutorialButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 367426972946432
+    m_Key: water
+    m_Metadata:
+      m_Items: []
+  - m_Id: 367589837770752
+    m_Key: fire
+    m_Metadata:
+      m_Items: []
+  - m_Id: 368917100105728
+    m_Key: create
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369005566365696
+    m_Key: sessionName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369119240392704
+    m_Key: join
+    m_Metadata:
+      m_Items: []
+  - m_Id: 370656092098560
+    m_Key: 'switchTeams
+
+'
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -74,10 +74,6 @@ MonoBehaviour:
     m_Localized: AUDIO
     m_Metadata:
       m_Items: []
-  - m_Id: 28762355011584
-    m_Localized: "Changer d'\xE9quipe"
-    m_Metadata:
-      m_Items: []
   - m_Id: 28925861564416
     m_Localized: EN PAUSE
     m_Metadata:
@@ -104,6 +100,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 30432711413760
     m_Localized: Code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 367426972946432
+    m_Localized: EAU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 367589837770752
+    m_Localized: FEU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 368917100105728
+    m_Localized: "Cr\xE9er"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369005566365696
+    m_Localized: Nom de la Session
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369119240392704
+    m_Localized: Rejoindre
+    m_Metadata:
+      m_Items: []
+  - m_Id: 370656092098560
+    m_Localized: "Changer d'\xC9quipe"
     m_Metadata:
       m_Items: []
   references:

@@ -74,10 +74,6 @@ MonoBehaviour:
     m_Localized: "Ajustar asignaci\xF3n de teclas"
     m_Metadata:
       m_Items: []
-  - m_Id: 28762355011584
-    m_Localized: Cambiar de equipo
-    m_Metadata:
-      m_Items: []
   - m_Id: 28925861564416
     m_Localized: PAUSADO
     m_Metadata:
@@ -104,6 +100,30 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 30432711413760
     m_Localized: "C\xF3digo"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 367426972946432
+    m_Localized: AGUA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 367589837770752
+    m_Localized: FUEGO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 368917100105728
+    m_Localized: Crear
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369005566365696
+    m_Localized: "Nombre de la Sesi\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 369119240392704
+    m_Localized: Unirse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 370656092098560
+    m_Localized: Cambiar de Equipo
     m_Metadata:
       m_Items: []
   references:
