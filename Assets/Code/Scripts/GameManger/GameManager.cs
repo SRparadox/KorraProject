@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public ZoneControl[] zones;
     public Transform Firespawn;
     public Transform Waterspawn;
-    public float roundDuration = 300f;
+    public float roundDuration = 120f;
     public int maxControlScore = 100;
     public int scoreIncrement = 5; // How much the score increases each tick
     public float scoreTickRate = 2f; //How often score increases
@@ -317,6 +317,12 @@ public class GameManager : MonoBehaviour
         ChooseNewZone();
         SpawnPlayers();
         roundTimer = roundDuration;
+
+        ReadyUpManager readyUpManager = FindAnyObjectByType<ReadyUpManager>();
+        if (readyUpManager != null)
+        {
+            readyUpManager.ResetReadyUp();
+        }
     }
 
     void ResetWinIcons(Image[] teamIcons, Sprite[] teamSprites)

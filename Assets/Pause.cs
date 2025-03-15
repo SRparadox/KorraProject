@@ -5,6 +5,7 @@ public class Pause : MonoBehaviour
 {
     public bool ToggleMenu;
     public bool ToggleAbilityButtons;
+    public ReadyUpManager readyUpManager;
 
     [SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject SettingsMenu;
@@ -67,5 +68,28 @@ public class Pause : MonoBehaviour
     public void AudioVolume()
     {
         AudioSource.volume = MusicVolume.value;
+    }
+
+    public void OpenSettings()
+    {
+        SettingsMenu.SetActive(true);
+        PauseMenu.SetActive(false);
+
+        if (readyUpManager != null)
+            readyUpManager.enabled = false;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void CloseSettings()
+    {
+        SettingsMenu.SetActive(false);
+        PauseMenu.SetActive(true);
+        if (readyUpManager != null)
+            readyUpManager.enabled = true;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }
