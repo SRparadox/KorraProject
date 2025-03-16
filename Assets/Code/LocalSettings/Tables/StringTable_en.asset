@@ -75,7 +75,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 28925861564416
-    m_Localized: PAUSED
+    m_Localized: Match
     m_Metadata:
       m_Items: []
   - m_Id: 29268649447424
@@ -124,6 +124,18 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 370656092098560
     m_Localized: Switch Teams
+    m_Metadata:
+      m_Items: []
+  - m_Id: 755995382575104
+    m_Localized: 'Starting in:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 761377274392576
+    m_Localized: Ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 761191856795648
+    m_Localized: 5
     m_Metadata:
       m_Items: []
   references:
