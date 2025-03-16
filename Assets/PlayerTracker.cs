@@ -9,6 +9,7 @@ public class PlayerTracker : MonoBehaviour
     public GameObject playerPrefab;
     [NonSerialized] public GameObject player;
     [NonSerialized] public CharacterClass playerClass;
+    [NonSerialized] public bool isOneHanded = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -29,6 +30,7 @@ public class PlayerTracker : MonoBehaviour
     {
         player = gameManager.CreatePlayer(playerTeam);
         playerClass = player.GetComponent<CharacterClass>();
+        GetPlayer().GetComponent<StarterAssets.StarterAssetsInputs>().setOneHanded(isOneHanded);
     }
 
     public void SetPlayerTeam(CharacterClass.PlayerTeam playerTeam)
@@ -43,5 +45,17 @@ public class PlayerTracker : MonoBehaviour
     public CharacterClass getCharacterClass()
     {
         return playerClass;
+    }
+
+    public void toggleOneHandedMode()
+    {
+        isOneHanded = !isOneHanded;
+    }
+
+    public void setOneHanded(bool oneHanded)
+    {
+        isOneHanded = oneHanded;
+        if (GetPlayer() == null) return;
+        GetPlayer().GetComponent<StarterAssets.StarterAssetsInputs>().setOneHanded(oneHanded);
     }
 }

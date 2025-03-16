@@ -118,6 +118,10 @@ public class CharacterClass: MonoBehaviour
         AssignPrefabs();
     }
 
+    public Color getTeamColor()
+    {
+        return team == PlayerTeam.Fire ? Color.red : Color.blue;
+    }
     public PlayerTeam getPlayersTeam(){
         return team;
     }

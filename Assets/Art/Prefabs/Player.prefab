@@ -16178,7 +16178,6 @@ MonoBehaviour:
   SprintSpeed: 10
   RotationSmoothTime: 0.07
   SpeedChangeRate: 10
-  SensitivitySlider: {fileID: 0}
   normalSensitivityX: 2
   normalSensitivityY: 2
   aimSensitivityX: 1
@@ -16258,6 +16257,8 @@ MonoBehaviour:
   cursorLocked: 1
   cursorInputForLook: 1
   characterClass: {fileID: 7233193356939096023}
+  playerInput: {fileID: 7865049869909681944}
+  selectedAbility: 0
 --- !u!114 &7865049869909681944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16351,8 +16352,8 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e4ce1614-c754-48c1-9103-33130441661f
     m_ActionName: UI/New action
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -16368,22 +16369,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b20d75c4d6bed46841c19f93353e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 0
   health: 100
   maxHealth: 100
-  HealthBar: {fileID: 0}
-  HealthBarText: {fileID: 0}
   abilityCooldowns:
   - 1
   - 2
   - 2
   - 2
   - 2
-  AbilityCooldownTexts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  currentCooldowns: []
   fireUlt: {fileID: 6533730809385208864, guid: 76b6dfbe4e27eab4d89f12f049cf0ecf, type: 3}
   waterUlt: {fileID: 2398402702540021952, guid: fc2bfafd7cec320489659c81ee5d33d4, type: 3}
   fireRingPrefab: {fileID: 3637822239372596547, guid: 85dae3f884a5614469d4a28bd0d9cce7, type: 3}

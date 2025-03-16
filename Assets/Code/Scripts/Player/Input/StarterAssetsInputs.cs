@@ -28,6 +28,13 @@ namespace StarterAssets
         public bool cursorLocked = true;
         public bool cursorInputForLook = true;
         public CharacterClass characterClass;
+        
+        [Header("One Handed Special Code")]
+        [SerializeField] private PlayerInput playerInput;
+        public int selectedAbility = 0;
+        private bool readyToScroll = true;
+
+
 
 #if ENABLE_INPUT_SYSTEM
         public void OnMove(InputValue value)
@@ -96,7 +103,34 @@ namespace StarterAssets
         {
             characterClass.UseAbility(4);
         }
+        public void OnUseAttack()
+        {
+            if (playerInput.currentControlScheme != "OneHanded") return;
+            characterClass.UseAbility(selectedAbility);
+        }
+
+        public void onNextAbility(float value){
+            Debug.Log("Scrolling Detected: " + value);
+            if (value < 0) return; //Scrolling down
+            Debug.Log("Scrolling up");
+            if (!readyToScroll) return;
+            
+        }
 #endif
+
+
+        public void nextAbility(){
+            if (isOneHanded()) {
+                selectedAbility = (selectedAbility + 1) % 5;
+                readyToScroll = false;
+                StartCoroutine(ResetScroll());
+            }
+        }
+        IEnumerator ResetScroll(){
+            yield return new WaitForSeconds(0.2f);
+            readyToScroll = true;
+        }
+
 
         public void MoveInput(Vector2 newMoveDirection)
         {
@@ -158,7 +192,33 @@ namespace StarterAssets
             {
                 animator.SetLayerWeight(2, 0);
             }
+            if (isOneHanded()){
+                if (playerInput.actions["NextAbility"].ReadValue<float>() > 0 && readyToScroll){
+                    nextAbility();
+                }
+                else if (playerInput.actions["NextAbility"].ReadValue<float>() < 0){
+                    JumpInput(true);
+                }
+            }
             
+        }
+
+        public bool isOneHanded(){
+            return playerInput.currentControlScheme == "OneHanded";
+        }
+
+        private void enableOneHanded(){
+            playerInput.SwitchCurrentControlScheme("OneHanded", Mouse.current);
+        }
+
+        private void DisableOneHanded(){
+            playerInput.SwitchCurrentControlScheme("Keyboard&Mouse", Keyboard.current, Mouse.current);
+        }
+
+        public void setOneHanded(bool val){
+            Debug.Log("Step 3" + val);
+            if (val) enableOneHanded();
+            else DisableOneHanded();
         }
 
 
