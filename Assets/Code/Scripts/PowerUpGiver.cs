@@ -1,8 +1,8 @@
-using System.Collections;
 using StarterAssets;
+using System.Collections;
 using UnityEngine;
 
-public class PowerUpGiver : MonoBehaviour
+public class PowerUpGiver: MonoBehaviour
 {
     public enum PowerUpType
     {
@@ -10,6 +10,7 @@ public class PowerUpGiver : MonoBehaviour
         Damage,
         Health
     }
+
     [Header("PowerUp Type")]
     public PowerUpType powerUpType;
     public bool isActive = true;
@@ -25,8 +26,6 @@ public class PowerUpGiver : MonoBehaviour
     public GameObject icon;
     [SerializeField] private GameObject scroll;
     [SerializeField] private Collider col;
-    
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -35,7 +34,8 @@ public class PowerUpGiver : MonoBehaviour
         setupObject();
     }
 
-    public void setupObject(){
+    public void setupObject()
+    {
         if (isActive)
         {
             setupMaterial();
@@ -43,8 +43,7 @@ public class PowerUpGiver : MonoBehaviour
             lightEffect.SetActive(true);
             icon.SetActive(true);
             col.enabled = true;
-        }
-        else
+        } else
         {
             col.enabled = false;
             scroll.SetActive(false);
@@ -58,23 +57,24 @@ public class PowerUpGiver : MonoBehaviour
         switch (powerUpType)
         {
             case PowerUpType.Speed:
-                lightEffect.GetComponent<Renderer>().material = speedMaterial;
-                icon.GetComponent<Renderer>().material = speedMaterial2;
-                break;
+            lightEffect.GetComponent<Renderer>().material = speedMaterial;
+            icon.GetComponent<Renderer>().material = speedMaterial2;
+            break;
             case PowerUpType.Damage:
-                lightEffect.GetComponent<Renderer>().material = damageMaterial;
-                icon.GetComponent<Renderer>().material = damageMaterial2;
-                break;
+            lightEffect.GetComponent<Renderer>().material = damageMaterial;
+            icon.GetComponent<Renderer>().material = damageMaterial2;
+            break;
             case PowerUpType.Health:
-                lightEffect.GetComponent<Renderer>().material = healthMaterial;
-                icon.GetComponent<Renderer>().material = healthMaterial2;
-                break;
+            lightEffect.GetComponent<Renderer>().material = healthMaterial;
+            icon.GetComponent<Renderer>().material = healthMaterial2;
+            break;
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (!isActive) return;
+        if (!isActive)
+            return;
         ThirdPersonController player = other.GetComponent<ThirdPersonController>();
         if (player != null)
         {
@@ -82,14 +82,14 @@ public class PowerUpGiver : MonoBehaviour
             switch (powerUpType)
             {
                 case PowerUpType.Speed:
-                    player.activateSpeedPowerup();
-                    break;
+                player.activateSpeedPowerup();
+                break;
                 case PowerUpType.Damage:
-                    player.GetComponent<DamageBoost>().ActivateBoost();
-                    break;
+                player.GetComponent<DamageBoost>().ActivateBoost();
+                break;
                 case PowerUpType.Health:
-                    player.GetComponent<CharacterClass>().Heal(25);
-                    break;
+                player.GetComponent<CharacterClass>().Heal(25);
+                break;
             }
             isActive = false;
             setupObject();
@@ -103,14 +103,12 @@ public class PowerUpGiver : MonoBehaviour
         setupObject();
     }
 
-
-    public void spawnPowerUp(){
-        PowerUpType type = (PowerUpType)Random.Range(0, 3);
+    public void spawnPowerUp()
+    {
+        PowerUpType type = (PowerUpType) Random.Range(0, 3);
         Debug.Log("Spawning Powerup: " + type);
         powerUpType = type;
         isActive = true;
         setupObject();
     }
-
-
 }

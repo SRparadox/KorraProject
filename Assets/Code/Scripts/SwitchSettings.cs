@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class SwitchSettings : MonoBehaviour
+public class SwitchSettings: MonoBehaviour
 {
     [SerializeField] private GameObject Menu;
     [SerializeField] private GameObject Settings;
@@ -15,19 +15,6 @@ public class SwitchSettings : MonoBehaviour
     [SerializeField] private GameObject Gameplay;
     [SerializeField] private GameObject Audio;
     [SerializeField] private GameObject Accessibility;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void EnableMenu()
     {
         Menu.SetActive(true);

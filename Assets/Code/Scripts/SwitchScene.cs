@@ -19,14 +19,14 @@ public class SwitchScene: MonoBehaviour
     public void SwitchToPlayScene()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("PlayScene");
     }
     public void SwitchToPlaySceneFire()
     {
         Cursor.lockState = CursorLockMode.Locked;
         //Change scene name here when ready
         playerTracker.SetPlayerTeam(CharacterClass.PlayerTeam.Fire);
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("PlayScene");
 
     }
     public void SwitchToCreditsScene()
