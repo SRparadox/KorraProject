@@ -3210,7 +3210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawImage: {fileID: 375168620}
-  videoFileName: BackgroundVideo.mp4
+  videoFileName: Video.mp4
 --- !u!328 &249280827
 VideoPlayer:
   m_ObjectHideFlags: 0
