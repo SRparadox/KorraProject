@@ -75,7 +75,7 @@ public class HandleAbilityCDOnLocalPlayer : MonoBehaviour
     void updateHealthBar(){
         if (localPlayer == null) return;
         HealthBar.value = localPlayer.GetComponent<CharacterClass>().getHealth();
-        HealthBarText.text = localPlayer.GetComponent<CharacterClass>().getHealth() + " HP";
+        HealthBarText.text = localPlayer.GetComponent<CharacterClass>().getHealth() + " / 100";
     }
 
     public void updateSensitivityValue(){
