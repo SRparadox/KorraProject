@@ -36,7 +36,7 @@ public class Pause : MonoBehaviour
         CurrentVolume = MusicVolume.value;
         if(Input.GetKeyDown(KeyCode.Escape)) {
                 HUD.SetActive(ToggleMenu);
-                AbilityButtons.GetComponent<Canvas>().enabled = ToggleMenu;
+                AbilityButtons.SetActive(ToggleMenu);
                 ToggleMenu = !ToggleMenu;
                 PauseMenu.SetActive(ToggleMenu);
                 SettingsMenu.SetActive(false);

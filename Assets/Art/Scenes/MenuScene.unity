@@ -18083,7 +18083,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2089693253}
         m_TargetAssemblyTypeName: Pause, Assembly-CSharp
         m_MethodName: AbilityButtonsToggle
         m_Mode: 1
@@ -20883,8 +20883,8 @@ MonoBehaviour:
   ToggleAbilityButtons: 0
   readyUpManager: {fileID: 0}
   PauseMenu: {fileID: 15885019}
-  SettingsMenu: {fileID: 0}
-  CreditsMenu: {fileID: 0}
+  SettingsMenu: {fileID: 1748286401}
+  CreditsMenu: {fileID: 1230465077}
   HUD: {fileID: 0}
   AbilityButtons: {fileID: 0}
   AudioSource: {fileID: 1005994886}
