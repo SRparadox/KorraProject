@@ -138,6 +138,43 @@ MonoBehaviour:
     m_Localized: 5
     m_Metadata:
       m_Items: []
+  - m_Id: 801607701028864
+    m_Localized: "Ajuster la sensibilit\xE9 de la souris\r\n\r\n\n\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 802190004641792
+    m_Localized: 'Volume de la musique
+
+
+
+
+
+      Volume des effets sonores
+
+
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 802382586109952
+    m_Localized: 'Changer de langue principale
+
+
+
+
+
+      Afficher/Masquer l''ATH
+
+
+
+      Mode
+      une main (souris requise)
+
+
+
+'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

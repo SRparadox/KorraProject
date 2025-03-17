@@ -138,6 +138,20 @@ MonoBehaviour:
     m_Localized: 5
     m_Metadata:
       m_Items: []
+  - m_Id: 801607701028864
+    m_Localized: "Ajustar la sensibilidad del rat\xF3n\r\n\r\n\n\n\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 802190004641792
+    m_Localized: "Volumen de la m\xFAsica\r\n\r\n\n\n\nVolumen de los efectos de
+      sonido\r\n\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 802382586109952
+    m_Localized: "Cambiar idioma principal\r\n\r\n\n\n\nMostrar/Ocultar HUD\r\n\r\n\nModo
+      de una mano (requiere rat\xF3n)\r\n\r\n"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

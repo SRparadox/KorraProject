@@ -138,6 +138,41 @@ MonoBehaviour:
     m_Localized: 5
     m_Metadata:
       m_Items: []
+  - m_Id: 801607701028864
+    m_Localized: 'Adjust Mouse Sensitivity
+
+
+
+
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 802190004641792
+    m_Localized: 'Music Volume
+
+
+
+
+
+      SFX Volume'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 802382586109952
+    m_Localized: 'Switch Primary Language
+
+
+
+
+
+      Show/Hide HUD
+
+
+
+      One Handed
+      Mode (Mouse Required)'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

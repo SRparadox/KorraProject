@@ -141,6 +141,18 @@ MonoBehaviour:
     m_Key: Ready
     m_Metadata:
       m_Items: []
+  - m_Id: 801607701028864
+    m_Key: gameplay text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 802190004641792
+    m_Key: audio text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 802382586109952
+    m_Key: accessibility text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
