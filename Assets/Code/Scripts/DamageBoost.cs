@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class DamageBoost : MonoBehaviour
+public class DamageBoost: MonoBehaviour
 {
     public ParticleSystem particleSystem;
     float DamageMultiplier = 1.0f;
@@ -9,25 +9,16 @@ public class DamageBoost : MonoBehaviour
     public float Duration = 5.0f;
     private bool isActive = false;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void startParticleSystem()
     {
-        
-    }
-
-    void startParticleSystem(){
         if (particleSystem != null)
-        {                    
+        {
             particleSystem.Play();
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ActivateBoost()
     {
-        
-    }
-    public void ActivateBoost(){
         if (!isActive)
         {
             Debug.Log("Activated Damage Boost");
@@ -35,7 +26,7 @@ public class DamageBoost : MonoBehaviour
             DamageMultiplier += increaseMultiplierBy;
             startParticleSystem();
             StartCoroutine(DeactivateBoostAfterDelay());
-            
+
         }
     }
 
@@ -47,14 +38,15 @@ public class DamageBoost : MonoBehaviour
         Debug.Log("Deactivated Damage Boost");
     }
 
-    public float getDamageBoost(){
-        if (isActive) {
+    public float getDamageBoost()
+    {
+        if (isActive)
+        {
             Debug.Log("Damage Multiplier: " + DamageMultiplier);
             return DamageMultiplier;
-        }
-        else {
+        } else
+        {
             return 1.0f;
         }
     }
-
 }
