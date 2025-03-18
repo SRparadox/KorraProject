@@ -4301,7 +4301,6 @@ GameObject:
   - component: {fileID: 375168622}
   - component: {fileID: 375168621}
   - component: {fileID: 375168620}
-  - component: {fileID: 375168623}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -4363,19 +4362,6 @@ RectTransform:
   m_AnchoredPosition: {x: 4.2100754, y: -0.94576263}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &375168623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375168619}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a250c20e508ba4ebfab1b45c550ab2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parrallaxStrength: 5
 --- !u!114 &386563996 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4335727544217581336, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
@@ -14939,7 +14925,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a250c20e508ba4ebfab1b45c550ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parrallaxStrength: 5
+  parrallaxStrength: 3
 --- !u!1 &1441666210
 GameObject:
   m_ObjectHideFlags: 0
