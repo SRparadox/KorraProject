@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     private string currentWinningTeam = "Neutral";
     private int fireScore = 0;
     private int waterScore = 0;
-    private PlayerTracker localPlayer;
+
     [SerializeField] private GameObject playersParent;
     private int fireWins = 0;
     private int waterWins = 0;
@@ -43,16 +43,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         
-        GameObject localPlayerInput = GameObject.Find("KeepTrackOfPlayer");
-        if (localPlayerInput != null)
-        {
-            localPlayer = localPlayerInput.GetComponent<PlayerTracker>();
-            Debug.Log("Deleting Players...");
-            DeleteAllPlayers();
-            //Then we spawn a player.
-            localPlayer.OnSceneLoad(this);
-        }
-        else Debug.LogError("PlayerTracker not found");
 
 
         ChooseNewZone();

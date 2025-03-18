@@ -38,6 +38,10 @@ public class ZoneControl : MonoBehaviour
         {
             waterPlayers.Remove(other.gameObject);
         }
+        else {
+            Debug.LogError("Player team not found")
+            return;
+        }
 
         UpdateControl();
     }

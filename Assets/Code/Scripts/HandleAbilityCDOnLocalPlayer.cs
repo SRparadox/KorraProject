@@ -2,11 +2,13 @@ using StarterAssets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
 public class HandleAbilityCDOnLocalPlayer : MonoBehaviour
 {
+    // Reference to our local player's GameObject (assigned at runtime).
     public GameObject localPlayer;
-    private PlayerTracker playerTracker;
+    
     [SerializeField] private TextMeshProUGUI Attack1CDText;
     [SerializeField] private TextMeshProUGUI Attack2CDText;
     [SerializeField] private TextMeshProUGUI Ability1CDText;
@@ -18,41 +20,73 @@ public class HandleAbilityCDOnLocalPlayer : MonoBehaviour
 
     [SerializeField] protected Slider HealthBar;
     [SerializeField] protected Slider SensitivitySlider;
-    [SerializeField] TextMeshProUGUI HealthBarText;
+    [SerializeField] private TextMeshProUGUI HealthBarText;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        GameObject playerTrackerObj = GameObject.Find("KeepTrackOfPlayer");
-        if (playerTrackerObj == null)
+        // Instead of relying on a "KeepTrackOfPlayer" object,
+        // loop through all spawned network objects and find the one owned by this client.
+        if (NetworkManager.Singleton != null)
         {
-            Debug.LogError("PlayerTracker not found");
-        
+            foreach (var kvp in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
+            {
+                if (kvp.Value.OwnerClientId == NetworkManager.Singleton.LocalClientId)
+                {
+                    localPlayer = kvp.Value.gameObject;
+                    break;
+                }
+            }
         }
-        else {
-            playerTracker = playerTrackerObj.GetComponent<PlayerTracker>();
-            localPlayer = playerTracker.GetPlayer();
-            oneHandedModeToggle.isOn = playerTracker.isOneHanded;
+        if (localPlayer == null)
+        {
+            Debug.LogError("HandleAbilityCDOnLocalPlayer: Local player not found!");
+            return;
         }
         
-        // line of code below was added to allow player settings to carry across scenes
-        localPlayer.GetComponent<ThirdPersonController>().updateSensitive(SensitivitySlider.value);
+        // Apply sensitivity from the slider to the local player's ThirdPersonController.
+        ThirdPersonController controller = localPlayer.GetComponent<ThirdPersonController>();
+        if (controller != null)
+        {
+            controller.updateSensitive(SensitivitySlider.value);
+        }
+        else
+        {
+            Debug.LogError("HandleAbilityCDOnLocalPlayer: ThirdPersonController not found on local player!");
+        }
 
-        Color color = localPlayer.GetComponent<CharacterClass>().getTeamColor();
-        for (int i = 0; i < abilitySelectedImage.Length; i++){
-            abilitySelectedImage[i].enabled = false;
-            abilitySelectedImage[i].color = color;
+        // Set the color for ability selection images based on the player's team.
+        CharacterClass character = localPlayer.GetComponent<CharacterClass>();
+        if (character != null)
+        {
+            Color color = character.getTeamColor();
+            for (int i = 0; i < abilitySelectedImage.Length; i++)
+            {
+                abilitySelectedImage[i].enabled = false;
+                abilitySelectedImage[i].color = color;
+            }
+        }
+        else
+        {
+            Debug.LogError("HandleAbilityCDOnLocalPlayer: CharacterClass not found on local player!");
         }
         
-        if (localPlayer.GetComponent<StarterAssetsInputs>().isOneHanded()){
+        // If using one-handed mode, select the current ability.
+        StarterAssetsInputs inputs = localPlayer.GetComponent<StarterAssetsInputs>();
+        if (inputs != null && inputs.isOneHanded())
+        {
             SelectAbility(selectedAbility);
         }
-
     }
 
-    void updateCooldowns(){
-        if (localPlayer == null) return;
+    void updateCooldowns()
+    {
+        if (localPlayer == null)
+            return;
+            
         CharacterClass playerClass = localPlayer.GetComponent<CharacterClass>();
+        if (playerClass == null)
+            return;
+            
         Attack1CDText.text = playerClass.getTextForCD(0);
         Attack2CDText.text = playerClass.getTextForCD(1);
         Ability1CDText.text = playerClass.getTextForCD(2);
@@ -60,54 +94,88 @@ public class HandleAbilityCDOnLocalPlayer : MonoBehaviour
         UltimateCDText.text = playerClass.getTextForCD(4);
     }
 
-    public void SelectAbility(int abilityIndex){
-        if (localPlayer == null) return;
+    public void SelectAbility(int abilityIndex)
+    {
+        if (localPlayer == null)
+            return;
         
-        hideSelectedAbilitys();
-        abilitySelectedImage[abilityIndex].enabled = true;
+        hideSelectedAbilities();
+        if (abilityIndex >= 0 && abilityIndex < abilitySelectedImage.Length)
+        {
+            abilitySelectedImage[abilityIndex].enabled = true;
+        }
     }
-    private void hideSelectedAbilitys(){
-        for (int i = 0; i < abilitySelectedImage.Length; i++){
+    
+    private void hideSelectedAbilities()
+    {
+        for (int i = 0; i < abilitySelectedImage.Length; i++)
+        {
             abilitySelectedImage[i].enabled = false;
         }
     }
 
-    void updateHealthBar(){
-        if (localPlayer == null) return;
-        HealthBar.value = localPlayer.GetComponent<CharacterClass>().getHealth();
-        HealthBarText.text = localPlayer.GetComponent<CharacterClass>().getHealth() + " / 100";
+    void updateHealthBar()
+    {
+        if (localPlayer == null)
+            return;
+            
+        CharacterClass character = localPlayer.GetComponent<CharacterClass>();
+        if (character == null)
+            return;
+            
+        float health = character.getHealth();
+        HealthBar.value = health;
+        HealthBarText.text = health + " / 100";
     }
 
-    public void updateSensitivityValue(){
-        if (localPlayer == null) return;
-        localPlayer.GetComponent<ThirdPersonController>().updateSensitive(SensitivitySlider.value);
+    public void updateSensitivityValue()
+    {
+        if (localPlayer == null)
+            return;
+            
+        ThirdPersonController controller = localPlayer.GetComponent<ThirdPersonController>();
+        if (controller != null)
+            controller.updateSensitive(SensitivitySlider.value);
     }
 
-    public void SwitchTeams(){
-        if (localPlayer == null) return;
-        localPlayer.GetComponent<CharacterClass>().SwitchTeams();
+    public void SwitchTeams()
+    {
+        if (localPlayer == null)
+            return;
+            
+        CharacterClass character = localPlayer.GetComponent<CharacterClass>();
+        if (character != null)
+            character.SwitchTeams();
     }
 
-    public void toggleOneHandedMode(){
-        if (localPlayer == null) return;
-   
-        if (playerTracker != null) playerTracker.setOneHanded(oneHandedModeToggle.isOn);
+    public void toggleOneHandedMode()
+    {
+        if (localPlayer == null)
+            return;
 
-        localPlayer.GetComponent<StarterAssetsInputs>().setOneHanded(oneHandedModeToggle.isOn);
-        if (oneHandedModeToggle.isOn){
+        StarterAssetsInputs inputs = localPlayer.GetComponent<StarterAssetsInputs>();
+        if (inputs != null)
+            inputs.setOneHanded(oneHandedModeToggle.isOn);
+
+        if (oneHandedModeToggle.isOn)
+        {
             SelectAbility(selectedAbility);
-        } else {
-            hideSelectedAbilitys();
+        }
+        else
+        {
+            hideSelectedAbilities();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         updateCooldowns();
         updateHealthBar();
-        if (selectedAbility != localPlayer.GetComponent<StarterAssetsInputs>().selectedAbility){
-            selectedAbility = localPlayer.GetComponent<StarterAssetsInputs>().selectedAbility;
+        
+        StarterAssetsInputs inputs = localPlayer.GetComponent<StarterAssetsInputs>();
+        if (inputs != null && selectedAbility != inputs.selectedAbility)
+        {
+            selectedAbility = inputs.selectedAbility;
             SelectAbility(selectedAbility);
         }
     }
