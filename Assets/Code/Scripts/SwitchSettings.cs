@@ -20,25 +20,26 @@ public class SwitchSettings: MonoBehaviour
         Menu.SetActive(true);
         Settings.SetActive(false);
         Credits.SetActive(false);
-        Tutorial.SetActive(false);
+
+        if (Tutorial != null) Tutorial.SetActive(false);
     }
     public void EnableSettings()
     {
         Settings.SetActive(true);
         Menu.SetActive(false);
         Credits.SetActive(false);
-        Tutorial.SetActive(false);
+        if (Tutorial != null) Tutorial.SetActive(false);
     }
     public void EnableCredits()
     {
         Credits.SetActive(true);
         Settings.SetActive(false);
         Menu.SetActive(false);
-        Tutorial.SetActive(false);
+        if (Tutorial != null) Tutorial.SetActive(false);
     }
     public void EnableTutorial()
     {
-        Tutorial.SetActive(true);
+        if (Tutorial != null) Tutorial.SetActive(true);
         Settings.SetActive(false);
         Menu.SetActive(false);
         Credits.SetActive(false);

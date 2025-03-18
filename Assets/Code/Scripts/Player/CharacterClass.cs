@@ -79,6 +79,14 @@ public class CharacterClass: MonoBehaviour
     private void Awake()
     {
         currentCooldowns = new float[abilityCooldowns.Length];
+        if (UnityEngine.Random.value < 0.5f)
+        {
+            team = PlayerTeam.Fire;
+        }
+        else
+        {
+            team = PlayerTeam.Water;
+        }
         animator = GetComponent<Animator>();
         currentAttack1Uses = maxAttack1Uses;
         damageBoostScript = GetComponent<DamageBoost>();

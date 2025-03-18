@@ -169,6 +169,8 @@ public class HandleAbilityCDOnLocalPlayer : MonoBehaviour
 
     void Update()
     {
+        if (localPlayer == null)
+            return;
         updateCooldowns();
         updateHealthBar();
         
