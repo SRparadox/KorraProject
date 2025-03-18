@@ -1,13 +1,17 @@
-using UnityEngine;
+using Cinemachine; // Ensure you have Cinemachine installed!
+using StarterAssets;
 using Unity.Netcode; // Import Netcode for GameObjects
-using StarterAssets;  
-// This script wraps your existing player components.
-public class PlayerNetwork : NetworkBehaviour
+using UnityEngine;
+
+public class PlayerNetwork: NetworkBehaviour
 {
-    // References to your existing components on the player prefab
+    // References to your existing components on the player prefab.
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
     private CharacterClass characterClass;
+
+    // Reference to the Cinemachine Virtual Camera attached to the player prefab.
+    public CinemachineVirtualCamera playerCamera;
 
     private void Awake()
     {
@@ -15,31 +19,45 @@ public class PlayerNetwork : NetworkBehaviour
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         characterClass = GetComponent<CharacterClass>();
+
+        // If the camera isn't manually assigned in the Inspector,
+        // try to get it from the children.
+        if (playerCamera == null)
+            playerCamera = GetComponentInChildren<CinemachineVirtualCamera>();
     }
 
     public override void OnNetworkSpawn()
     {
-        // This method is called when the object is spawned on the network.
-        // Only the local player (owner) should process input and control movement.
+        // Only the local player's object should process input, movement, etc.
         if (!IsOwner)
         {
-            // Disable input & movement components for non-owner instances.
             if (starterAssetsInputs != null)
                 starterAssetsInputs.enabled = false;
             if (thirdPersonController != null)
                 thirdPersonController.enabled = false;
             if (characterClass != null)
                 characterClass.enabled = false;
-        }
-        else
+
+            // Disable the camera for remote players.
+            if (playerCamera != null)
+                playerCamera.gameObject.SetActive(false);
+        } else
         {
-            // For the local owner, ensure these components are enabled.
             if (starterAssetsInputs != null)
                 starterAssetsInputs.enabled = true;
             if (thirdPersonController != null)
                 thirdPersonController.enabled = true;
             if (characterClass != null)
                 characterClass.enabled = true;
+
+            // Enable the local player's camera and set it to follow this player.
+            if (playerCamera != null)
+            {
+                playerCamera.gameObject.SetActive(true);
+            } else
+            {
+                Debug.LogWarning("Local player has no camera attached!");
+            }
         }
     }
 }

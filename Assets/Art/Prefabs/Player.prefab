@@ -10768,7 +10768,7 @@ Transform:
   m_GameObject: {fileID: 3885973296871084338}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.39998877, y: 1.375, z: -4.000002}
+  m_LocalPosition: {x: 0.40000015, y: 1.375, z: -4.0000005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16515,6 +16515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  playerCamera: {fileID: 1524740133899000452}
 --- !u!114 &6782562874022981665
 MonoBehaviour:
   m_ObjectHideFlags: 0
