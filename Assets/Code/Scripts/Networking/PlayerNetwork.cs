@@ -69,25 +69,25 @@ public class PlayerNetwork: NetworkBehaviour
             cameraRoot.gameObject.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (!IsOwner)
-            return;
+    //private void Update()
+    //{
+    //    if (!IsOwner)
+    //        return;
 
-        // Send player input to the server
-        SubmitInputServerRpc(starterAssetsInputs.move, starterAssetsInputs.jump, starterAssetsInputs.sprint);
-    }
+    //    // Send player input to the server
+    //    SubmitInputServerRpc(starterAssetsInputs.move, starterAssetsInputs.jump, starterAssetsInputs.sprint);
+    //}
 
-    [ServerRpc]
-    private void SubmitInputServerRpc(Vector2 moveInput, bool jump, bool sprint)
-    {
-        // Ensure the server does not overwrite owner-controlled movement
-        if (!IsOwner)
-            return;
+    //[ServerRpc]
+    //private void SubmitInputServerRpc(Vector2 moveInput, bool jump, bool sprint)
+    //{
+    //    // Ensure the server does not overwrite owner-controlled movement
+    //    if (!IsOwner)
+    //        return;
 
-        // Sync input values for movement simulation on the server
-        starterAssetsInputs.move = moveInput;
-        starterAssetsInputs.jump = jump;
-        starterAssetsInputs.sprint = sprint;
-    }
+    //    // Sync input values for movement simulation on the server
+    //    starterAssetsInputs.move = moveInput;
+    //    starterAssetsInputs.jump = jump;
+    //    starterAssetsInputs.sprint = sprint;
+    //}
 }
