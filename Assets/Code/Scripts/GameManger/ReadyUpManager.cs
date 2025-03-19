@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using Unity.Netcode;
-using UnityEditor.Search;
-using UnityEditor.PackageManager;
-using UnityEngine.InputSystem;
 using TMPro;
+using Unity.Netcode;
+using UnityEditor.PackageManager;
+using UnityEditor.Search;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-public class ReadyUpManager : NetworkBehaviour
+public class ReadyUpManager: NetworkBehaviour
 {
     public TMP_Text countdownText;
     public GameObject readyMenu;
@@ -21,6 +21,7 @@ public class ReadyUpManager : NetworkBehaviour
     private List<GameObject> players = new List<GameObject>();
     private bool allReady = false;
     private int countdown = 5;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -28,17 +29,6 @@ public class ReadyUpManager : NetworkBehaviour
         {
             Debug.LogError("NetworkManager is missing! Make sure it exists in the scene.");
             return;
-        }
-
-        if (!NetworkManager.Singleton.IsListening)
-        {
-            Debug.Log("Starting network...");
-            bool success = NetworkManager.Singleton.StartHost();
-
-            if (!success)
-            {
-                Debug.LogError("Failed to start network!");
-            }
         }
 
         Debug.Log("ReadyUpManager started!");
@@ -51,7 +41,7 @@ public class ReadyUpManager : NetworkBehaviour
         UIMenu.SetActive(false);
         matchText.gameObject.SetActive(false);
         ShowCursor();
-        
+
     }
 
     void FindPlayers()
@@ -79,7 +69,7 @@ public class ReadyUpManager : NetworkBehaviour
     {
         Debug.Log("Ready button clicked!");
         ulong clientId = NetworkManager.Singleton.LocalClientId;
-        if(playerReadyStatus.ContainsKey(clientId) && !playerReadyStatus[clientId])
+        if (playerReadyStatus.ContainsKey(clientId) && !playerReadyStatus[clientId])
         {
             SetPlayerReadyServerRpc(clientId);
             readyButton.gameObject.SetActive(false);
@@ -106,9 +96,10 @@ public class ReadyUpManager : NetworkBehaviour
 
     bool AllPlayersReady()
     {
-        foreach( var ready in playerReadyStatus.Values)
+        foreach (var ready in playerReadyStatus.Values)
         {
-            if(!ready) return false;
+            if (!ready)
+                return false;
         }
         return true;
     }
@@ -118,7 +109,7 @@ public class ReadyUpManager : NetworkBehaviour
         ShowMatchTextClientRpc(true);
 
         readyMenu.SetActive(true);
-        while(countdown > 0 )
+        while (countdown > 0)
         {
             UpdateCountdownTextClientRpc(countdown);
             yield return new WaitForSeconds(1);
@@ -182,7 +173,7 @@ public class ReadyUpManager : NetworkBehaviour
         UIMenu.SetActive(false);
         readyMenu.SetActive(true);
 
-        countdown = 5; 
+        countdown = 5;
 
         ShowCursor();
     }
@@ -190,6 +181,6 @@ public class ReadyUpManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
