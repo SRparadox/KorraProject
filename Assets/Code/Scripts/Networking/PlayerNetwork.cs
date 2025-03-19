@@ -68,35 +68,4 @@ public class PlayerNetwork: NetworkBehaviour
         if (cameraRoot != null)
             cameraRoot.gameObject.SetActive(false);
     }
-
-    //private void Update()
-    //{
-    //    if (!IsOwner)
-    //        return;
-
-    //    SubmitInputServerRpc(
-    //        starterAssetsInputs.move,
-    //        starterAssetsInputs.look,
-    //        starterAssetsInputs.jump,
-    //        starterAssetsInputs.sprint,
-    //        starterAssetsInputs.aim,
-    //        starterAssetsInputs.attack,
-    //        starterAssetsInputs.selectedAbility
-    //    );
-    //}
-
-    //[ServerRpc]
-    //private void SubmitInputServerRpc(Vector2 moveInput, Vector2 lookInput, bool jump, bool sprint, bool aim, bool attack, int selectedAbility)
-    //{
-    //    if (!IsOwner)
-    //        return;
-
-    //    starterAssetsInputs.move = moveInput;
-    //    starterAssetsInputs.look = lookInput;
-    //    starterAssetsInputs.jump = jump;
-    //    starterAssetsInputs.sprint = sprint;
-    //    starterAssetsInputs.aim = aim;
-    //    starterAssetsInputs.attack = attack;
-    //    starterAssetsInputs.selectedAbility = selectedAbility;
-    //}
 }
