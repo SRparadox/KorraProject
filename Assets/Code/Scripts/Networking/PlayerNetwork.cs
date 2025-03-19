@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerNetwork: NetworkBehaviour
 {
+    private CharacterController characterController;
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
     private PlayerInput playerInput;
@@ -14,11 +15,12 @@ public class PlayerNetwork: NetworkBehaviour
 
     private void Awake()
     {
-        TryGetComponent(out thirdPersonController);
-        TryGetComponent(out starterAssetsInputs);
-        TryGetComponent(out playerInput);
+        characterController = GetComponent<CharacterController>();
+        thirdPersonController = GetComponent<ThirdPersonController>();
+        starterAssetsInputs = GetComponent<StarterAssetsInputs>();
+        playerInput = GetComponent<PlayerInput>();
 
-        virtualCameras = GetComponentsInChildren<CinemachineVirtualCamera>(true);
+        virtualCameras = GetComponentsInChildren<CinemachineVirtualCamera>();
         cameraRoot = transform.Find("PlayerCameraRoot");
     }
 
@@ -36,40 +38,35 @@ public class PlayerNetwork: NetworkBehaviour
     private void EnableLocalPlayer()
     {
         Debug.Log("SPAWNED LOCAL PLAYER");
-
-        // Enable player input and movement for the local player
-        starterAssetsInputs.enabled = true;
-        thirdPersonController.enabled = true;
-        playerInput.enabled = true;
-
-        // Activate cameras
-        foreach (var cam in virtualCameras)
-        {
-            cam.gameObject.SetActive(true);
-        }
-
-        if (cameraRoot != null)
-            cameraRoot.gameObject.SetActive(true);
     }
 
     private void EnableRemotePlayer()
     {
         Debug.Log("SPAWNED REMOTE PLAYER");
 
-        // Disable player input and cameras for remote players
-        playerInput.enabled = false;
-        foreach (var cam in virtualCameras)
+        // Disable components
+        if (characterController != null)
+            characterController.enabled = false;
+        if (thirdPersonController != null)
+            thirdPersonController.enabled = false;
+        if (starterAssetsInputs != null)
+            starterAssetsInputs.enabled = false;
+        if (playerInput != null)
+            playerInput.enabled = false;
+
+        // Disable all virtual cameras
+        if (virtualCameras != null)
         {
-            cam.gameObject.SetActive(false);
+            foreach (var cam in virtualCameras)
+            {
+                if (cam != null)
+                    cam.gameObject.SetActive(false);
+            }
         }
 
+        // Disable camera root
         if (cameraRoot != null)
             cameraRoot.gameObject.SetActive(false);
-
-        // Allow movement simulation on the server for remote clients
-        bool shouldEnableMovement = IsServer;
-        thirdPersonController.enabled = shouldEnableMovement;
-        starterAssetsInputs.enabled = shouldEnableMovement;
     }
 
     private void Update()
