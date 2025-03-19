@@ -13,12 +13,6 @@ public class PlayerNetwork: NetworkBehaviour
     private CinemachineVirtualCamera[] virtualCameras;
     private Transform cameraRoot;
 
-    // Network variables for synchronization
-    private NetworkVariable<Vector3> networkPosition = new NetworkVariable<Vector3>(
-        writePerm: NetworkVariableWritePermission.Owner);
-    private NetworkVariable<Quaternion> networkRotation = new NetworkVariable<Quaternion>(
-        writePerm: NetworkVariableWritePermission.Owner);
-
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -75,45 +69,34 @@ public class PlayerNetwork: NetworkBehaviour
             cameraRoot.gameObject.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (IsOwner)
-        {
-            // Send input to the server
-            SubmitInputServerRpc(
-                starterAssetsInputs.move,
-                starterAssetsInputs.look,
-                starterAssetsInputs.jump,
-                starterAssetsInputs.sprint,
-                starterAssetsInputs.aim,
-                starterAssetsInputs.attack,
-                starterAssetsInputs.selectedAbility
-            );
+    //private void Update()
+    //{
+    //    if (!IsOwner)
+    //        return;
 
-            // Update networked position and rotation
-            networkPosition.Value = transform.position;
-            networkRotation.Value = transform.rotation;
-        } else
-        {
-            // Apply received position and rotation from the network
-            transform.position = networkPosition.Value;
-            transform.rotation = networkRotation.Value;
-        }
-    }
+    //    SubmitInputServerRpc(
+    //        starterAssetsInputs.move,
+    //        starterAssetsInputs.look,
+    //        starterAssetsInputs.jump,
+    //        starterAssetsInputs.sprint,
+    //        starterAssetsInputs.aim,
+    //        starterAssetsInputs.attack,
+    //        starterAssetsInputs.selectedAbility
+    //    );
+    //}
 
-    [ServerRpc]
-    private void SubmitInputServerRpc(Vector2 moveInput, Vector2 lookInput, bool jump, bool sprint, bool aim, bool attack, int selectedAbility)
-    {
-        if (!IsOwner)
-            return;
+    //[ServerRpc]
+    //private void SubmitInputServerRpc(Vector2 moveInput, Vector2 lookInput, bool jump, bool sprint, bool aim, bool attack, int selectedAbility)
+    //{
+    //    if (!IsOwner)
+    //        return;
 
-        // Apply input on the player
-        starterAssetsInputs.move = moveInput;
-        starterAssetsInputs.look = lookInput;
-        starterAssetsInputs.jump = jump;
-        starterAssetsInputs.sprint = sprint;
-        starterAssetsInputs.aim = aim;
-        starterAssetsInputs.attack = attack;
-        starterAssetsInputs.selectedAbility = selectedAbility;
-    }
+    //    starterAssetsInputs.move = moveInput;
+    //    starterAssetsInputs.look = lookInput;
+    //    starterAssetsInputs.jump = jump;
+    //    starterAssetsInputs.sprint = sprint;
+    //    starterAssetsInputs.aim = aim;
+    //    starterAssetsInputs.attack = attack;
+    //    starterAssetsInputs.selectedAbility = selectedAbility;
+    //}
 }
