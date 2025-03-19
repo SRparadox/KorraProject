@@ -8,7 +8,6 @@ public class PlayerNetwork: NetworkBehaviour
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
     private CharacterClass characterClass;
-
     private CinemachineVirtualCamera[] virtualCameras;
 
     private void Awake()
@@ -17,7 +16,6 @@ public class PlayerNetwork: NetworkBehaviour
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         characterClass = GetComponent<CharacterClass>();
 
-        // Find all CinemachineVirtualCamera components in children
         virtualCameras = GetComponentsInChildren<CinemachineVirtualCamera>(true);
     }
 
@@ -25,7 +23,7 @@ public class PlayerNetwork: NetworkBehaviour
     {
         if (!IsOwner)
         {
-            Debug.Log("Not owner");
+            Debug.Log($"[PlayerNetwork] {gameObject.name} is NOT the local player. Disabling components...");
 
             if (starterAssetsInputs != null)
                 starterAssetsInputs.enabled = false;
@@ -34,14 +32,13 @@ public class PlayerNetwork: NetworkBehaviour
             if (characterClass != null)
                 characterClass.enabled = false;
 
-            // Disable all cameras for non-local players
             foreach (var cam in virtualCameras)
             {
                 cam.gameObject.SetActive(false);
             }
         } else
         {
-            Debug.Log("Owner");
+            Debug.Log($"[PlayerNetwork] {gameObject.name} is the local player. Enabling components...");
 
             if (starterAssetsInputs != null)
                 starterAssetsInputs.enabled = true;
@@ -50,7 +47,6 @@ public class PlayerNetwork: NetworkBehaviour
             if (characterClass != null)
                 characterClass.enabled = true;
 
-            // Enable all cameras for local player
             foreach (var cam in virtualCameras)
             {
                 cam.gameObject.SetActive(true);

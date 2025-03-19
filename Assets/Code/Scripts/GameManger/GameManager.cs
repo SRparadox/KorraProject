@@ -1,12 +1,12 @@
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using Unity.VisualScripting;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager: MonoBehaviour
 {
     public ZoneControl[] zones;
     public Transform Firespawn;
@@ -42,9 +42,6 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-
-
         ChooseNewZone();
         SpawnPlayers();
         roundTimer = roundDuration;
@@ -64,7 +61,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void spawnAPowerup(){
+    void spawnAPowerup()
+    {
         // Get all children of the parent transform
         Transform parentTransform = PowerUpSpawnParent.transform;
         int childCount = parentTransform.childCount;
@@ -73,19 +71,22 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < childCount; i++)
         {
             children[i] = parentTransform.GetChild(i);
-            if (children[i].GetComponent<PowerUpGiver>().isActive == false) allAreActive = false; //If theres nothing to spawn then dont spawn
+            if (children[i].GetComponent<PowerUpGiver>().isActive == false)
+                allAreActive = false; //If theres nothing to spawn then dont spawn
         }
-        if (children.Length == 0 || allAreActive == true) {
+        if (children.Length == 0 || allAreActive == true)
+        {
             Debug.LogError("Powerups: No children found under the parent transform or all children are active.");
             return;
-        } 
+        }
 
         // Choose a random child
         int randomIndex = Random.Range(0, children.Length);
         Transform randomChild = children[randomIndex];
         PowerUpGiver powerUpGiver = randomChild.GetComponent<PowerUpGiver>();
         // Pick a random child until we find one that is not active
-        while (powerUpGiver.isActive){
+        while (powerUpGiver.isActive)
+        {
             randomIndex = Random.Range(0, children.Length);
             randomChild = children[randomIndex];
             powerUpGiver = randomChild.GetComponent<PowerUpGiver>();
@@ -104,7 +105,7 @@ public class GameManager : MonoBehaviour
         updateTimeUI();
         UpdateProgessBars();
 
-        if(scoreTimer >= scoreTickRate)
+        if (scoreTimer >= scoreTickRate)
         {
             scoreTimer = 0f;
             UpdateControlScore();
@@ -127,36 +128,36 @@ public class GameManager : MonoBehaviour
 
     void ChooseNewZone()
     {
-        if (zones.Length == 0) return;
+        if (zones.Length == 0)
+            return;
 
-        if(activeZone != null && activeZone.lightPillar != null)
+        if (activeZone != null && activeZone.lightPillar != null)
         {
             activeZone.lightPillar.SetActive(false);
-        } 
+        }
 
         activeZone = zones[Random.Range(0, zones.Length)];
         if (activeZone.lightPillar != null)
         {
             activeZone.lightPillar.SetActive(true);
         }
-
-        Debug.Log($"New active zone:{activeZone.gameObject.name}");
     }
 
     void UpdateControlScore()
     {
-        if(activeZone == null) return;
+        if (activeZone == null)
+            return;
 
         switch (activeZone.controllingTeam)
         {
             case "Fire":
-                fireScore = Mathf.Min(fireScore + scoreIncrement, maxControlScore);
-                break;
+            fireScore = Mathf.Min(fireScore + scoreIncrement, maxControlScore);
+            break;
             case "Water":
-                waterScore = Mathf.Min(waterScore + scoreIncrement, maxControlScore); 
-                break;
+            waterScore = Mathf.Min(waterScore + scoreIncrement, maxControlScore);
+            break;
             case "Neutral":
-                return;
+            return;
         }
 
     }
@@ -164,13 +165,13 @@ public class GameManager : MonoBehaviour
     void UpdateProgessBars()
     {
         float smoothSpeed = 5f * Time.deltaTime;
-        fireProgressBar.value = Mathf.Lerp(fireProgressBar.value, (float)fireScore / maxControlScore, smoothSpeed);
-        waterProgressBar.value = Mathf.Lerp(waterProgressBar.value, (float)waterScore / maxControlScore, smoothSpeed);
+        fireProgressBar.value = Mathf.Lerp(fireProgressBar.value, (float) fireScore / maxControlScore, smoothSpeed);
+        waterProgressBar.value = Mathf.Lerp(waterProgressBar.value, (float) waterScore / maxControlScore, smoothSpeed);
     }
 
     void UpdateWinIcons(Image[] teamIcons, int wins, Sprite[] teamSprites)
     {
-        for(int i = 0; i < teamIcons.Length; i++)
+        for (int i = 0; i < teamIcons.Length; i++)
         {
             teamIcons[i].sprite = (i < wins) ? teamSprites[1] : teamSprites[0];
         }
@@ -180,24 +181,24 @@ public class GameManager : MonoBehaviour
     {
         string dominantTeam = fireScore > waterScore ? "Fire" : waterScore > fireScore ? "Water" : "Neutral";
 
-        if (currentWinningTeam == dominantTeam) return;
+        if (currentWinningTeam == dominantTeam)
+            return;
         currentWinningTeam = dominantTeam;
 
-        switch(dominantTeam)
+        switch (dominantTeam)
         {
             case "Fire":
-                waterRenderer.material = lavaMaterial;
-                RenderSettings.skybox = fireSkybox;
-                break;
+            waterRenderer.material = lavaMaterial;
+            RenderSettings.skybox = fireSkybox;
+            break;
             case "Water":
-                waterRenderer.material = waterMaterial;
-                RenderSettings.skybox = waterSkybox;
-                break;
+            waterRenderer.material = waterMaterial;
+            RenderSettings.skybox = waterSkybox;
+            break;
             case "Neutral":
-                waterRenderer.material = waterMaterial;
-                RenderSettings.skybox = defaultSkybox;
-                break;
-
+            waterRenderer.material = waterMaterial;
+            RenderSettings.skybox = defaultSkybox;
+            break;
         }
 
         DynamicGI.UpdateEnvironment();
@@ -217,13 +218,12 @@ public class GameManager : MonoBehaviour
         List<GameObject> fireplayers = new List<GameObject>();
         List<GameObject> waterplayers = new List<GameObject>();
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach(GameObject player in players)
+        foreach (GameObject player in players)
         {
             if (player.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Fire)
             {
                 fireplayers.Add(player);
-            }
-            else if (player.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Water)
+            } else if (player.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Water)
             {
                 waterplayers.Add(player);
             }
@@ -233,19 +233,20 @@ public class GameManager : MonoBehaviour
         SpawnTeam(waterplayers.ToArray(), Waterspawn);
     }
 
-   void SpawnTeam(GameObject[] players, Transform spawnPoint)
-   {
-        if(spawnPoint == null) return;
+    void SpawnTeam(GameObject[] players, Transform spawnPoint)
+    {
+        if (spawnPoint == null)
+            return;
 
-        foreach(GameObject player in players)
+        foreach (GameObject player in players)
         {
             player.transform.position = spawnPoint.position;
             player.transform.rotation = spawnPoint.rotation;
         }
-   }
+    }
 
-   public void RespawnPlayer(GameObject player)
-   {
+    public void RespawnPlayer(GameObject player)
+    {
         player.GetComponent<CharacterController>().enabled = false;
         string teamName = "None";
         if (player.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Fire)
@@ -253,41 +254,38 @@ public class GameManager : MonoBehaviour
             teamName = "Fire";
             player.transform.position = Firespawn.position;
             player.transform.rotation = Firespawn.rotation;
-        }
-        else if (player.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Water)
+        } else if (player.GetComponent<CharacterClass>().getPlayersTeam() == CharacterClass.PlayerTeam.Water)
         {
             teamName = "Water";
             player.transform.position = Waterspawn.position;
             player.transform.rotation = Waterspawn.rotation;
-        }
-        else Debug.Log("Player team not set");
+        } else
+            Debug.Log("Player team not set");
         player.GetComponent<CharacterController>().enabled = true;
 
         Debug.Log($"{player.name}/{teamName} respawned at {player.transform.position}");
-   }
+    }
 
     void EndRound()
     {
         string roundWinner = fireScore > waterScore ? "Fire" : "Water";
 
-        if(roundWinner == "Fire")
+        if (roundWinner == "Fire")
         {
             fireWins++;
             UpdateWinIcons(fireWinIcons, fireWins, fireWinSprites);
-        }
-        else
+        } else
         {
             waterWins++;
             UpdateWinIcons(waterWinIcons, waterWins, waterWinSprites);
         }
 
-        if(fireWins == 2)
+        if (fireWins == 2)
         {
             Debug.Log("Fire Team Wins");
             ResetGame(); //Reset Game to beginning state
             return;
-        }
-        else if(waterWins == 2)
+        } else if (waterWins == 2)
         {
             Debug.Log("Water Team Wins");
             ResetGame(); //Reset Game to beginning state
@@ -323,11 +321,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void DeleteAllPlayers(){
+    void DeleteAllPlayers()
+    {
         foreach (Transform child in playersParent.transform)
         {
             Debug.Log("Checking if player: " + child.name);
-            if (child.tag == "Player") {
+            if (child.tag == "Player")
+            {
                 Debug.Log("Destroying player: " + child.name);
                 Destroy(child.gameObject);
             }

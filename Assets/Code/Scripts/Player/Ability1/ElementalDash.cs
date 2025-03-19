@@ -20,7 +20,6 @@ public class ElementalDash: MonoBehaviour
 
     public void Trigger()
     {
-        Debug.Log("Begin Dashing");
         StartCoroutine(Dash());
     }
 
@@ -41,7 +40,7 @@ public class ElementalDash: MonoBehaviour
             characterController.Move(dashDirection * dashSpeed * Time.deltaTime);
             yield return null;
         }
-        
+
         animator.SetBool("IsDashing", false);
         Destroy(vfxTrail.gameObject, vfxTrail.main.duration);
         vfxTrail.Stop();
@@ -49,7 +48,6 @@ public class ElementalDash: MonoBehaviour
 
     public void SetPrefab(ParticleSystem prefab)
     {
-        Debug.Log("Setting Dash Prefab");
         selectedPrefab = prefab;
     }
 }
