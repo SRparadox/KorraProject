@@ -2,19 +2,21 @@ using Cinemachine;
 using StarterAssets;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerNetwork: NetworkBehaviour
 {
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
-    private CharacterClass characterClass;
+    private PlayerInput playerInput;
+
     private CinemachineVirtualCamera[] virtualCameras;
 
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
-        characterClass = GetComponent<CharacterClass>();
+        playerInput = GetComponent<PlayerInput>();
 
         virtualCameras = GetComponentsInChildren<CinemachineVirtualCamera>(true);
     }
@@ -29,12 +31,18 @@ public class PlayerNetwork: NetworkBehaviour
                 starterAssetsInputs.enabled = false;
             if (thirdPersonController != null)
                 thirdPersonController.enabled = false;
-            if (characterClass != null)
-                characterClass.enabled = false;
+            if (playerInput != null)
+                playerInput.enabled = false;
 
             foreach (var cam in virtualCameras)
             {
                 cam.gameObject.SetActive(false);
+            }
+
+            Transform cameraRoot = transform.Find("PlayerCameraRoot");
+            if (cameraRoot != null)
+            {
+                cameraRoot.gameObject.SetActive(false);
             }
         } else
         {
@@ -44,8 +52,8 @@ public class PlayerNetwork: NetworkBehaviour
                 starterAssetsInputs.enabled = true;
             if (thirdPersonController != null)
                 thirdPersonController.enabled = true;
-            if (characterClass != null)
-                characterClass.enabled = true;
+            if (playerInput != null)
+                playerInput.enabled = true;
 
             foreach (var cam in virtualCameras)
             {
