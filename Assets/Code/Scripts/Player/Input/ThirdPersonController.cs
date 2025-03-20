@@ -468,6 +468,7 @@ namespace StarterAssets
             {
                 if (FootstepAudioClips.Length > 0)
                 {
+                    if (_controller == null) return;
                     var index = UnityEngine.Random.Range(0, FootstepAudioClips.Length);
                     AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
                 }
@@ -478,6 +479,7 @@ namespace StarterAssets
         {
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
+                if (_controller == null) return;
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
         }
