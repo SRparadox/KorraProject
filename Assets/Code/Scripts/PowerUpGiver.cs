@@ -1,8 +1,9 @@
 using StarterAssets;
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PowerUpGiver: MonoBehaviour
+public class PowerUpGiver: NetworkBehaviour
 {
     public enum PowerUpType
     {
@@ -12,8 +13,8 @@ public class PowerUpGiver: MonoBehaviour
     }
 
     [Header("PowerUp Type")]
-    public PowerUpType powerUpType;
-    public bool isActive = true;
+    public NetworkVariable<PowerUpType> powerUpType = new NetworkVariable<PowerUpType>(PowerUpType.Speed);
+    public NetworkVariable<bool> isActive = new NetworkVariable<bool>(true);
 
     [Header("Materials")]
     public Material speedMaterial;
@@ -34,27 +35,30 @@ public class PowerUpGiver: MonoBehaviour
         setupObject();
     }
 
+    public override void OnNetworkSpawn()
+    {
+        isActive.OnValueChanged += (prev, newValue) => setupObject();
+        powerUpType.OnValueChanged += (prev, newValue) => setupMaterial();
+        setupObject();  // Ensure initial setup on spawn
+    }
+
     public void setupObject()
     {
-        if (isActive)
+        bool active = isActive.Value;
+        col.enabled = active;
+        scroll.SetActive(active);
+        lightEffect.SetActive(active);
+        icon.SetActive(active);
+
+        if (active)
         {
             setupMaterial();
-            scroll.SetActive(true);
-            lightEffect.SetActive(true);
-            icon.SetActive(true);
-            col.enabled = true;
-        } else
-        {
-            col.enabled = false;
-            scroll.SetActive(false);
-            lightEffect.SetActive(false);
-            icon.SetActive(false);
         }
     }
 
     void setupMaterial()
     {
-        switch (powerUpType)
+        switch (powerUpType.Value)
         {
             case PowerUpType.Speed:
             lightEffect.GetComponent<Renderer>().material = speedMaterial;
@@ -73,12 +77,11 @@ public class PowerUpGiver: MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!isActive)
-            return;
+        if (!isActive.Value) return;
         ThirdPersonController player = other.GetComponent<ThirdPersonController>();
         if (player != null)
         {
-            switch (powerUpType)
+            switch (powerUpType.Value)
             {
                 case PowerUpType.Speed:
                 player.activateSpeedPowerup();
@@ -90,23 +93,27 @@ public class PowerUpGiver: MonoBehaviour
                 player.GetComponent<CharacterClass>().Heal(25);
                 break;
             }
-            isActive = false;
+            SetActiveServerRpc(false);
             setupObject();
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SetActiveServerRpc(bool newState)
+    {
+        isActive.Value = newState;
     }
 
     IEnumerator respawnAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        isActive = true;
+        isActive.Value = true;
         setupObject();
     }
 
     public void spawnPowerUp()
     {
-        PowerUpType type = (PowerUpType) Random.Range(0, 3);
-        powerUpType = type;
-        isActive = true;
-        setupObject();
+        powerUpType.Value = (PowerUpType)Random.Range(0, 3);
+        isActive.Value = true;
     }
 }

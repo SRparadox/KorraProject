@@ -30,8 +30,14 @@ public class HandleAbilityCDOnLocalPlayer : MonoBehaviour
         {
             foreach (var kvp in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
             {
+                
                 if (kvp.Value.OwnerClientId == NetworkManager.Singleton.LocalClientId)
                 {
+                    if (kvp.Value.gameObject == null)
+                    {
+                        Debug.LogError("HandleAbilityCDOnLocalPlayer: Local player object is null!");
+                        break;
+                    }
                     localPlayer = kvp.Value.gameObject;
                     break;
                 }

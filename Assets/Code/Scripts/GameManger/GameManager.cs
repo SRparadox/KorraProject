@@ -69,13 +69,17 @@ public class GameManager: MonoBehaviour
         for (int i = 0; i < childCount; i++)
         {
             children[i] = parentTransform.GetChild(i);
-            if (children[i].GetComponent<PowerUpGiver>().isActive == false)
+            if (children[i].GetComponent<PowerUpGiver>().isActive.Value == false)
                 allAreActive = false; //If theres nothing to spawn then dont spawn
         }
-        if (children.Length == 0 || allAreActive == true)
+        if (children.Length == 0)
         {
-            Debug.LogError("Powerups: No children found under the parent transform or all children are active.");
+            Debug.LogError("Powerups: No children found under the parent transform");
             return;
+        }
+        if (allAreActive){
+            Debug.LogError("Powerups: All powerups are active, no powerup spawned");
+            return; 
         }
 
         // Choose a random child
@@ -83,7 +87,7 @@ public class GameManager: MonoBehaviour
         Transform randomChild = children[randomIndex];
         PowerUpGiver powerUpGiver = randomChild.GetComponent<PowerUpGiver>();
         // Pick a random child until we find one that is not active
-        while (powerUpGiver.isActive)
+        while (powerUpGiver.isActive.Value)
         {
             randomIndex = Random.Range(0, children.Length);
             randomChild = children[randomIndex];

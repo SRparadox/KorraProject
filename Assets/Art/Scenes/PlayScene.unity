@@ -1345,6 +1345,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3554739849
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (32)
@@ -2288,6 +2296,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1449606697
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -4053,6 +4069,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4028326147
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (6)
@@ -4393,6 +4417,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4119316688
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -5031,6 +5063,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 999234879
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -6723,6 +6763,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 814880760
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -8634,6 +8682,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1231206718
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (27)
@@ -9372,6 +9428,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1456932819
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -10704,6 +10768,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2364736737
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (12)
@@ -10784,6 +10856,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 512156
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -11378,6 +11458,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3741638545
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (35)
@@ -11613,6 +11701,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3578714793
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -13074,6 +13170,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 60121802
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (21)
@@ -13155,6 +13259,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 958420419
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (14)
@@ -13235,6 +13347,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 743681101
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -15069,6 +15189,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4103346236
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -17451,6 +17579,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3183884851
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -20035,6 +20171,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 358880180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (5)
@@ -21272,6 +21416,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3580762922
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (24)
@@ -22146,6 +22298,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4156446682
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (17)
@@ -22998,6 +23158,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3769300692
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (16)
@@ -23118,7 +23286,6 @@ MonoBehaviour:
   powerUpSpawnInterval: 8
   initialPowers: 3
   playerPrefab: {fileID: 4705826424688216604, guid: 54b40e8471a3af34ab3a6dadcf8969b1, type: 3}
-  playersParent: {fileID: 0}
 --- !u!4 &1163296466
 Transform:
   m_ObjectHideFlags: 0
@@ -23716,6 +23883,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1944823150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (20)
@@ -24263,6 +24438,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2562725311
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (36)
@@ -24761,6 +24944,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2803377514
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -26192,6 +26383,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3610840636
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (28)
@@ -26272,6 +26471,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1159934209
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -31414,6 +31621,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1204216977
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (8)
@@ -33949,6 +34164,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4194402933
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (34)
@@ -34029,6 +34252,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4215781006
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -36825,6 +37056,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2054166236
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (1)
@@ -37865,6 +38104,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3275891842
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -39282,6 +39529,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3968867617
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (18)
@@ -39362,6 +39617,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 195946989
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -40371,6 +40634,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 817678113
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups
@@ -40526,6 +40797,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3464913456
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -40808,6 +41087,14 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3058440963
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
+      objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
       value: Powerups (19)
@@ -40893,6 +41180,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3198766078
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
@@ -41184,6 +41479,14 @@ PrefabInstance:
     - target: {fileID: 4783203759887678921, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3271598602
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139610383145411632, guid: eed644a5409f10140a9926c759f57f49, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 1436351877
       objectReference: {fileID: 0}
     - target: {fileID: 6137437783831769188, guid: eed644a5409f10140a9926c759f57f49, type: 3}
       propertyPath: m_Name
