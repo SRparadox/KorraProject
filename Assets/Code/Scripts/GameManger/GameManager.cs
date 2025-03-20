@@ -2,11 +2,12 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager: MonoBehaviour
+public class GameManager: NetworkBehaviour
 {
     public ZoneControl[] zones;
     public Transform Firespawn;
@@ -61,6 +62,9 @@ public class GameManager: MonoBehaviour
 
     void spawnAPowerup()
     {
+        //if not the host of the server, return
+        if (!NetworkManager.Singleton.IsHost)
+            return;
         // Get all children of the parent transform
         Transform parentTransform = PowerUpSpawnParent.transform;
         int childCount = parentTransform.childCount;

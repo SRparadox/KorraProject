@@ -16478,8 +16478,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cdd965a13401d408bba54ea40053f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   fireballSpawnPoint: {fileID: 5358277804580457506}
   fireballSpeed: 30
+  fireballPrefab: {fileID: 2232664650143588886, guid: 7bb64ef469ef02c43977dee4ebb0e388, type: 3}
+  waterballPrefab: {fileID: 7368918336036502496, guid: 5bb889a9d26b0784eb61d56a69152ef3, type: 3}
 --- !u!114 &5594367366458681983
 MonoBehaviour:
   m_ObjectHideFlags: 0

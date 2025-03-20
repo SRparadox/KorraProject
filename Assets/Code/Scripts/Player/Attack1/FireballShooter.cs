@@ -1,13 +1,17 @@
+using Unity.Netcode;
+using Unity.Services.Matchmaker.Models;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FireballShooter: MonoBehaviour
+public class FireballShooter: NetworkBehaviour
 {
     public Transform fireballSpawnPoint;
     public float fireballSpeed = 10f;
     private Animator animator;
 
     private GameObject selectedPrefab; //stores which prefab the player will use
+    [SerializeField] private GameObject fireballPrefab, waterballPrefab; //the prefab that will be used to shoot
+
 
     private void Start()
     {
@@ -16,6 +20,8 @@ public class FireballShooter: MonoBehaviour
     }
     public void Trigger()
     {
+        if (!IsOwner)
+            return;
         ShootFireball();
     }
 
@@ -29,28 +35,94 @@ public class FireballShooter: MonoBehaviour
     {
         if (selectedPrefab != null && fireballSpawnPoint != null)
         {
-            GameObject Fireball = Instantiate(selectedPrefab, fireballSpawnPoint.position, fireballSpawnPoint.rotation);
-            Fireball fireball = Fireball.GetComponent<Fireball>();
             Camera mainCamera = Camera.main;
+            if (mainCamera == null) return;
 
-            if(fireball != null)
+            Vector3 spawnPos = fireballSpawnPoint.position;
+            Quaternion spawnRot = fireballSpawnPoint.rotation;
+            Vector3 shootDirection = mainCamera.transform.forward;
+
+            if (IsHost) // If the player is the host, spawn the fireball locally
             {
-                fireball.SetPlayer(GetComponent<CharacterClass>());
+                spawnFireballForServerOwner(spawnPos, spawnRot, shootDirection);
             }
-
-            if (mainCamera != null)
-            {
-                Vector3 cameraForward = mainCamera.transform.forward;
-                Rigidbody rb = Fireball.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    rb.useGravity = false;
-                    rb.linearVelocity = cameraForward * fireballSpeed;
-                }
-            }
-
-            Destroy(Fireball, 3f);
+            else // Request the server to spawn the fireball
+                ShootFireballServerRpc(spawnPos, spawnRot, shootDirection, NetworkManager.Singleton.LocalClientId);
         }
+    }
+
+    private void spawnFireballForServerOwner(Vector3 spawnPos, Quaternion spawnRot, Vector3 shootDirection)
+    {
+        if (selectedPrefab == null){
+            if (GetComponent<CharacterClass>().team.Value == CharacterClass.PlayerTeam.Fire){
+                selectedPrefab = fireballPrefab;
+            } else {
+                selectedPrefab = waterballPrefab;
+            }
+        }
+        GameObject Fireball = Instantiate(selectedPrefab, spawnPos, spawnRot);
+        Fireball fireball = Fireball.GetComponent<Fireball>();
+
+        Rigidbody rb = Fireball.GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            Debug.LogError("Fireball is missing a Rigidbody component!");
+            return;
+        }
+
+        NetworkObject netObj = Fireball.GetComponent<NetworkObject>();
+        if (netObj == null)
+        {
+            Debug.LogError("Fireball is missing a NetworkObject component!");
+            return;
+        }
+
+        rb.useGravity = false;
+        rb.linearVelocity = shootDirection * fireballSpeed;
+
+        netObj.Spawn();
+        fireball.setPlayer(GetComponent<CharacterClass>(), NetworkManager.Singleton.LocalClientId);
+        Destroy(Fireball, 3f);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ShootFireballServerRpc(Vector3 spawnPos, Quaternion spawnRot, Vector3 shootDirection, ulong shooterId)
+    {
+        if (!IsServer) return;
+        if (shooterId == 0) {
+            Debug.LogError("Fireball shooter ID is invalid!");
+            return;
+        }
+        if (selectedPrefab == null){
+            if (GetComponent<CharacterClass>().team.Value == CharacterClass.PlayerTeam.Fire){
+                selectedPrefab = fireballPrefab;
+            } else {
+                selectedPrefab = waterballPrefab;
+            }
+        }
+        GameObject Fireball = Instantiate(selectedPrefab, spawnPos, spawnRot);
+        Fireball fireball = Fireball.GetComponent<Fireball>();
+
+        Rigidbody rb = Fireball.GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            Debug.LogError("Fireball is missing a Rigidbody component!");
+            return;
+        }
+
+        NetworkObject netObj = Fireball.GetComponent<NetworkObject>();
+        if (netObj == null)
+        {
+            Debug.LogError("Fireball is missing a NetworkObject component!");
+            return;
+        }
+
+        rb.useGravity = false;
+        rb.linearVelocity = shootDirection * fireballSpeed;
+
+        netObj.Spawn();
+        fireball.SetPlayerServerRpc(shooterId);
+        Destroy(Fireball, 3f);
     }
 
     public void SetPrefab(GameObject prefab)
