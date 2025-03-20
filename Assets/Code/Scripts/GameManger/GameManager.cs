@@ -35,8 +35,6 @@ public class GameManager: MonoBehaviour
     private string currentWinningTeam = "Neutral";
     private int fireScore = 0;
     private int waterScore = 0;
-
-    [SerializeField] private GameObject playersParent;
     private int fireWins = 0;
     private int waterWins = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -204,14 +202,6 @@ public class GameManager: MonoBehaviour
         DynamicGI.UpdateEnvironment();
     }
 
-    public GameObject CreatePlayer(CharacterClass.PlayerTeam team)
-    {
-        GameObject player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity, playersParent.transform);
-        player.GetComponent<CharacterClass>().setPlayersTeam(team);
-        RespawnPlayer(player);
-        return player;
-    }
-
     void SpawnPlayers()
     {
         //Spawns all the players in the game currently at their spawn point.
@@ -318,19 +308,6 @@ public class GameManager: MonoBehaviour
         for (int i = 0; i < teamIcons.Length; i++)
         {
             teamIcons[i].sprite = teamSprites[0];
-        }
-    }
-
-    void DeleteAllPlayers()
-    {
-        foreach (Transform child in playersParent.transform)
-        {
-            Debug.Log("Checking if player: " + child.name);
-            if (child.tag == "Player")
-            {
-                Debug.Log("Destroying player: " + child.name);
-                Destroy(child.gameObject);
-            }
         }
     }
 

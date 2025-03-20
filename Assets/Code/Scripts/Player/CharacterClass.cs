@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.Netcode;
 using Unity.Services.Lobbies.Models;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -13,7 +14,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(UltimateAttack))] // Ultimate
 
 
-public class CharacterClass: MonoBehaviour
+public class CharacterClass: NetworkBehaviour
 {
 
     public enum PlayerTeam
@@ -24,7 +25,12 @@ public class CharacterClass: MonoBehaviour
 
     // Character class variables
     [Header("Character Properties")]
-    public PlayerTeam team;
+    public NetworkVariable<PlayerTeam> team = new NetworkVariable<PlayerTeam>(
+        PlayerTeam.Fire, 
+        NetworkVariableReadPermission.Everyone, 
+        NetworkVariableWritePermission.Server
+    );
+
     [SerializeField] protected float health = 50.0f;
     [SerializeField] protected float maxHealth = 100.0f;
 
@@ -79,14 +85,6 @@ public class CharacterClass: MonoBehaviour
     private void Awake()
     {
         currentCooldowns = new float[abilityCooldowns.Length];
-        if (UnityEngine.Random.value < 0.5f)
-        {
-            team = PlayerTeam.Fire;
-        }
-        else
-        {
-            team = PlayerTeam.Water;
-        }
         animator = GetComponent<Animator>();
         currentAttack1Uses = maxAttack1Uses;
         damageBoostScript = GetComponent<DamageBoost>();
@@ -98,7 +96,24 @@ public class CharacterClass: MonoBehaviour
         elementalDash = GetComponent<ElementalDash>();
         waterRing = GetComponent<WaterRingAttack>();
         ultimate = GetComponent<UltimateAttack>();
+        
 
+        setupAbilities();
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsServer)
+        {
+            AssignRandomTeam();
+        }
+
+        team.OnValueChanged += OnTeamChanged; // Ensure team updates correctly on all clients
+        OnTeamChanged(PlayerTeam.Fire, team.Value); // Call once to set up the abilities
+    }
+
+    private void OnTeamChanged(PlayerTeam previousValue, PlayerTeam newValue)
+    {
         setupAbilities();
     }
 
@@ -126,25 +141,44 @@ public class CharacterClass: MonoBehaviour
         AssignPrefabs();
     }
 
+    [ServerRpc]
+    public void SetTeamServerRpc(PlayerTeam newTeam)
+    {
+        if (!IsServer) return;
+        team.Value = newTeam;
+    }
+
+    private void AssignRandomTeam()
+    {
+        team.Value = UnityEngine.Random.value < 0.5f ? PlayerTeam.Fire : PlayerTeam.Water;
+    }
+
     public Color getTeamColor()
     {
-        return team == PlayerTeam.Fire ? Color.red : Color.blue;
+        return team.Value == PlayerTeam.Fire ? Color.red : Color.blue;
     }
     public PlayerTeam getPlayersTeam(){
-        return team;
+        return team.Value;
     }
     public PlayerTeam getEnemyTeam(){
         //return the opposite of team
-        return team == PlayerTeam.Fire ? PlayerTeam.Water : PlayerTeam.Fire;
+        return team.Value == PlayerTeam.Fire ? PlayerTeam.Water : PlayerTeam.Fire;
     }
     public void setPlayersTeam(PlayerTeam newTeam){
-        if (team == newTeam) return;
-        team = newTeam;
+        if (team.Value == newTeam) return;
+        team.Value = newTeam;
         Respawn();
         setupAbilities();
     }
     public void SwitchTeams(){
-        setPlayersTeam(getEnemyTeam());
+        if (IsServer)
+        {
+            team.Value = team.Value == PlayerTeam.Fire ? PlayerTeam.Water : PlayerTeam.Fire;
+        }
+        else
+        {
+            SetTeamServerRpc(team.Value == PlayerTeam.Fire ? PlayerTeam.Water : PlayerTeam.Fire);
+        }
     }
 
     private void AssignPrefabs()
