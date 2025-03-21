@@ -27,6 +27,7 @@ public class WaterRing : NetworkBehaviour
     [ServerRpc]
     public void setPlayerIDServerRpc(ulong id)
     {
+        if (!GetComponent<NetworkObject>().IsSpawned) return;
         playerID.Value = id;
     }
 
@@ -46,13 +47,18 @@ public class WaterRing : NetworkBehaviour
             if (progress >= 1f)
             {
                 hasExpanded = true;
-                Invoke("DestroyRing", holdDuration);
+                destroyAfterTime(holdDuration);
             }
         }
         else
         {
             transform.Rotate(Vector3.up, slowerrotation * Time.deltaTime, Space.World);
         }
+    }
+
+    private void destroyAfterTime(float time)
+    {
+        destroyRingServerRpc();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -65,7 +71,6 @@ public class WaterRing : NetworkBehaviour
 
         if (myTeam != otherTeam)
         {
-            Debug.Log("Applying Damage and Knockback to: " + other.name);
             character.TakeDamage(damage); // * player.getDamageMultiplier() ADD LATER
             if(player != null)
             {
@@ -78,7 +83,6 @@ public class WaterRing : NetworkBehaviour
             float knockbackDuration = 0.2f; 
 
             StartCoroutine(Knockback(other.transform, knockbackDirection, knockbackDistance, knockbackDuration));
-            Debug.Log("Knockback Applied");
         }
     }
 
@@ -96,6 +100,12 @@ public class WaterRing : NetworkBehaviour
         }
 
         target.position = endPosition;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void destroyRingServerRpc()
+    {
+        DestroyRing();
     }
 
     void DestroyRing()
