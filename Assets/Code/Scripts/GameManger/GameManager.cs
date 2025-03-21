@@ -9,6 +9,11 @@ using UnityEngine.UI;
 
 public class GameManager: NetworkBehaviour
 {
+    public static GameManager Instance
+    {
+        get; private set;
+    }
+
     public ZoneControl[] zones;
     public Transform Firespawn;
     public Transform Waterspawn;
@@ -42,6 +47,17 @@ public class GameManager: NetworkBehaviour
     private NetworkVariable<int> fireCount = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private NetworkVariable<int> waterCount = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        } else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         ChooseNewZone();
@@ -68,6 +84,9 @@ public class GameManager: NetworkBehaviour
             character.SetTeamServerRpc(CharacterClass.PlayerTeam.Water);
             IncrementWaterCountServerRpc();
         }
+
+        Debug.Log("Fire Team Count: " + fireCount.Value);
+        Debug.Log("Water Team Count: " + waterCount.Value);
     }
 
     [ServerRpc]
