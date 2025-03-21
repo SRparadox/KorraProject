@@ -1,10 +1,8 @@
-using UnityEngine;
-using Unity.Netcode;
-using UnityEditor.Rendering;
 using System.Collections;
-using UnityEngine.Analytics;
+using Unity.Netcode;
+using UnityEngine;
 
-public class Fireball : NetworkBehaviour
+public class Fireball: NetworkBehaviour
 {
     public int damage = 10;
     private CharacterClass player;
@@ -34,15 +32,16 @@ public class Fireball : NetworkBehaviour
         CharacterClass target = collision.gameObject.GetComponent<CharacterClass>();
         NetworkObject targetNetworkObject = collision.gameObject.GetComponent<NetworkObject>();
 
-        if (target == null) 
+        if (target == null)
         {
             deleteFireballAfterTime(0.5f); //Lag compensation for fireball
             return;
         }
 
-        if (target.IsHost) {
-        }
-        else if (!target.IsOwner) return; // Only the player's own client should handle health
+        if (target.IsHost)
+        {
+        } else if (!target.IsOwner)
+            return; // Only the player's own client should handle health
 
         if (player == null)
         {
@@ -58,7 +57,7 @@ public class Fireball : NetworkBehaviour
             }
             if (player == null && team.Value == 0)
             {
-            
+
                 Debug.LogError("Fireball's shooter is missing and team not set!");
                 deleteFireballAfterTime(0.5f); //Lag compensation for fireball
                 return;
@@ -68,15 +67,15 @@ public class Fireball : NetworkBehaviour
         ulong targetClientId = targetNetworkObject.OwnerClientId;
 
         // Check if fireball hit its own shooter
-        if (shooterID.Value == targetClientId) 
+        if (shooterID.Value == targetClientId)
         {
             return;
         }
 
         if (team.Value == 0)
-        {   
+        {
             //Try to get value from player
-            team.Value = (int)player.getPlayersTeam() + 1;
+            team.Value = (int) player.getPlayersTeam() + 1;
 
         }
         // Team check: only damage if the player is from a different team
@@ -86,20 +85,23 @@ public class Fireball : NetworkBehaviour
             Debug.Log("Damage Dealt: " + damage);
 
             // Tell the shooter they successfully hit
-            if (shooterID.Value != 0 && player == null) player = NetworkManager.Singleton.SpawnManager.SpawnedObjects[shooterID.Value].GetComponent<CharacterClass>();
+            if (shooterID.Value != 0 && player == null)
+                player = NetworkManager.Singleton.SpawnManager.SpawnedObjects[shooterID.Value].GetComponent<CharacterClass>();
             Debug.Log("Shooter ID: " + shooterID.Value);
-            if (player != null) player.OnSuccessfulHit(shooterID.Value); // Notify the player of a successful hit
+            if (player != null)
+                player.OnSuccessfulHit(shooterID.Value); // Notify the player of a successful hit
 
             // Destroy the fireball ONLY on the owner’s client
             deleteObjectServerRpc();
-            
+
         }
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void SetPlayerServerRpc(ulong shooterClientId)
     {
-        if (!IsServer) return;
+        if (!IsServer)
+            return;
 
         shooterID.Value = shooterClientId;
 
@@ -126,7 +128,8 @@ public class Fireball : NetworkBehaviour
     {
         NetworkObject.Despawn();
 
-        if (gameObject != null) Destroy(gameObject);
+        if (gameObject != null)
+            Destroy(gameObject);
     }
 
     IEnumerator deleteFireballAfterTime(float time)
@@ -135,13 +138,16 @@ public class Fireball : NetworkBehaviour
         deleteObjectServerRpc();
     }
 
-    private CharacterClass.PlayerTeam getFireballTeam(){
-        if (team.Value == 1){
+    private CharacterClass.PlayerTeam getFireballTeam()
+    {
+        if (team.Value == 1)
+        {
             return CharacterClass.PlayerTeam.Fire;
-        } else if (team.Value == 2){
+        } else if (team.Value == 2)
+        {
             return CharacterClass.PlayerTeam.Water;
-        }
-        else {
+        } else
+        {
             return CharacterClass.PlayerTeam.Fire;
         }
     }
