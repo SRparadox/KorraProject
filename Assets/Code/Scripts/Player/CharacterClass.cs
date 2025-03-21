@@ -26,8 +26,8 @@ public class CharacterClass: NetworkBehaviour
     // Character class variables
     [Header("Character Properties")]
     public NetworkVariable<PlayerTeam> team = new NetworkVariable<PlayerTeam>(
-        PlayerTeam.Fire, 
-        NetworkVariableReadPermission.Everyone, 
+        PlayerTeam.Fire,
+        NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Server
     );
 
@@ -79,7 +79,7 @@ public class CharacterClass: NetworkBehaviour
     public GameObject dmgTextPrefab;
     private DamageBoost damageBoostScript;
     public ParticleSystem healParticles;
-    private GameManager GameManager;
+    private GameManager gameManager;
 
 
     private void Awake()
@@ -88,7 +88,7 @@ public class CharacterClass: NetworkBehaviour
         animator = GetComponent<Animator>();
         currentAttack1Uses = maxAttack1Uses;
         damageBoostScript = GetComponent<DamageBoost>();
-        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         // Retrieve ability references
         fireball = GetComponent<FireballShooter>();
@@ -96,7 +96,7 @@ public class CharacterClass: NetworkBehaviour
         elementalDash = GetComponent<ElementalDash>();
         waterRing = GetComponent<WaterRingAttack>();
         ultimate = GetComponent<UltimateAttack>();
-        
+
 
         setupAbilities();
     }
@@ -105,7 +105,7 @@ public class CharacterClass: NetworkBehaviour
     {
         if (IsServer)
         {
-            AssignRandomTeam();
+            gameManager.OnPlayerJoined(this);
         }
 
         team.OnValueChanged += OnTeamChanged; // Ensure team updates correctly on all clients
@@ -118,7 +118,8 @@ public class CharacterClass: NetworkBehaviour
         Respawn();
     }
 
-    private void setupAbilities(){
+    private void setupAbilities()
+    {
         switch (getPlayersTeam())
         {
             case PlayerTeam.Fire:
@@ -145,9 +146,17 @@ public class CharacterClass: NetworkBehaviour
     [ServerRpc]
     public void SetTeamServerRpc(PlayerTeam newTeam)
     {
-        if (!IsServer) return;
         team.Value = newTeam;
-        
+
+        if (newTeam == PlayerTeam.Fire)
+        {
+            gameManager.IncrementFireCountServerRpc();
+            gameManager.DecrementWaterCountServerRpc();
+        } else
+        {
+            gameManager.IncrementWaterCountServerRpc();
+            gameManager.DecrementFireCountServerRpc();
+        }
     }
 
     private void AssignRandomTeam()
@@ -159,25 +168,29 @@ public class CharacterClass: NetworkBehaviour
     {
         return team.Value == PlayerTeam.Fire ? Color.red : Color.blue;
     }
-    public PlayerTeam getPlayersTeam(){
+    public PlayerTeam getPlayersTeam()
+    {
         return team.Value;
     }
-    public PlayerTeam getEnemyTeam(){
+    public PlayerTeam getEnemyTeam()
+    {
         //return the opposite of team
         return team.Value == PlayerTeam.Fire ? PlayerTeam.Water : PlayerTeam.Fire;
     }
-    public void setPlayersTeam(PlayerTeam newTeam){
-        if (team.Value == newTeam) return;
+    public void setPlayersTeam(PlayerTeam newTeam)
+    {
+        if (team.Value == newTeam)
+            return;
         team.Value = newTeam;
         Respawn();
         setupAbilities();
     }
-    public void SwitchTeams(){
+    public void SwitchTeams()
+    {
         if (IsServer)
         {
             team.Value = team.Value == PlayerTeam.Fire ? PlayerTeam.Water : PlayerTeam.Fire;
-        }
-        else
+        } else
         {
             SetTeamServerRpc(team.Value == PlayerTeam.Fire ? PlayerTeam.Water : PlayerTeam.Fire);
         }
@@ -199,7 +212,8 @@ public class CharacterClass: NetworkBehaviour
 
     void Update()
     {
-        if (isPlayer) UpdateCooldowns();
+        if (isPlayer)
+            UpdateCooldowns();
     }
 
     public float getDamageMultiplier()
@@ -253,7 +267,7 @@ public class CharacterClass: NetworkBehaviour
     }
     public void PerformUltimate()
     {
-        if(ultimateCharge >= maxUltimateCharge)
+        if (ultimateCharge >= maxUltimateCharge)
         {
             if (ultimate != null)
             {
@@ -262,8 +276,7 @@ public class CharacterClass: NetworkBehaviour
                 ultimateCharge = 0;
                 Debug.Log("Ultimate actived!");
             }
-        }
-        else
+        } else
         {
             Debug.Log("Ultimate not ready yet");
         }
@@ -276,17 +289,17 @@ public class CharacterClass: NetworkBehaviour
             Debug.LogWarning("Warning: Current cooldowns wasn't initialized correctly or differs from length of cooldown array");
             return;
         }
-        
+
         for (int i = 0; i < currentCooldowns.Length; i++)
         {
-            if(i == 4)
+            if (i == 4)
             {
                 continue;
             }
             if (currentCooldowns[i] > 0.0f)
             {
                 currentCooldowns[i] -= Time.deltaTime;
-                
+
             } else
             {
                 currentCooldowns[i] = 0;
@@ -310,7 +323,7 @@ public class CharacterClass: NetworkBehaviour
         }
         if (index == 4)
         {
-            float ultimatePercentage = (float)ultimateCharge / maxUltimateCharge * 100f;
+            float ultimatePercentage = (float) ultimateCharge / maxUltimateCharge * 100f;
             return $"{ultimatePercentage:F0}%";
         }
         string text = currentCooldowns[index] > 0 ? currentCooldowns[index].ToString("F1") + "s" : "Ready";
@@ -406,7 +419,8 @@ public class CharacterClass: NetworkBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!canTakeDamage) return;
+        if (!canTakeDamage)
+            return;
         Debug.Log("Player has taken " + damage + " damage.");
         health -= damage;
         if (takeDamageParticles != null)
@@ -423,13 +437,15 @@ public class CharacterClass: NetworkBehaviour
     }
 
 
-    public float getHealth(){
+    public float getHealth()
+    {
         return health;
     }
 
-    public void Respawn(){
+    public void Respawn()
+    {
         health = maxHealth;
-        GameManager.RespawnPlayer(gameObject);
+        gameManager.RespawnPlayer(gameObject);
     }
 
     public void Heal(float amount)
@@ -444,7 +460,8 @@ public class CharacterClass: NetworkBehaviour
     [SerializeField] private AudioSource hitsound;
     public void OnSuccessfulHit()
     {
-        if (!IsOwner) return; // Only the owner runs this
+        if (!IsOwner)
+            return; // Only the owner runs this
         ultimateCharge = Mathf.Min(ultimateCharge + 1, maxUltimateCharge);
         hitsound.Play();
     }

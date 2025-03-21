@@ -38,7 +38,10 @@ public class GameManager: NetworkBehaviour
     private int waterScore = 0;
     private int fireWins = 0;
     private int waterWins = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private NetworkVariable<int> fireCount = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    private NetworkVariable<int> waterCount = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
     void Start()
     {
         ChooseNewZone();
@@ -49,6 +52,62 @@ public class GameManager: NetworkBehaviour
             spawnAPowerup();
         }
         StartCoroutine(spawnPowerUpEveryXSeconds(powerUpSpawnInterval));
+    }
+
+    public void AssignTeam(CharacterClass character)
+    {
+        if (!IsServer)
+            return;
+
+        if (fireCount.Value <= waterCount.Value)
+        {
+            character.SetTeamServerRpc(CharacterClass.PlayerTeam.Fire);
+            IncrementFireCountServerRpc();
+        } else
+        {
+            character.SetTeamServerRpc(CharacterClass.PlayerTeam.Water);
+            IncrementWaterCountServerRpc();
+        }
+    }
+
+    [ServerRpc]
+    public void IncrementFireCountServerRpc()
+    {
+        fireCount.Value++;
+    }
+
+    [ServerRpc]
+    public void IncrementWaterCountServerRpc()
+    {
+        waterCount.Value++;
+    }
+
+    public void OnPlayerJoined(CharacterClass character)
+    {
+        AssignTeam(character);
+    }
+
+    public void OnPlayerLeft(CharacterClass character)
+    {
+        if (character.getPlayersTeam() == CharacterClass.PlayerTeam.Fire)
+        {
+            DecrementFireCountServerRpc();
+        } else
+        {
+            DecrementWaterCountServerRpc();
+        }
+    }
+
+    [ServerRpc]
+    public void DecrementFireCountServerRpc()
+    {
+        fireCount.Value--;
+    }
+
+    [ServerRpc]
+    public void DecrementWaterCountServerRpc()
+    {
+        waterCount.Value--;
     }
 
     IEnumerator spawnPowerUpEveryXSeconds(float seconds)
@@ -81,9 +140,10 @@ public class GameManager: NetworkBehaviour
             Debug.LogError("Powerups: No children found under the parent transform");
             return;
         }
-        if (allAreActive){
+        if (allAreActive)
+        {
             Debug.LogError("Powerups: All powerups are active, no powerup spawned");
-            return; 
+            return;
         }
 
         // Choose a random child
