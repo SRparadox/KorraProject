@@ -56,19 +56,17 @@ public class GameManager: NetworkBehaviour
 
     public void IncrementFirePlayerCount()
     {
-        Debug.Log("incremeting fire player count");
         firePlayerCount.Value++;
     }
 
     public void IncrementWaterPlayerCount()
     {
-        Debug.Log("incremeting water player count");
         waterPlayerCount.Value++;
     }
 
     public void DecrementFirePlayerCount()
     {
-        if (IsServer && firePlayerCount.Value > 0)
+        if (firePlayerCount.Value > 0)
         {
             firePlayerCount.Value--;
         }
@@ -76,7 +74,7 @@ public class GameManager: NetworkBehaviour
 
     public void DecrementWaterPlayerCount()
     {
-        if (IsServer && waterPlayerCount.Value > 0)
+        if (waterPlayerCount.Value > 0)
         {
             waterPlayerCount.Value--;
         }
