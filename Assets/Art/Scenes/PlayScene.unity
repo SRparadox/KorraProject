@@ -11247,6 +11247,7 @@ MonoBehaviour:
   AudioSource: {fileID: 203398212}
   MusicVolume: {fileID: 676011554}
   SensitivitySlider: {fileID: 837906541}
+  sessionCodeText: {fileID: 742414255}
 --- !u!1 &676011552
 GameObject:
   m_ObjectHideFlags: 0
@@ -34744,8 +34745,8 @@ RectTransform:
   - {fileID: 617658147}
   - {fileID: 1661966517}
   - {fileID: 1576072572}
-  - {fileID: 506506867}
   - {fileID: 1022510526}
+  - {fileID: 506506867}
   m_Father: {fileID: 675305833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

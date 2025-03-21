@@ -1,7 +1,9 @@
+using Mono.Cecil.Cil;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Pause : MonoBehaviour
+public class Pause: MonoBehaviour
 {
     public bool ToggleMenu;
     public bool ToggleAbilityButtons;
@@ -14,17 +16,24 @@ public class Pause : MonoBehaviour
     [SerializeField] private GameObject HUD;
     [SerializeField] private GameObject AbilityButtons;
     [SerializeField] private AudioSource AudioSource;
-    
+
     [SerializeField] private Slider MusicVolume;
     [SerializeField] private Slider SensitivitySlider;
 
     public static float CurrentSensitivity = 4;
     public static float CurrentVolume = 7;
 
+    [SerializeField] private TMP_Text sessionCodeText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (PlayerPrefs.HasKey("SessionCode"))
+        {
+            PlayerPrefs.SetString("SessionCode", "---");
+            PlayerPrefs.Save();
+        }
+
         SensitivitySlider.value = CurrentSensitivity;
         MusicVolume.value = CurrentVolume;
     }
@@ -34,21 +43,29 @@ public class Pause : MonoBehaviour
     {
         CurrentSensitivity = SensitivitySlider.value;
         CurrentVolume = MusicVolume.value;
-        if(Input.GetKeyDown(KeyCode.Escape)) {
-                HUD.SetActive(ToggleMenu);
-                AbilityButtons.SetActive(ToggleMenu);
-                ToggleMenu = !ToggleMenu;
-                PauseMenu.SetActive(ToggleMenu);
-                SettingsMenu.SetActive(false);
-                CreditsMenu.SetActive(false);
-                Cursor.lockState = ToggleMenu ? CursorLockMode.None : CursorLockMode.Locked;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            HUD.SetActive(ToggleMenu);
+            AbilityButtons.SetActive(ToggleMenu);
+            ToggleMenu = !ToggleMenu;
+            PauseMenu.SetActive(ToggleMenu);
+            SettingsMenu.SetActive(false);
+            CreditsMenu.SetActive(false);
+            Cursor.lockState = ToggleMenu ? CursorLockMode.None : CursorLockMode.Locked;
+
+            if (ToggleMenu)
+            {
+                RetrieveSessionCode();
+            }
         }
 
         // in case the player leaves and reenters application while paused
-        if ((PauseMenu.activeSelf || SettingsMenu.activeSelf) && Cursor.lockState == CursorLockMode.Locked) {
+        if ((PauseMenu.activeSelf || SettingsMenu.activeSelf) && Cursor.lockState == CursorLockMode.Locked)
+        {
             Cursor.lockState = CursorLockMode.None;
         }
-        if ((!PauseMenu.activeSelf && !SettingsMenu.activeSelf) && ToggleAbilityButtons) {
+        if ((!PauseMenu.activeSelf && !SettingsMenu.activeSelf) && ToggleAbilityButtons)
+        {
             AbilityButtons.SetActive(false);
         }
     }
@@ -91,5 +108,20 @@ public class Pause : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void RetrieveSessionCode()
+    {
+        if (sessionCodeText == null)
+            return;
+
+        if (PlayerPrefs.HasKey("SessionCode"))
+        {
+            string storedCode = PlayerPrefs.GetString("SessionCode");
+            sessionCodeText.text = !string.IsNullOrEmpty(storedCode) ? storedCode : "---";
+        } else
+        {
+            sessionCodeText.text = "---";
+        }
     }
 }
