@@ -79,7 +79,7 @@ public class CharacterClass: NetworkBehaviour
     public GameObject dmgTextPrefab;
     private DamageBoost damageBoostScript;
     public ParticleSystem healParticles;
-    private GameManager gameManager;
+    private GameManager GameManager;
 
 
     private void Awake()
@@ -88,7 +88,7 @@ public class CharacterClass: NetworkBehaviour
         animator = GetComponent<Animator>();
         currentAttack1Uses = maxAttack1Uses;
         damageBoostScript = GetComponent<DamageBoost>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        GameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         // Retrieve ability references
         fireball = GetComponent<FireballShooter>();
@@ -105,7 +105,7 @@ public class CharacterClass: NetworkBehaviour
     {
         if (IsServer)
         {
-            gameManager.OnPlayerJoined(this);
+            AssignTeam();
         }
 
         team.OnValueChanged += OnTeamChanged; // Ensure team updates correctly on all clients
@@ -146,22 +146,23 @@ public class CharacterClass: NetworkBehaviour
     [ServerRpc]
     public void SetTeamServerRpc(PlayerTeam newTeam)
     {
+        if (!IsServer)
+            return;
         team.Value = newTeam;
 
-        if (newTeam == PlayerTeam.Fire)
-        {
-            gameManager.IncrementFireCountServerRpc();
-            gameManager.DecrementWaterCountServerRpc();
-        } else
-        {
-            gameManager.IncrementWaterCountServerRpc();
-            gameManager.DecrementFireCountServerRpc();
-        }
     }
 
-    private void AssignRandomTeam()
+    private void AssignTeam()
     {
-        team.Value = UnityEngine.Random.value < 0.5f ? PlayerTeam.Fire : PlayerTeam.Water;
+        if (GameManager.firePlayerCount.Value <= GameManager.waterPlayerCount.Value)
+        {
+            team.Value = PlayerTeam.Fire;
+            GameManager.IncrementFirePlayerCount();
+        } else
+        {
+            team.Value = PlayerTeam.Water;
+            GameManager.IncrementWaterPlayerCount();
+        }
     }
 
     public Color getTeamColor()
@@ -421,19 +422,42 @@ public class CharacterClass: NetworkBehaviour
     {
         if (!canTakeDamage)
             return;
-        Debug.Log("Player has taken " + damage + " damage.");
+        ulong clientId = NetworkManager.LocalClientId;
+        if (IsOwner)
+            TakeDamageServerRpc(damage, clientId);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeDamageServerRpc(float damage, ulong playerID)
+    {
+        if (!IsServer)
+            return;
+        if (!canTakeDamage)
+            return;
         health -= damage;
-        if (takeDamageParticles != null)
+        Debug.Log($"[Server] {gameObject.name} took {damage} damage. New health: {health}");
+
+        TakeDamageClientRpc(health, playerID);
+    }
+
+    [ClientRpc]
+    private void TakeDamageClientRpc(float newHealth, ulong playerID)
+    {
+
+        if (playerID == NetworkManager.LocalClientId)
         {
-            takeDamageParticles.Play();
+            health = newHealth;
+            Debug.Log($"[Client] {gameObject.name} updated health: {health}");
+            StartCoroutine(ResetDamageCooldown());
         }
-        spawnDamageText(damage);
-        canTakeDamage = false;
-        StartCoroutine(ResetDamageCooldown());
+        takeDamageParticles.Play();
+        if (!IsOwner)
+            return; // Only the owner runs this
         if (health <= 0)
         {
             Respawn();
         }
+        canTakeDamage = false;
     }
 
 
@@ -445,7 +469,7 @@ public class CharacterClass: NetworkBehaviour
     public void Respawn()
     {
         health = maxHealth;
-        gameManager.RespawnPlayer(gameObject);
+        GameManager.RespawnPlayer(gameObject);
     }
 
     public void Heal(float amount)

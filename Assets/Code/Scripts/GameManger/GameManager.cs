@@ -15,7 +15,7 @@ public class GameManager: NetworkBehaviour
     public float roundDuration = 120f;
     public int maxControlScore = 100;
     public int scoreIncrement = 5; // How much the score increases each tick
-    public float scoreTickRate = 2f; //How often score increases
+    public float scoreTickRate = 2f; // How often score increases
     public Material waterMaterial, lavaMaterial;
     public Renderer waterRenderer;
     public Material defaultSkybox, fireSkybox, waterSkybox;
@@ -38,7 +38,10 @@ public class GameManager: NetworkBehaviour
     private int waterScore = 0;
     private int fireWins = 0;
     private int waterWins = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public NetworkVariable<int> firePlayerCount = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    public NetworkVariable<int> waterPlayerCount = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
     void Start()
     {
         ChooseNewZone();
@@ -49,6 +52,38 @@ public class GameManager: NetworkBehaviour
             spawnAPowerup();
         }
         StartCoroutine(spawnPowerUpEveryXSeconds(powerUpSpawnInterval));
+    }
+
+    public void IncrementFirePlayerCount()
+    {
+        if (IsServer)
+        {
+            firePlayerCount.Value++;
+        }
+    }
+
+    public void IncrementWaterPlayerCount()
+    {
+        if (IsServer)
+        {
+            waterPlayerCount.Value++;
+        }
+    }
+
+    public void DecrementFirePlayerCount()
+    {
+        if (IsServer && firePlayerCount.Value > 0)
+        {
+            firePlayerCount.Value--;
+        }
+    }
+
+    public void DecrementWaterPlayerCount()
+    {
+        if (IsServer && waterPlayerCount.Value > 0)
+        {
+            waterPlayerCount.Value--;
+        }
     }
 
     IEnumerator spawnPowerUpEveryXSeconds(float seconds)
@@ -62,7 +97,7 @@ public class GameManager: NetworkBehaviour
 
     void spawnAPowerup()
     {
-        //if not the host of the server, return
+        // if not the host of the server, return
         if (!NetworkManager.Singleton.IsHost)
             return;
         // Get all children of the parent transform
@@ -74,7 +109,7 @@ public class GameManager: NetworkBehaviour
         {
             children[i] = parentTransform.GetChild(i);
             if (children[i].GetComponent<PowerUpGiver>().isActive.Value == false)
-                allAreActive = false; //If theres nothing to spawn then dont spawn
+                allAreActive = false; // If theres nothing to spawn then dont spawn
         }
         if (children.Length == 0)
         {
