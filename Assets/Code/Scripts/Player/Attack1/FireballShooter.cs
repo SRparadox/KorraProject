@@ -1,5 +1,6 @@
 using Unity.Netcode;
 using Unity.Services.Matchmaker.Models;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -82,47 +83,58 @@ public class FireballShooter: NetworkBehaviour
 
         netObj.Spawn();
         fireball.setPlayer(GetComponent<CharacterClass>(), NetworkManager.Singleton.LocalClientId);
-        Destroy(Fireball, 3f);
+        fireball.setTeamServerRpc(teamToInt(GetComponent<CharacterClass>().team.Value));
     }
 
     [ServerRpc(RequireOwnership = false)]
     private void ShootFireballServerRpc(Vector3 spawnPos, Quaternion spawnRot, Vector3 shootDirection, ulong shooterId)
     {
         if (!IsServer) return;
-        if (shooterId == 0) {
-            Debug.LogError("Fireball shooter ID is invalid!");
-            return;
-        }
-        if (selectedPrefab == null){
-            if (GetComponent<CharacterClass>().team.Value == CharacterClass.PlayerTeam.Fire){
-                selectedPrefab = fireballPrefab;
-            } else {
-                selectedPrefab = waterballPrefab;
+            if (shooterId == 0) {
+                Debug.LogError("Fireball shooter ID is invalid!");
+                return;
             }
+            if (selectedPrefab == null){
+                if (GetComponent<CharacterClass>().team.Value == CharacterClass.PlayerTeam.Fire){
+                    selectedPrefab = fireballPrefab;
+                } else {
+                    selectedPrefab = waterballPrefab;
+                }
+            }
+            GameObject Fireball = Instantiate(selectedPrefab, spawnPos, spawnRot);
+            Fireball fireball = Fireball.GetComponent<Fireball>();
+            fireball.setPlayer(GetComponent<CharacterClass>(), shooterId);
+
+            Rigidbody rb = Fireball.GetComponent<Rigidbody>();
+            if (rb == null)
+            {
+                Debug.LogError("Fireball is missing a Rigidbody component!");
+                return;
+            }
+
+            NetworkObject netObj = Fireball.GetComponent<NetworkObject>();
+            if (netObj == null)
+            {
+                Debug.LogError("Fireball is missing a NetworkObject component!");
+                return;
+            }
+
+            rb.useGravity = false;
+            rb.linearVelocity = shootDirection * fireballSpeed;
+
+            netObj.Spawn();
+            fireball.SetPlayerServerRpc(shooterId);
+            fireball.setTeamServerRpc(teamToInt(GetComponent<CharacterClass>().getPlayersTeam()));
+    }
+    
+    private int teamToInt(CharacterClass.PlayerTeam team){
+        if (team == CharacterClass.PlayerTeam.Fire){
+            return 1;
+        } else if (team == CharacterClass.PlayerTeam.Water){
+            return 2;
+        } else {
+            return 0;
         }
-        GameObject Fireball = Instantiate(selectedPrefab, spawnPos, spawnRot);
-        Fireball fireball = Fireball.GetComponent<Fireball>();
-
-        Rigidbody rb = Fireball.GetComponent<Rigidbody>();
-        if (rb == null)
-        {
-            Debug.LogError("Fireball is missing a Rigidbody component!");
-            return;
-        }
-
-        NetworkObject netObj = Fireball.GetComponent<NetworkObject>();
-        if (netObj == null)
-        {
-            Debug.LogError("Fireball is missing a NetworkObject component!");
-            return;
-        }
-
-        rb.useGravity = false;
-        rb.linearVelocity = shootDirection * fireballSpeed;
-
-        netObj.Spawn();
-        fireball.SetPlayerServerRpc(shooterId);
-        Destroy(Fireball, 3f);
     }
 
     public void SetPrefab(GameObject prefab)

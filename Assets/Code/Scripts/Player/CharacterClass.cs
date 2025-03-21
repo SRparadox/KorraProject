@@ -115,6 +115,7 @@ public class CharacterClass: NetworkBehaviour
     private void OnTeamChanged(PlayerTeam previousValue, PlayerTeam newValue)
     {
         setupAbilities();
+        Respawn();
     }
 
     private void setupAbilities(){
@@ -146,6 +147,7 @@ public class CharacterClass: NetworkBehaviour
     {
         if (!IsServer) return;
         team.Value = newTeam;
+        
     }
 
     private void AssignRandomTeam()
@@ -399,6 +401,7 @@ public class CharacterClass: NetworkBehaviour
         GameObject dmgText = Instantiate(dmgTextPrefab, textSpawnLocation.transform.position, Quaternion.identity);
         dmgText.GetComponent<DamageText>().setDamageText(damage);
     }
+
     public ParticleSystem takeDamageParticles;
 
     public void TakeDamage(float damage)
@@ -438,14 +441,12 @@ public class CharacterClass: NetworkBehaviour
         }
         health = Mathf.Min(health + amount, maxHealth);
     }
-
+    [SerializeField] private AudioSource hitsound;
     public void OnSuccessfulHit()
     {
+        if (!IsOwner) return; // Only the owner runs this
         ultimateCharge = Mathf.Min(ultimateCharge + 1, maxUltimateCharge);
-        if(ultimateCharge >= maxUltimateCharge)
-        {
-            Debug.Log("Ultimate is ready!");
-        }
+        hitsound.Play();
     }
 
 }

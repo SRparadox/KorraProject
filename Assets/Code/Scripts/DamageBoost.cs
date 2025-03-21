@@ -1,15 +1,22 @@
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class DamageBoost: MonoBehaviour
+public class DamageBoost: NetworkBehaviour
 {
     public ParticleSystem particleSystem;
-    float DamageMultiplier = 1.0f;
+    //sync damage multiplier with network
+    public NetworkVariable<float> damageMultiplier = new NetworkVariable<float>(
+        1.0f, 
+        NetworkVariableReadPermission.Everyone, 
+        NetworkVariableWritePermission.Owner
+    );
     public float increaseMultiplierBy = 0.5f;
     public float Duration = 5.0f;
     private bool isActive = false;
 
-    void startParticleSystem()
+    [ServerRpc(RequireOwnership = false)]
+    void startParticleSystemServerRpc()
     {
         if (particleSystem != null)
         {
@@ -19,12 +26,13 @@ public class DamageBoost: MonoBehaviour
 
     public void ActivateBoost()
     {
+        if (!IsOwner) return; // Only the owner can activate the boost
         if (!isActive)
         {
             Debug.Log("Activated Damage Boost");
             isActive = true;
-            DamageMultiplier += increaseMultiplierBy;
-            startParticleSystem();
+            damageMultiplier.Value += increaseMultiplierBy;
+            startParticleSystemServerRpc();
             StartCoroutine(DeactivateBoostAfterDelay());
 
         }
@@ -34,7 +42,7 @@ public class DamageBoost: MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(Duration);
         isActive = false;
-        DamageMultiplier -= increaseMultiplierBy;
+        damageMultiplier.Value -= increaseMultiplierBy;
         Debug.Log("Deactivated Damage Boost");
     }
 
@@ -42,8 +50,8 @@ public class DamageBoost: MonoBehaviour
     {
         if (isActive)
         {
-            Debug.Log("Damage Multiplier: " + DamageMultiplier);
-            return DamageMultiplier;
+            Debug.Log("Damage Multiplier: " + damageMultiplier.Value);
+            return damageMultiplier.Value;
         } else
         {
             return 1.0f;

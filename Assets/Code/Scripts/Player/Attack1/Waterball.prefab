@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 110525236109340352}
   - component: {fileID: 1294952889847376290}
   - component: {fileID: 67642812623565625}
-  m_Layer: 0
+  - component: {fileID: 3824906500523047259}
+  m_Layer: 7
   m_Name: Waterball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,6 +201,23 @@ MonoBehaviour:
   SwitchTransformSpaceWhenParented: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &3824906500523047259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7368918336036502496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkRigidbodyBaseExpanded: 1
+  UseRigidBodyForMotion: 0
+  AutoUpdateKinematicState: 0
+  AutoSetKinematicOnDespawn: 1
 --- !u!1001 &4739098717499703313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,6 +285,14 @@ PrefabInstance:
     - target: {fileID: 5569776766358458418, guid: 4cf6620036a19a24a8616ba3fe7f2f48, type: 3}
       propertyPath: m_Name
       value: WaterBallParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5569776766358458418, guid: 4cf6620036a19a24a8616ba3fe7f2f48, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920250656666277652, guid: 4cf6620036a19a24a8616ba3fe7f2f48, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
