@@ -163,6 +163,9 @@ public class CharacterClass: NetworkBehaviour
             team.Value = PlayerTeam.Water;
             GameManager.IncrementWaterPlayerCount();
         }
+
+        Debug.Log("Fire: " + GameManager.firePlayerCount.Value);
+        Debug.Log("Water: " + GameManager.waterPlayerCount.Value);
     }
 
     public Color getTeamColor()

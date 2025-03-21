@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerNetwork: NetworkBehaviour
 {
-    private CharacterClass characterClass;
     private CharacterController characterController;
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
@@ -16,7 +15,6 @@ public class PlayerNetwork: NetworkBehaviour
 
     private void Awake()
     {
-        characterClass = GetComponent<CharacterClass>();
         characterController = GetComponent<CharacterController>();
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
@@ -31,11 +29,6 @@ public class PlayerNetwork: NetworkBehaviour
         if (IsOwner)
         {
             EnableLocalPlayer();
-
-            if (characterClass != null)
-            {
-                GameManager.Instance.AssignTeam(characterClass);
-            }
         } else
         {
             EnableRemotePlayer();
