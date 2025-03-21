@@ -20,7 +20,7 @@ public class Pause: MonoBehaviour
     [SerializeField] private Slider SensitivitySlider;
 
     public static float CurrentSensitivity = 4;
-    public static float CurrentVolume = 7;
+    public static float CurrentVolume = 2;
 
     [SerializeField] private TMP_Text sessionCodeText;
 

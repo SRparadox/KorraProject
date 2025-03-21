@@ -75,7 +75,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 28925861564416
-    m_Localized: El Partido
+    m_Localized: Unirse al Partido
     m_Metadata:
       m_Items: []
   - m_Id: 29268649447424
@@ -150,20 +150,20 @@ MonoBehaviour:
   - m_Id: 802382586109952
     m_Localized: 'Cambiar idioma principal
 
-      
+
 
 
 
 
       Mostrar/Ocultar HUD
 
-      
+
 
 
       Modo
       de una mano (Habilitar solo en el juego)
 
-      
+
 
 '
     m_Metadata:
