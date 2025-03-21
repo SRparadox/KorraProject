@@ -110,10 +110,14 @@ public class Fireball : NetworkBehaviour
         }
     }
 
-    public void setPlayer(CharacterClass player, ulong shooterClientId)
+    public void setPlayer(CharacterClass player)
     {
         this.player = player;
-        shooterID.Value = shooterClientId;
+        
+    }
+    public void setPlayerID(ulong id)
+    {
+        shooterID.Value = id;
     }
 
     [ServerRpc(RequireOwnership = false)]

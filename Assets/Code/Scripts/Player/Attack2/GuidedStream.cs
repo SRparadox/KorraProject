@@ -1,15 +1,17 @@
 using SplineMesh;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 // code modified from https://youtu.be/3CcWus6d_B8?feature=shared
 
-public class GuidedStream: MonoBehaviour
+public class GuidedStream: NetworkBehaviour
 {
     [SerializeField] float pointCount;
     [SerializeField] float radius;
     [SerializeField] Vector3 scale;
+    [SerializeField] private CharacterClass.PlayerTeam team;
 
     [SerializeField] Spline spline;
     [SerializeField] ExampleContortAlong contortAlong;
@@ -23,9 +25,10 @@ public class GuidedStream: MonoBehaviour
     [SerializeField] float splashActivationOffset;
     [SerializeField] float puddleScaleSpeed;
     [SerializeField] float hitDetectionRadius;
+    List<ulong> hitEnemies = new List<ulong>();
 
     private Vector3 target;
-    private float damageAmount;
+    private float damageAmount = 40f;
     private CharacterClass player;
 
     public void SendTo(Vector3 target)
@@ -34,6 +37,18 @@ public class GuidedStream: MonoBehaviour
 
         StopAllCoroutines();
         StartCoroutine(Coroutine_SendTo());
+    }
+
+    [ServerRpc]
+    public void SendToServerRpc(Vector3 target)
+    {
+        SendToClientRpc(target);
+    }
+
+    [ClientRpc]
+    public void SendToClientRpc(Vector3 target)
+    {
+        SendTo(target);
     }
 
     IEnumerator Coroutine_SendTo()
@@ -115,7 +130,14 @@ public class GuidedStream: MonoBehaviour
 
         spline.gameObject.SetActive(false);
         splashParticle.Stop();
-        Destroy(gameObject, 2f);
+        if (IsServer)
+        {
+            NetworkObject networkObject = GetComponent<NetworkObject>();
+            if (networkObject != null && networkObject.IsSpawned)
+            {
+                networkObject.Despawn(true); // Ensures all clients properly unregister the object
+            }
+        }
     }
 
     private void ConfigureSpline()
@@ -185,20 +207,62 @@ public class GuidedStream: MonoBehaviour
 
         foreach (Collider hit in hitColliders)
         {
-            GameObject hitObject = hit.gameObject;
+            CharacterClass enemy = hit.gameObject.GetComponent<CharacterClass>();
 
-            if (hitObject.GetComponent<CharacterClass>() != null && !damagedObjects.Contains(hitObject) && hitObject.GetComponent<CharacterClass>().getPlayersTeam() != player.getPlayersTeam())
+            if (enemy != null && !damagedObjects.Contains(hit.gameObject) &&
+                enemy.getPlayersTeam() != team) 
             {
-                hitObject.GetComponent<CharacterClass>().TakeDamage(damageAmount * player.getDamageMultiplier());
-                damagedObjects.Add(hitObject);
+                NetworkObject enemyNetworkObject = enemy.GetComponent<NetworkObject>();
 
-                if (player != null)
+                if (enemyNetworkObject != null)
                 {
-                    player.OnSuccessfulHit();
+        
+                    Debug.Log($"Sending damage request for {enemyNetworkObject.NetworkObjectId}");
+                    DealDamageServerRpc(enemyNetworkObject.OwnerClientId, damageAmount); // * player.getDamageMultiplier() ADD LATAER
                 }
+                else
+                {
+                    Debug.LogWarning($"No NetworkObject found on {enemy.gameObject.name}");
+                }
+
+                damagedObjects.Add(hit.gameObject);
                 return;
             }
         }
     }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void DealDamageServerRpc(ulong targetID, float damage, ServerRpcParams rpcParams = default)
+    {
+        if (!NetworkManager.Singleton.IsServer) return; 
+
+        Debug.Log($"[Server] Damage request from {rpcParams.Receive.SenderClientId} to {targetID}");
+
+        NetworkObject targetObject = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(targetID);
+        if (targetObject != null)
+        {
+            CharacterClass enemy = targetObject.GetComponent<CharacterClass>();
+            if (enemy != null)
+            {
+
+                Debug.Log($"[Server] Applying {damage} damage to {enemy.gameObject.name} (Host: {enemy.IsHost})");
+                ulong enemyID = enemy.GetComponent<NetworkObject>().OwnerClientId;
+                if (hitEnemies.Contains(enemyID)) return; // Prevents multiple hits on the same enemy
+                hitEnemies.Add(enemyID);
+                enemy.TakeDamageServerRpc(damage, enemyID);
+            }
+            else
+            {
+                Debug.LogWarning($"[Server] Target {targetObject.name} does not have CharacterClass!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"[Server] No NetworkObject found with ID {targetID}!");
+        }
+    }
+
+
 
 }

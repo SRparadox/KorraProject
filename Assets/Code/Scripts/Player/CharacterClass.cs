@@ -407,19 +407,37 @@ public class CharacterClass: NetworkBehaviour
     public void TakeDamage(float damage)
     {
         if (!canTakeDamage) return;
-        Debug.Log("Player has taken " + damage + " damage.");
+        ulong clientId = NetworkManager.LocalClientId;
+        if (IsOwner) TakeDamageServerRpc(damage, clientId);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void TakeDamageServerRpc(float damage, ulong playerID)
+    {
+        if (!IsServer) return;
+        if (!canTakeDamage) return;
         health -= damage;
-        if (takeDamageParticles != null)
-        {
-            takeDamageParticles.Play();
+        Debug.Log($"[Server] {gameObject.name} took {damage} damage. New health: {health}");
+        
+        TakeDamageClientRpc(health, playerID);
+    }
+
+    [ClientRpc]
+    private void TakeDamageClientRpc(float newHealth, ulong playerID)
+    {
+        
+        if (playerID == NetworkManager.LocalClientId) {
+            health = newHealth;
+            Debug.Log($"[Client] {gameObject.name} updated health: {health}");
+            StartCoroutine(ResetDamageCooldown());
         }
-        spawnDamageText(damage);
-        canTakeDamage = false;
-        StartCoroutine(ResetDamageCooldown());
+        takeDamageParticles.Play();
+        if (!IsOwner) return; // Only the owner runs this
         if (health <= 0)
         {
             Respawn();
         }
+        canTakeDamage = false;
     }
 
 

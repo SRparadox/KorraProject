@@ -82,7 +82,8 @@ public class FireballShooter: NetworkBehaviour
         rb.linearVelocity = shootDirection * fireballSpeed;
 
         netObj.Spawn();
-        fireball.setPlayer(GetComponent<CharacterClass>(), NetworkManager.Singleton.LocalClientId);
+        fireball.setPlayer(GetComponent<CharacterClass>());
+        fireball.setPlayerID(NetworkManager.Singleton.LocalClientId);
         fireball.setTeamServerRpc(teamToInt(GetComponent<CharacterClass>().team.Value));
     }
 
@@ -103,7 +104,7 @@ public class FireballShooter: NetworkBehaviour
             }
             GameObject Fireball = Instantiate(selectedPrefab, spawnPos, spawnRot);
             Fireball fireball = Fireball.GetComponent<Fireball>();
-            fireball.setPlayer(GetComponent<CharacterClass>(), shooterId);
+            fireball.setPlayer(GetComponent<CharacterClass>());
 
             Rigidbody rb = Fireball.GetComponent<Rigidbody>();
             if (rb == null)
@@ -123,6 +124,7 @@ public class FireballShooter: NetworkBehaviour
             rb.linearVelocity = shootDirection * fireballSpeed;
 
             netObj.Spawn();
+            fireball.setPlayerID( shooterId);
             fireball.SetPlayerServerRpc(shooterId);
             fireball.setTeamServerRpc(teamToInt(GetComponent<CharacterClass>().getPlayersTeam()));
     }
