@@ -16450,9 +16450,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9067ef389ef6b674493d5d98ef9bffda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   selectedPrefab: {fileID: 5879177407378570033, guid: 61c3807406a524745ae975171f529015, type: 3}
   camera: {fileID: 0}
-  damage: 25
+  damage: 40
 --- !u!114 &5475956816634884169
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -443,7 +443,6 @@ public class CharacterClass: NetworkBehaviour
     [ClientRpc]
     private void TakeDamageClientRpc(float newHealth, ulong playerID)
     {
-
         if (playerID == NetworkManager.LocalClientId)
         {
             health = newHealth;
@@ -451,6 +450,7 @@ public class CharacterClass: NetworkBehaviour
             StartCoroutine(ResetDamageCooldown());
         }
         takeDamageParticles.Play();
+
         if (!IsOwner)
             return; // Only the owner runs this
         if (health <= 0)
@@ -459,7 +459,6 @@ public class CharacterClass: NetworkBehaviour
         }
         canTakeDamage = false;
     }
-
 
     public float getHealth()
     {

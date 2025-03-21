@@ -225,6 +225,10 @@ namespace StarterAssets
 
             // Face the player forward
             transform.forward = Vector3.Lerp(transform.forward, cameraForward, Time.deltaTime * 20f);
+
+            if (gameObject.transform.position.y < 0.0f){
+                GetComponent<CharacterClass>().Respawn();
+            }
         }
 
         private void LateUpdate()
