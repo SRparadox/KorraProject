@@ -217,7 +217,6 @@ public class GuidedStream: NetworkBehaviour
                 if (enemyNetworkObject != null)
                 {
         
-                    Debug.Log($"Sending damage request for {enemyNetworkObject.NetworkObjectId}");
                     DealDamageServerRpc(enemyNetworkObject.OwnerClientId, damageAmount); // * player.getDamageMultiplier() ADD LATAER
                 }
                 else
@@ -237,7 +236,6 @@ public class GuidedStream: NetworkBehaviour
     {
         if (!NetworkManager.Singleton.IsServer) return; 
 
-        Debug.Log($"[Server] Damage request from {rpcParams.Receive.SenderClientId} to {targetID}");
 
         NetworkObject targetObject = NetworkManager.Singleton.SpawnManager.GetPlayerNetworkObject(targetID);
         if (targetObject != null)
@@ -246,7 +244,6 @@ public class GuidedStream: NetworkBehaviour
             if (enemy != null)
             {
 
-                Debug.Log($"[Server] Applying {damage} damage to {enemy.gameObject.name} (Host: {enemy.IsHost})");
                 ulong enemyID = enemy.GetComponent<NetworkObject>().OwnerClientId;
                 if (hitEnemies.Contains(enemyID)) return; // Prevents multiple hits on the same enemy
                 hitEnemies.Add(enemyID);
