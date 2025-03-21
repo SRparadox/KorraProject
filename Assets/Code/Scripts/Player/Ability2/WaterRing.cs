@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using Unity.Netcode;
 
-public class WaterRing : MonoBehaviour
+public class WaterRing : NetworkBehaviour
 {
     public float expansionTime = 5f;
     public float maxScale = 5f;
@@ -14,11 +15,19 @@ public class WaterRing : MonoBehaviour
     private float currentTime = 0f;
     private bool hasExpanded = false;
     private Vector3[] initialOffsets;
+    [SerializeField] CharacterClass.PlayerTeam team;
+    NetworkVariable<ulong> playerID = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private CharacterClass player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+    }
+
+    [ServerRpc]
+    public void setPlayerIDServerRpc(ulong id)
+    {
+        playerID.Value = id;
     }
 
     // Update is called once per frame
@@ -51,16 +60,16 @@ public class WaterRing : MonoBehaviour
         CharacterClass character = other.GetComponent<CharacterClass>();
         if (character == null) return;
 
-        CharacterClass.PlayerTeam myTeam = player.getPlayersTeam();
+        CharacterClass.PlayerTeam myTeam = team;
         CharacterClass.PlayerTeam otherTeam = character.getPlayersTeam();
 
         if (myTeam != otherTeam)
         {
             Debug.Log("Applying Damage and Knockback to: " + other.name);
-            character.TakeDamage(damage * player.getDamageMultiplier());
+            character.TakeDamage(damage); // * player.getDamageMultiplier() ADD LATER
             if(player != null)
             {
-                player.OnSuccessfulHit();
+                player.OnSuccessfulHit(playerID.Value);
             }
             
             Vector3 knockbackDirection = (other.transform.position - transform.position).normalized;
@@ -76,7 +85,7 @@ public class WaterRing : MonoBehaviour
     private IEnumerator Knockback(Transform target, Vector3 direction, float distance, float duration)
     {
         Vector3 startPosition = target.position;
-        Vector3 endPosition = startPosition + direction * distance * player.getDamageMultiplier();
+        Vector3 endPosition = startPosition + direction * distance;
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
@@ -91,6 +100,8 @@ public class WaterRing : MonoBehaviour
 
     void DestroyRing()
     {
+        if (!IsServer) return;
+        GetComponent<NetworkObject>().Despawn(true);
         Destroy(gameObject);
     }
 

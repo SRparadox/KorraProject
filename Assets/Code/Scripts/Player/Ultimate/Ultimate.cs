@@ -1,6 +1,8 @@
+using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Ultimate: MonoBehaviour
+public class Ultimate: NetworkBehaviour
 {
     public GameObject fireRingPrefab;
     public GameObject waterRingPrefab;
@@ -10,7 +12,12 @@ public class Ultimate: MonoBehaviour
     public float lifeTime = 5f;
     public float damage = 75;
 
-    private CharacterClass.PlayerTeam playerTeam;
+    [SerializeField] private NetworkVariable<float> currentScale = new NetworkVariable<float>(0f, 
+        NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
+    [SerializeField] private CharacterClass.PlayerTeam playerTeam;
+    NetworkVariable<ulong> playerID = new NetworkVariable<ulong>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+
     private float currentTime = 0f;
     private bool hasExpanded = false;
     private Rigidbody rb;
@@ -18,11 +25,6 @@ public class Ultimate: MonoBehaviour
     private UltimateAttack attackScript;
     private bool hasSpawnedRing = false;
 
-    public void Initialize(CharacterClass.PlayerTeam team)
-    {
-        playerTeam = team;
-        Debug.Log("Ultimate initialized for " + playerTeam);
-    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,27 +38,65 @@ public class Ultimate: MonoBehaviour
 
         transform.localScale = Vector3.zero;
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void setPlayerIDServerRpc(ulong id)
+    {
+        playerID.Value = id;
+    }
+
     public void StartExpansion(Vector3 direction, UltimateAttack attack)
     {
         launchDirection = direction;
         attackScript = attack;
     }
 
+    public void InitializeUltimate(Vector3 direction, CharacterClass.PlayerTeam team)
+        {
+            if (!IsServer) return; // Only the server should control initialization
+
+            launchDirection = direction;
+            playerTeam = team;
+            StartExpansionServerRpc();
+        }
+
+    [ServerRpc]
+    private void StartExpansionServerRpc()
+    {
+        StartExpansionClientRpc();
+    }
+
+    [ClientRpc]
+    private void StartExpansionClientRpc()
+    {
+        StartCoroutine(ExpandCoroutine());
+    }
+
+    private IEnumerator ExpandCoroutine()
+    {
+        float startTime = Time.time;
+        while (Time.time - startTime < expansionTime)
+        {
+            float progress = (Time.time - startTime) / expansionTime;
+            float scaleFactor = Mathf.Lerp(0.1f, maxScale, progress);
+            
+            if (IsServer)
+                currentScale.Value = scaleFactor; // Server updates the scale variable
+
+            transform.localScale = Vector3.one * scaleFactor;
+            yield return null;
+        }
+
+        hasExpanded = true;
+        LaunchForward();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (!hasExpanded)
+        if (!IsServer) 
         {
-            currentTime += Time.deltaTime;
-            float progress = Mathf.Clamp01(currentTime / expansionTime);
-            float scaleFactor = Mathf.Lerp(0.1f, maxScale, progress);
-            transform.localScale = Vector3.one * scaleFactor;
-
-            if (progress >= 1f)
-            {
-                hasExpanded = true;
-                LaunchForward();
-            }
+            transform.localScale = Vector3.one * currentScale.Value; // Sync scale for clients
         }
     }
 
@@ -68,45 +108,63 @@ public class Ultimate: MonoBehaviour
             rb.useGravity = true;
             rb.linearVelocity = launchDirection * Speed;
         }
-        Debug.Log("Ultimate launched! Resetting camera...");
-        attackScript.ResetCamera();
+        Debug.Log("Ultimate launched!");
         Destroy(gameObject, lifeTime);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (hasSpawnedRing) return;
+        if (!IsServer || hasSpawnedRing) return;
+
         bool hitCharacter = false;
-        if (collision.gameObject.GetComponent<CharacterClass>() != null && collision.gameObject.GetComponent<CharacterClass>().getPlayersTeam() != playerTeam)
+        CharacterClass character = collision.gameObject.GetComponent<CharacterClass>();
+        
+        if (character != null && character.getPlayersTeam() != playerTeam)
         {
-            //Todo Setup Damage Boost on the ultimate
-            collision.gameObject.GetComponent<CharacterClass>().TakeDamage(damage);
-            hitCharacter = true;
+            if (character.getPlayerID() != playerID.Value)
+            {
+                character.TakeDamage(damage);
+                hitCharacter = true;   
+            }
         }
 
         if (collision.gameObject.CompareTag("Ground") || hitCharacter)
         {
             Vector3 impactPosition = collision.contacts[0].point;
-            GameObject ringToSpawn = null;
-
-            if (playerTeam == CharacterClass.PlayerTeam.Fire && fireRingPrefab != null)
+            SpawnRingServerRpc(impactPosition);
+            hasSpawnedRing = true;
+            NetworkObject networkObject = GetComponent<NetworkObject>();
+            if (networkObject.IsSpawned)
             {
-                ringToSpawn = fireRingPrefab;
-            } else if (playerTeam == CharacterClass.PlayerTeam.Water && waterRingPrefab != null)
-            {
-                ringToSpawn = waterRingPrefab;
+                networkObject.Despawn(true); // Ensures all clients properly unregister the object
             }
-
-            if (ringToSpawn != null)
-            {
-                Instantiate(ringToSpawn, impactPosition, Quaternion.identity);
-                hasSpawnedRing = true;
-            } else
-            {
-                Debug.LogError("No valid ring prefab assigned for " + playerTeam);
-            }
-
-            Destroy(gameObject);
         }
     }
+
+    [ServerRpc]
+    private void SpawnRingServerRpc(Vector3 impactPosition)
+    {
+        GameObject ringToSpawn = null;
+        Debug.Log("Spawning Ring at: " + impactPosition);
+        if (playerTeam == CharacterClass.PlayerTeam.Fire && fireRingPrefab != null)
+        {
+            Debug.Log("Spawning Fire Ring!");
+            ringToSpawn = Instantiate(fireRingPrefab, impactPosition, Quaternion.identity);
+        }
+        else if (playerTeam == CharacterClass.PlayerTeam.Water && waterRingPrefab != null)
+        {
+            Debug.Log("Spawning Water Ring!");
+            ringToSpawn = Instantiate(waterRingPrefab, impactPosition, Quaternion.identity);
+        }
+
+        if (ringToSpawn != null)
+        {
+            NetworkObject ringNetworkObject = ringToSpawn.GetComponent<NetworkObject>();
+            if (ringNetworkObject != null)
+            {
+                ringNetworkObject.Spawn(true);
+            }
+        }
+    }
+
 }

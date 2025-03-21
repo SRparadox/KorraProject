@@ -27,6 +27,9 @@ public class GuidedStream: NetworkBehaviour
     [SerializeField] float hitDetectionRadius;
     List<ulong> hitEnemies = new List<ulong>();
 
+    //Network variable to keep track of who owns this object
+    private ulong playerID;
+
     private Vector3 target;
     private float damageAmount = 40f;
     private CharacterClass player;
@@ -37,6 +40,11 @@ public class GuidedStream: NetworkBehaviour
 
         StopAllCoroutines();
         StartCoroutine(Coroutine_SendTo());
+    }
+
+    public void setPlayerID(ulong playerID)
+    {
+        this.playerID = playerID;
     }
 
     [ServerRpc]
@@ -247,6 +255,7 @@ public class GuidedStream: NetworkBehaviour
                 ulong enemyID = enemy.GetComponent<NetworkObject>().OwnerClientId;
                 if (hitEnemies.Contains(enemyID)) return; // Prevents multiple hits on the same enemy
                 hitEnemies.Add(enemyID);
+                if (player != null) player.OnSuccessfulHit(playerID); // Notify the player of a successful hit
                 enemy.TakeDamageServerRpc(damage, enemyID);
             }
             else

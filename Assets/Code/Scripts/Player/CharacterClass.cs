@@ -70,7 +70,7 @@ public class CharacterClass: NetworkBehaviour
 
     private int maxAttack1Uses = 4;
     private int currentAttack1Uses;
-    private int ultimateCharge = 0;
+    private float ultimateCharge = 0f;
     public int maxUltimateCharge = 30;
     private bool isAttack1OnCooldown = false;
 
@@ -227,6 +227,12 @@ public class CharacterClass: NetworkBehaviour
         if (fireball != null)
         {
             fireball.Trigger();
+            //increase ult charge by 5%
+            ultimateCharge = ultimateCharge + (maxUltimateCharge * 0.05f);
+            if (ultimateCharge > maxUltimateCharge)
+            {
+                ultimateCharge = maxUltimateCharge;
+            }
         }
     }
 
@@ -243,6 +249,11 @@ public class CharacterClass: NetworkBehaviour
         if (guidedStream != null)
         {
             guidedStream.Trigger();
+            ultimateCharge = ultimateCharge + (maxUltimateCharge * 0.1f);
+            if (ultimateCharge > maxUltimateCharge)
+            {
+                ultimateCharge = maxUltimateCharge;
+            }
             animator.SetTrigger("Attack2");
         }
     }
@@ -259,7 +270,18 @@ public class CharacterClass: NetworkBehaviour
         if (waterRing != null)
         {
             waterRing.Trigger();
+            ultimateCharge = ultimateCharge + (maxUltimateCharge * 0.15f);
+            if (ultimateCharge > maxUltimateCharge)
+            {
+                ultimateCharge = maxUltimateCharge;
+            }
         }
+    }
+
+    public ulong getPlayerID()
+    {
+        if (!IsOwner) return 0;
+        return NetworkManager.LocalClientId;
     }
 
     public void PerformAbility2()
@@ -481,8 +503,23 @@ public class CharacterClass: NetworkBehaviour
         health = Mathf.Min(health + amount, maxHealth);
     }
     [SerializeField] private AudioSource hitsound;
-    public void OnSuccessfulHit()
+    public void OnSuccessfulHit(ulong playerID)
     {
+        if (!IsOwner) return; // Only the owner runs this
+
+        OnSuccesfulHitServerRpc(playerID);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void OnSuccesfulHitServerRpc(ulong playerID)
+    {
+        if (!IsServer) return;
+        OnSuccessfulHitClientRpc(playerID);
+    }
+    [ClientRpc]
+    public void OnSuccessfulHitClientRpc(ulong playerID)
+    {
+        if (playerID != NetworkManager.LocalClientId) return;
         if (!IsOwner)
             return; // Only the owner runs this
         ultimateCharge = Mathf.Min(ultimateCharge + 1, maxUltimateCharge);

@@ -11,6 +11,7 @@ public class GuidedStreamAttack: NetworkBehaviour
     [SerializeField] Camera camera;
     [SerializeField] float damage = 25;
     private CharacterClass playerClass;
+    ulong playerID;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class GuidedStreamAttack: NetworkBehaviour
         {
             camera = Camera.main;
         }
+        playerID = GetComponent<NetworkObject>().OwnerClientId;
     }
 
     public void Trigger()
@@ -47,6 +49,7 @@ public class GuidedStreamAttack: NetworkBehaviour
         
         NetworkObject networkObject = stream.GetComponent<NetworkObject>();
         networkObject.Spawn(); // Only the server can spawn it!
+        stream.setPlayerID(playerID);
         stream.setDamage(damage);
         stream.SetPlayer(playerClass);
 

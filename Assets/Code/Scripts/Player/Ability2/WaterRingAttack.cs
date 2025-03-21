@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class WaterRingAttack: MonoBehaviour
+public class WaterRingAttack: NetworkBehaviour
 {
     //public GameObject waterRingPrefab;
     //public GameObject fireRingPrefab;
@@ -14,6 +15,7 @@ public class WaterRingAttack: MonoBehaviour
     public void Trigger()
     {
         SpawnWaterRing();
+
     }
 
     private void SpawnWaterRing()
@@ -25,9 +27,12 @@ public class WaterRingAttack: MonoBehaviour
             GameObject waterRing = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
             WaterRing waterring = waterRing.GetComponent<WaterRing>();
 
-            if(waterring != null)
+            if(waterring != null && IsOwner)
             {
-                waterring.SetPlayer(GetComponent<CharacterClass>());
+                if (IsOwner){
+                    waterring.setPlayerIDServerRpc(NetworkManager.Singleton.LocalClientId);
+                    waterring.SetPlayer(GetComponent<CharacterClass>()); 
+                }
             }
 
             Debug.Log("Waterring spawned");

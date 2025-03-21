@@ -86,8 +86,9 @@ public class Fireball : NetworkBehaviour
             Debug.Log("Damage Dealt: " + damage);
 
             // Tell the shooter they successfully hit
-            
-            if (player != null) player.OnSuccessfulHit();
+            if (shooterID.Value != 0 && player == null) player = NetworkManager.Singleton.SpawnManager.SpawnedObjects[shooterID.Value].GetComponent<CharacterClass>();
+            Debug.Log("Shooter ID: " + shooterID.Value);
+            if (player != null) player.OnSuccessfulHit(shooterID.Value); // Notify the player of a successful hit
 
             // Destroy the fireball ONLY on the owner’s client
             deleteObjectServerRpc();
@@ -113,7 +114,7 @@ public class Fireball : NetworkBehaviour
     public void setPlayer(CharacterClass player)
     {
         this.player = player;
-        
+
     }
     public void setPlayerID(ulong id)
     {

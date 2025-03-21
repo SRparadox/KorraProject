@@ -1,8 +1,9 @@
 using Cinemachine;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
-public class UltimateAttack: MonoBehaviour
+public class UltimateAttack: NetworkBehaviour
 {
     public float zoomOutDistance = 15f;
     public float transitionSpeed = 2f;
@@ -14,11 +15,13 @@ public class UltimateAttack: MonoBehaviour
     private bool isReturning = false;
     private Transform cameraTransform;
     private CinemachineVirtualCamera followCamera;
+    private ulong playerID;
 
     private void Start()
     {
         characterClass = GetComponent<CharacterClass>();
         cameraTransform = Camera.main.transform;
+        playerID = GetComponent<NetworkObject>().OwnerClientId;
         followCamera = (CinemachineVirtualCamera) FindFirstObjectByType(typeof(CinemachineVirtualCamera));
         if (followCamera == null)
         {
@@ -29,19 +32,42 @@ public class UltimateAttack: MonoBehaviour
 
     public void Trigger()
     {
-        SpawnUltimate();
-    }
-
-    private void SpawnUltimate()
-    {
-
         if (selectedPrefab != null)
         {
             Vector3 spawnPosition = transform.position + new Vector3(0, 6, 0);
-
             Vector3 direction = cameraTransform.forward;
-            GameObject ultimate = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
 
+            SpawnUltimateServerRpc(spawnPosition, direction, GetComponent<CharacterClass>().team.Value);
+            SpawnUltimateLocalStuff();
+        }
+        else
+        {
+            Debug.LogError("Ultimate prefab not assigned in the Inspector");
+        }
+    }
+
+    [ServerRpc]
+    private void SpawnUltimateServerRpc(Vector3 position, Vector3 direction, CharacterClass.PlayerTeam team)
+    {
+        GameObject ultimate = Instantiate(selectedPrefab, position, Quaternion.identity);
+        NetworkObject netObj = ultimate.GetComponent<NetworkObject>();
+
+        if (netObj != null)
+        {
+            netObj.Spawn();
+            Ultimate ultimateScript = ultimate.GetComponent<Ultimate>();
+            if (ultimateScript != null)
+            {
+                ultimateScript.InitializeUltimate(direction, team);
+                ultimateScript.setPlayerIDServerRpc(playerID);
+            }
+        }
+    }
+
+    private void SpawnUltimateLocalStuff()
+    {
+        if (selectedPrefab != null)
+        {
             if (followCamera != null)
             {
                 followCamera.enabled = false;
@@ -51,16 +77,6 @@ public class UltimateAttack: MonoBehaviour
             isZoomingOut = true;
             isReturning = false;
 
-            Ultimate ultimateScript = ultimate.GetComponent<Ultimate>();
-            if (ultimateScript != null)
-            {
-                ultimateScript.Initialize(characterClass.getPlayersTeam());
-                ultimateScript.StartExpansion(direction, this);
-            }
-            Debug.Log(selectedPrefab.name + "Spawned");
-        } else
-        {
-            Debug.LogError("Ultimate prefab not assigned in the Inspector");
         }
     }
 
