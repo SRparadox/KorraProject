@@ -45,6 +45,7 @@ public class HandleAbilityCDOnLocalPlayer : MonoBehaviour
         }
         if (localPlayer == null)
         {
+            oneHandedModeToggle.interactable = false;
             Debug.LogError("HandleAbilityCDOnLocalPlayer: Local player not found!");
             return;
         }
@@ -88,6 +89,7 @@ public class HandleAbilityCDOnLocalPlayer : MonoBehaviour
     {
         if (localPlayer == null)
             return;
+        if (!oneHandedModeToggle.interactable) oneHandedModeToggle.interactable = true;
             
         CharacterClass playerClass = localPlayer.GetComponent<CharacterClass>();
         if (playerClass == null)
@@ -156,8 +158,11 @@ public class HandleAbilityCDOnLocalPlayer : MonoBehaviour
 
     public void toggleOneHandedMode()
     {
-        if (localPlayer == null)
+        if (localPlayer == null){
+            oneHandedModeToggle.interactable = false;
+            oneHandedModeToggle.isOn = false;
             return;
+        }
 
         StarterAssetsInputs inputs = localPlayer.GetComponent<StarterAssetsInputs>();
         if (inputs != null)
@@ -173,10 +178,32 @@ public class HandleAbilityCDOnLocalPlayer : MonoBehaviour
         }
     }
 
+    public void updateLocalPlayer(){
+        if (NetworkManager.Singleton != null)
+        {
+            foreach (var kvp in NetworkManager.Singleton.SpawnManager.SpawnedObjects)
+            {
+                
+                if (kvp.Value.OwnerClientId == NetworkManager.Singleton.LocalClientId)
+                {
+                    if (kvp.Value.gameObject == null)
+                    {
+                        Debug.LogError("HandleAbilityCDOnLocalPlayer: Local player object is null!");
+                        break;
+                    }
+                    localPlayer = kvp.Value.gameObject;
+                    break;
+                }
+            }
+        }
+    }
+
     void Update()
     {
-        if (localPlayer == null)
+        if (localPlayer == null){
+            updateLocalPlayer();
             return;
+        }
         updateCooldowns();
         updateHealthBar();
         

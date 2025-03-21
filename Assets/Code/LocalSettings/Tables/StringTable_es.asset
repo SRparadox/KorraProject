@@ -148,8 +148,24 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 802382586109952
-    m_Localized: "Cambiar idioma principal\r\n\r\n\n\n\nMostrar/Ocultar HUD\r\n\r\n\nModo
-      de una mano (requiere rat\xF3n)\r\n\r\n"
+    m_Localized: 'Cambiar idioma principal
+
+      
+
+
+
+
+      Mostrar/Ocultar HUD
+
+      
+
+
+      Modo
+      de una mano (Habilitar solo en el juego)
+
+      
+
+'
     m_Metadata:
       m_Items: []
   references:

@@ -4362,17 +4362,6 @@ RectTransform:
   m_AnchoredPosition: {x: 4.2100754, y: -0.94576263}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &386563996 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4335727544217581336, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-  m_PrefabInstance: {fileID: 406206065}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24423736c4e63ea4789cddc43f61d615, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &387981074
 GameObject:
   m_ObjectHideFlags: 0
@@ -4484,63 +4473,6 @@ RectTransform:
   m_AnchoredPosition: {x: 9.977905, y: -48.99993}
   m_SizeDelta: {x: 155.91, y: 9.9057}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &406206065
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 846438373700035245, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-      propertyPath: m_Name
-      value: KeepTrackOfPlayer
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173315137411189081, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 12.425153
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173315137411189081, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 67.021706
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173315137411189081, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.2461576
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173315137411189081, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173315137411189081, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173315137411189081, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173315137411189081, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173315137411189081, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173315137411189081, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2173315137411189081, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a79b9a95185fe7b44a17dd029d792a49, type: 3}
 --- !u!1 &463223671
 GameObject:
   m_ObjectHideFlags: 0
@@ -11242,7 +11174,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1020637417
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16631,7 +16563,7 @@ MonoBehaviour:
 
 
     One Handed Mode
-    (Mouse Required)'
+    (Enable Ingame Only)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -17237,7 +17169,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 495795962}
   toggleTransition: 1
   graphic: {fileID: 1385206138}
@@ -17245,7 +17177,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 386563996}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerTracker, Assembly-CSharp
         m_MethodName: toggleOneHandedMode
         m_Mode: 1
@@ -21112,6 +21044,7 @@ MonoBehaviour:
   AudioSource: {fileID: 1005994886}
   MusicVolume: {fileID: 1933119210}
   SensitivitySlider: {fileID: 2069997866}
+  sessionCodeText: {fileID: 0}
 --- !u!114 &2089693254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21960,6 +21893,5 @@ SceneRoots:
   - {fileID: 1487844279}
   - {fileID: 2089693259}
   - {fileID: 1005994887}
-  - {fileID: 406206065}
   - {fileID: 327778670}
   - {fileID: 249280828}
