@@ -153,6 +153,26 @@ MonoBehaviour:
     m_Key: accessibility text
     m_Metadata:
       m_Items: []
+  - m_Id: 2617408069308416
+    m_Key: groupMembers
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2621264807333888
+    m_Key: viewAssets
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2621479748636672
+    m_Key: inspiredBy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2625337728176128
+    m_Key: oneHandedInstructions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2627487392862208
+    m_Key: tutorialGuide
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

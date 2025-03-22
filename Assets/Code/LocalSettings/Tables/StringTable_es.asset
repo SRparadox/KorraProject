@@ -168,6 +168,38 @@ MonoBehaviour:
 '
     m_Metadata:
       m_Items: []
+  - m_Id: 2617408069308416
+    m_Localized: "El Equipo:\n\nBryon Anderson - L\xEDder de Producci\xF3n, Programador
+      de Gameplay\nEllie McKay - L\xEDder de Pruebas de Juego, Programadora de Gameplay,
+      Animadora\nNick Corfmat - L\xEDder de Dise\xF1o, Programador General, UI/UX\nLiam
+      Edwards - L\xEDder del Motor, Programador de Redes\nRahamat Zaman - L\xEDder
+      de Herramientas, UI/UX\nJay Kumar - Programador, UI/UX\nShazer Rizzo Varela
+      - Programador\nRichard Tao - UI/UX"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2621264807333888
+    m_Localized: Ver los activos en el navegador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2621479748636672
+    m_Localized: Inspirado por "La Leyenda de Korra"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2625337728176128
+    m_Localized: "Controles con Una Mano\n\nClic derecho - Correr hacia adelante\nClic
+      izquierdo - Usar la habilidad seleccionada\nRueda del rat\xF3n arriba - Seleccionar
+      la siguiente habilidad\nRueda del rat\xF3n abajo - Saltar\nBot\xF3n central
+      del rat\xF3n - Esprintar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2627487392862208
+    m_Localized: "Tutorial/Controles\n\nClic izquierdo - Ataque de proyectil ligero\nClic
+      derecho - Apuntar\nQ - Habilidad de dash\nE - Habilidad de anillo\nR - Ataque
+      de corriente vital\nT - Ataque definitivo (da\xF1a a los enemigos para cargarlo)\nRecoge
+      mejoras por el mapa para aumentar tu poder, velocidad y salud.\n\xA1Defiende
+      las zonas de control activas para ganar la ronda!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

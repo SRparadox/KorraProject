@@ -175,6 +175,39 @@ MonoBehaviour:
 '
     m_Metadata:
       m_Items: []
+  - m_Id: 2617408069308416
+    m_Localized: "L'\xC9quipe :\n\nBryon Anderson - Chef de Production, Programmeur
+      Gameplay\nEllie McKay - Cheffe des Tests de Jeu, Programmeuse Gameplay, Animatrice\nNick
+      Corfmat - Chef du Design, Programmeur G\xE9n\xE9ral, UI/UX\nLiam Edwards -
+      Chef du Moteur, Programmeur R\xE9seau\nRahamat Zaman - Chef des Outils, UI/UX\nJay
+      Kumar - Programmeur, UI/UX\nShazer Rizzo Varela - Programmeur\nRichard Tao
+      - UI/UX"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2621264807333888
+    m_Localized: Voir les ressources dans le navigateur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2621479748636672
+    m_Localized: "Inspir\xE9 par \"La L\xE9gende de Korra\""
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2625337728176128
+    m_Localized: "Commandes \xE0 Une Main\n\nClic droit - Courir en avant\nClic gauche
+      - Utiliser la capacit\xE9 s\xE9lectionn\xE9e\nMolette vers le haut - S\xE9lectionner
+      la capacit\xE9 suivante\nMolette vers le bas - Sauter\nBouton central de la
+      souris - Sprinter"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2627487392862208
+    m_Localized: "Tutoriel/Commandes\n\nClic gauche - Attaque de projectile l\xE9ger\nClic
+      droit - Viser\nQ - Capacit\xE9 de dash\nE - Capacit\xE9 d'anneau\nR - Attaque
+      de flux vital\nT - Attaque ultime (infligez des d\xE9g\xE2ts aux ennemis pour
+      la charger)\nRamassez des am\xE9liorations sur la carte pour augmenter votre
+      puissance, votre vitesse et votre sant\xE9.\nD\xE9fendez les zones de contr\xF4le
+      actives pour gagner la manche!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
