@@ -23516,7 +23516,7 @@ MonoBehaviour:
   - {fileID: 748872197}
   Firespawn: {fileID: 213671225}
   Waterspawn: {fileID: 1908922219}
-  roundDuration: 300
+  roundDuration: 120
   maxControlScore: 100
   scoreIncrement: 5
   scoreTickRate: 2
